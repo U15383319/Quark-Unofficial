@@ -1,0 +1,15 @@
+accessWidener v2 named
+
+accessible field net/minecraft/advancements/Advancement criteria Ljava/util/Map;
+mutable field net/minecraft/advancements/Advancement criteria Ljava/util/Map;
+accessible field net/minecraft/advancements/Advancement requirements [[Ljava/lang/String;
+mutable field net/minecraft/advancements/Advancement requirements [[Ljava/lang/String;
+accessible field net/minecraft/advancements/critereon/EffectsChangedTrigger$TriggerInstance effects Lnet/minecraft/advancements/critereon/MobEffectsPredicate;
+accessible field net/minecraft/advancements/critereon/ItemUsedOnLocationTrigger$TriggerInstance location Lnet/minecraft/advancements/critereon/ContextAwarePredicate;
+mutable field net/minecraft/advancements/critereon/ItemUsedOnLocationTrigger$TriggerInstance location Lnet/minecraft/advancements/critereon/ContextAwarePredicate;
+accessible field net/minecraft/advancements/critereon/ContextAwarePredicate compositePredicates Ljava/util/function/Predicate;
+mutable field net/minecraft/advancements/critereon/ContextAwarePredicate compositePredicates Ljava/util/function/Predicate;
+accessible field net/minecraft/world/level/storage/loot/LootPool entries [Lnet/minecraft/world/level/storage/loot/entries/LootPoolEntryContainer;
+mutable field net/minecraft/world/level/storage/loot/LootPool entries [Lnet/minecraft/world/level/storage/loot/entries/LootPoolEntryContainer;
+accessible field net/minecraft/world/level/block/Block descriptionId Ljava/lang/String;
+accessible field net/minecraft/world/item/Item descriptionId Ljava/lang/String;

@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "quark",
+	"version": "${version}",
+	"name": "Quark",
+	"description": "Small things, improving Minecraft bit by bit. Unofficial Fabric port of the 1.20.1 Forge version.",
+	"authors": ["Vazkii", "WireSegal", "MCVinnyq", "Sully"],
+	"contact": {
+		"homepage": "https://quarkmod.net",
+		"sources": "https://github.com/VazkiiMods/Quark"
+	},
+	"license": "CC-BY-NC-SA-3.0",
+	"icon": "proxypack.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["org.violetmoon.quark.base.QuarkFabric"],
+		"client": ["org.violetmoon.quark.base.QuarkFabricClient"]
+	},
+	"mixins": [
+		"quark.mixins.json"
+	],
+	"accessWidener": "quark.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"zeta": ">=1.0-29"
+	}
+}

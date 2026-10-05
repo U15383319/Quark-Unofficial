@@ -1,0 +1,107 @@
+plugins {
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}" apply false
+}
+
+subprojects {
+	// zeta shares the root conventions below
+}
+
+allprojects {
+	apply plugin: 'net.fabricmc.fabric-loom-remap'
+	apply plugin: 'maven-publish'
+
+	group = project.maven_group
+
+	repositories {
+		maven {
+			name = 'ParchmentMC'
+			url = 'https://maven.parchmentmc.org'
+		}
+		maven {
+			name = 'Modrinth'
+			url = 'https://api.modrinth.com/maven'
+			content {
+				includeGroup 'maven.modrinth'
+			}
+		}
+	}
+
+	dependencies {
+		minecraft "com.mojang:minecraft:${project.minecraft_version}"
+		mappings loom.layered() {
+			officialMojangMappings()
+			parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+		}
+		modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+		modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+		modApi "maven.modrinth:forge-config-api-port:${project.forge_config_api_port_version}"
+		compileOnly "com.electronwill.night-config:core:${project.night_config_version}"
+		compileOnly "com.electronwill.night-config:toml:${project.night_config_version}"
+	}
+
+	tasks.withType(JavaCompile).configureEach {
+		it.options.release = 17
+		it.options.encoding = 'UTF-8'
+		it.options.compilerArgs << '-Xmaxerrs' << '100000'
+	}
+
+	java {
+		withSourcesJar()
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+}
+
+version = project.mod_version
+base {
+	archivesName = project.archives_base_name
+}
+
+loom {
+	accessWidenerPath = file('src/main/resources/quark.accesswidener')
+	mixin {
+		defaultRefmapName = 'quark.mixins.refmap.json'
+	}
+
+	mods {
+		quark {
+			sourceSet sourceSets.main
+		}
+		zeta {
+			sourceSet project(':zeta').sourceSets.main
+		}
+	}
+
+	runs {
+		configureEach {
+			property 'mixin.debug.export', 'true'
+		}
+		client {
+			runDir 'run'
+		}
+		server {
+			runDir 'runServer'
+		}
+	}
+}
+
+dependencies {
+	implementation project(path: ':zeta', configuration: 'namedElements')
+	include project(':zeta')
+}
+
+processResources {
+	def version = project.version
+	inputs.property 'version', version
+
+	filesMatching('fabric.mod.json') {
+		expand 'version': version
+	}
+}
+
+jar {
+	from('LICENSE.md') {
+		rename { "${it}_quark" }
+	}
+}

@@ -1,0 +1,26 @@
+version = project.zeta_version
+base {
+	archivesName = 'Zeta-Fabric-1.20.1'
+}
+
+loom {
+	accessWidenerPath = file('src/main/resources/zeta.accesswidener')
+	mixin {
+		defaultRefmapName = 'zeta.mixins.refmap.json'
+	}
+}
+
+processResources {
+	def version = project.version
+	inputs.property 'version', version
+
+	filesMatching('fabric.mod.json') {
+		expand 'version': version
+	}
+}
+
+jar {
+	from('LICENSE.md') {
+		rename { "${it}_zeta" }
+	}
+}
