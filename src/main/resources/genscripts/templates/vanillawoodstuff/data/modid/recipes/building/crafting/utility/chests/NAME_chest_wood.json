@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "%name%_chest",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:%name%_logs"
+    }
+  },
+  "result": {
+    "item": "%modid%:%name%_chest",
+    "count": 4
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "%modid%:flag",
+          "flag": "wood_to_chest_recipes"
+        },
+        {
+          "type": "%modid%:flag",
+          "flag": "variant_chests"
+        }
+      ]
+    }
+  ]
+} 

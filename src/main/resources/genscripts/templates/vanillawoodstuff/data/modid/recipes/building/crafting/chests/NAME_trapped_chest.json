@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "%modid%:%name%_chest"
+    },
+    {
+      "item": "minecraft:tripwire_hook"
+    }
+  ],
+  "result": {
+    "item": "%modid%:%name%_trapped_chest"
+  },
+  "conditions": [
+    {
+      "type": "%modid%:flag",
+      "flag": "variant_chests"
+    }
+  ]
+}

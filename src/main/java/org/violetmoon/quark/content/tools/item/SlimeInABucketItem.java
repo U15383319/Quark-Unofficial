@@ -1,0 +1,125 @@
+package org.violetmoon.quark.content.tools.item;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.phys.Vec3;
+
+import org.jetbrains.annotations.NotNull;
+
+import org.violetmoon.zeta.item.ZetaItem;
+import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zeta.registry.CreativeTabManager;
+import org.violetmoon.zeta.util.ItemNBTHelper;
+
+import java.util.UUID;
+
+public class SlimeInABucketItem extends ZetaItem {
+
+	public static final String TAG_ENTITY_DATA = "slime_nbt";
+	public static final String TAG_EXCITED = "excited";
+
+	public SlimeInABucketItem(ZetaModule module) {
+		super("slime_in_a_bucket", module,
+				new Item.Properties()
+						.stacksTo(1)
+						.craftRemainder(Items.BUCKET));
+		CreativeTabManager.addToCreativeTabNextTo(CreativeModeTabs.TOOLS_AND_UTILITIES, this, Items.TADPOLE_BUCKET, false);
+	}
+
+	@Override
+	public void inventoryTick(@NotNull ItemStack stack, @NotNull Level world, @NotNull Entity entity, int itemSlot, boolean isSelected) {
+		if(world instanceof ServerLevel serverLevel) {
+			Vec3 pos = entity.position();
+			int x = Mth.floor(pos.x);
+			int z = Mth.floor(pos.z);
+			boolean slime = isSlimeChunk(serverLevel, x, z);
+			boolean excited = ItemNBTHelper.getBoolean(stack, TAG_EXCITED, false);
+			if(excited != slime)
+				ItemNBTHelper.setBoolean(stack, TAG_EXCITED, slime);
+		}
+	}
+
+	@NotNull
+	@Override
+	public InteractionResult useOn(UseOnContext context) {
+		BlockPos pos = context.getClickedPos();
+		Direction facing = context.getClickedFace();
+		Level level = context.getLevel();
+		Player player = context.getPlayer();
+		InteractionHand hand = context.getHand();
+
+		double x = pos.getX() + 0.5 + facing.getStepX();
+		double y = pos.getY() + 0.5 + facing.getStepY();
+		double z = pos.getZ() + 0.5 + facing.getStepZ();
+
+		if(!level.isClientSide) {
+			Slime slime = new Slime(EntityType.SLIME, level);
+
+			CompoundTag data = ItemNBTHelper.getCompound(player.getItemInHand(hand), TAG_ENTITY_DATA, true);
+			if(data != null)
+				slime.load(data);
+			else {
+				slime.getAttribute(Attributes.MAX_HEALTH).setBaseValue(1.0);
+				slime.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.3);
+				slime.setHealth(slime.getMaxHealth());
+			}
+
+			slime.setPos(x, y, z);
+            if (player.getAbilities().instabuild)
+                slime.setUUID(UUID.randomUUID());
+
+			level.gameEvent(player, GameEvent.ENTITY_PLACE, slime.position());
+            level.addFreshEntity(slime);
+			player.swing(hand);
+		}
+
+		level.playSound(player, pos, SoundEvents.BUCKET_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
+
+		if(!player.getAbilities().instabuild)
+			player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+
+		return InteractionResult.sidedSuccess(level.isClientSide);
+	}
+
+	@NotNull
+	@Override
+	public Component getName(@NotNull ItemStack stack) {
+		if(stack.hasTag()) {
+			CompoundTag cmp = ItemNBTHelper.getCompound(stack, TAG_ENTITY_DATA, false);
+			if(cmp != null && cmp.contains("CustomName")) {
+				Component custom = Component.Serializer.fromJson(cmp.getString("CustomName"));
+				return Component.translatable("item.quark.slime_in_a_bucket.named", custom);
+			}
+		}
+
+		return super.getName(stack);
+	}
+
+	public static boolean isSlimeChunk(ServerLevel world, int x, int z) {
+		ChunkPos chunkpos = new ChunkPos(new BlockPos(x, 0, z));
+		return WorldgenRandom.seedSlimeChunk(chunkpos.x, chunkpos.z, world.getSeed(), 987234911L).nextInt(10) == 0;
+	}
+
+}

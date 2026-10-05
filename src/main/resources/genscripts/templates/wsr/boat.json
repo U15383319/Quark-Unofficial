@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "%modid%:%name%_planks"
+    }
+  },
+  "result": {
+    "item": "%modid%:%name%_boat"
+  },
+  "conditions": [
+    {
+      "type": "quark:flag",
+      "flag": "%flag%"
+    }
+  ]
+}

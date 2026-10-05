@@ -1,0 +1,29 @@
+
+{
+  "replace": false,
+  "values": [
+    "quark:waxed_cut_copper_vertical_slab",
+    "quark:waxed_exposed_cut_copper_vertical_slab",
+    "quark:waxed_oxidized_cut_copper_vertical_slab",
+    "quark:waxed_weathered_cut_copper_vertical_slab",
+    "quark:weathered_cut_copper_vertical_slab",
+    "quark:cut_copper_vertical_slab",
+    "quark:exposed_cut_copper_vertical_slab",
+    "quark:oxidized_cut_copper_vertical_slab",
+
+    "quark:iron_rod",
+
+    "quark:raw_iron_bricks",
+    "quark:raw_copper_bricks",
+    "quark:raw_gold_bricks",
+    "quark:raw_iron_bricks_stairs",
+    "quark:raw_copper_bricks_stairs",
+    "quark:raw_gold_bricks_stairs",
+    "quark:raw_iron_bricks_slab",
+    "quark:raw_copper_bricks_slab",
+    "quark:raw_gold_bricks_slab",
+    "quark:raw_iron_bricks_vertical_slab",
+    "quark:raw_copper_bricks_vertical_slab",
+    "quark:raw_gold_bricks_vertical_slab"
+  ]
+}

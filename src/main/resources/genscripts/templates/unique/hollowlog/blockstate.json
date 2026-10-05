@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y":  { "model": "%modid%:block/hollow_%name%" },
+        "axis=z":   { "model": "%modid%:block/hollow_%name%_horizontal", "x": 90 },
+        "axis=x":   { "model": "%modid%:block/hollow_%name%_horizontal", "x": 90, "y": 90 }
+    }
+}

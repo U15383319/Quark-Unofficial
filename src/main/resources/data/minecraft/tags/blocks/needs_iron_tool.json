@@ -1,0 +1,10 @@
+
+{
+  "replace": false,
+  "values": [
+    "quark:raw_gold_bricks",
+    "quark:raw_gold_bricks_stairs",
+    "quark:raw_gold_bricks_slab",
+    "quark:raw_gold_bricks_vertical_slab"
+  ]
+}

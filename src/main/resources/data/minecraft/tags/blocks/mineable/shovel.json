@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "quark:gravisand",
+    "quark:dirt_bricks",
+    "quark:dirt_bricks_wall",
+    "quark:dirt_bricks_stairs",
+    "quark:dirt_bricks_slab",
+    "quark:dirt_bricks_vertical_slab"
+  ]
+}

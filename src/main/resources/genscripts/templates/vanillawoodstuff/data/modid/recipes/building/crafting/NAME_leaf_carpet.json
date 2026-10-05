@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:%name%_leaves"
+    }
+  },
+  "result": {
+    "item": "%modid%:%name%_leaf_carpet",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "%modid%:flag",
+      "flag": "leaf_carpet"
+    }
+  ]
+} 

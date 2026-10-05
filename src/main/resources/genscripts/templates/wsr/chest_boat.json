@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "tag": "forge:chests/wooden"
+    },
+    {
+      "item": "%modid%:%name%_boat"
+    }
+  ],
+  "result": {
+    "item": "%modid%:%name%_chest_boat"
+  },
+  "conditions": [
+    {
+      "type": "quark:flag",
+      "flag": "%flag%"
+    }
+  ]
+}

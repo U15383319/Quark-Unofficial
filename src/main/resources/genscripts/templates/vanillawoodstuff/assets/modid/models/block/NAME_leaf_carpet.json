@@ -1,0 +1,6 @@
+{   
+    "parent": "%modid%:block/leaf_carpet",
+    "textures": {
+        "all": "minecraft:block/%name%_leaves"
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "%name%_chest",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:%name%_planks"
+    }
+  },
+  "result": {
+    "item": "%modid%:%name%_chest",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "%modid%:flag",
+      "flag": "variant_chests"
+    }
+  ]
+} 

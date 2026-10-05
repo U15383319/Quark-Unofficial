@@ -1,0 +1,18 @@
+{
+    "replace": false,
+    "values": [
+        "quark:hollow_oak_log",
+        "quark:hollow_spruce_log",
+        "quark:hollow_birch_log",
+        "quark:hollow_jungle_log",
+        "quark:hollow_acacia_log",
+        "quark:hollow_dark_oak_log",
+        "quark:hollow_mangrove_log",
+        "quark:hollow_cherry_log",
+        "quark:hollow_crimson_stem",
+        "quark:hollow_warped_stem",
+        "quark:hollow_blossom_log",
+        "quark:hollow_azalea_log",
+        "quark:hollow_ancient_log"
+    ]
+}

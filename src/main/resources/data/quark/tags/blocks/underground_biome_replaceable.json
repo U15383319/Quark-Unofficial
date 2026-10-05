@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "minecraft:netherrack",
+    "minecraft:end_stone"
+  ]
+}

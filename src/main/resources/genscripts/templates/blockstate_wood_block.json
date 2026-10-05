@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y":  { "model": "%modid%:block/%name%_wood" },
+        "axis=z":   { "model": "%modid%:block/%name%_wood", "x": 90 },
+        "axis=x":   { "model": "%modid%:block/%name%_wood", "x": 90, "y": 90 }
+    }
+}

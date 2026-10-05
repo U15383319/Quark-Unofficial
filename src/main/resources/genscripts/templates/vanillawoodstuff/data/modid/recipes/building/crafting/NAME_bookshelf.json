@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "XXX",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:%name%_planks"
+    },
+    "X": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "%modid%:%name%_bookshelf",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "%modid%:flag",
+      "flag": "variant_bookshelves"
+    }
+  ]
+} 

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sculk_sensor",
+    "minecraft:sculk",
+    "minecraft:sculk_vein",
+    "minecraft:sculk_catalyst",
+    "minecraft:sculk_shrieker",
+    "minecraft:reinforced_deepslate",
+    {
+      "id": "#lootr:containers",
+      "required": false
+    }
+  ]
+}

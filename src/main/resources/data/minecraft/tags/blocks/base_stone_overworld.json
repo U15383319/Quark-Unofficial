@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "quark:jasper",
+    "quark:limestone",
+    "quark:shale"
+  ]
+}

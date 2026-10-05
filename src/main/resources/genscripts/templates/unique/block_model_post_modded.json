@@ -1,0 +1,6 @@
+{
+  "parent": "%modid%:block/post",
+  "textures": {
+    "texture": "%modid%:block/%name%_log"
+  }
+}

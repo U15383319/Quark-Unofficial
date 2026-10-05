@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "quark:red_corundum",
+    "quark:orange_corundum",
+    "quark:yellow_corundum",
+    "quark:green_corundum",
+    "quark:blue_corundum",
+    "quark:indigo_corundum",
+    "quark:violet_corundum",
+    "quark:white_corundum",
+    "quark:black_corundum"
+  ]
+}

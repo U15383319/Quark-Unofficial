@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F",
+    "F",
+    "F"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:stripped_%name%_wood"
+    }
+  },
+  "result": {
+    "item": "%modid%:stripped_%name%_post",
+    "count": 8
+  },
+  "conditions": [
+    {
+      "type": "%modid%:flag",
+      "flag": "wooden_posts"
+    }
+  ]
+}

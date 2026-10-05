@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "values": [
+        "quark:azalea_planks_stairs",
+        "quark:blossom_planks_stairs",
+        "quark:ancient_planks_stairs"
+    ]
+}

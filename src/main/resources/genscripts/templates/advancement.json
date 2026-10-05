@@ -1,0 +1,35 @@
+{
+  "parent": "%parent%",
+  "criteria": {
+    "%name%": {
+      "trigger": "quark:none"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.quark.%name%.description"
+    },
+    "frame": "%type%",
+    "hidden": false,
+    "icon": {
+      "item": "%item%"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.quark.%name%.title"
+    }
+  },
+  "requirements": [
+    [
+      "%name%"
+    ]
+  ],
+  "conditions": [
+    {
+      "type": "quark:advancement_flag",
+      "flag": "%flag%"
+    }
+  ]
+
+}

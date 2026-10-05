@@ -1,0 +1,6 @@
+{
+  "parent": "quark:block/post_connect_top",
+  "textures": {
+    "texture": "%parent%:block/%name%_log"
+  }
+}

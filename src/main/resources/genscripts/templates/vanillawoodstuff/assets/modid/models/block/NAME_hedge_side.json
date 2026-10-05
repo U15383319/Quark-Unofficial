@@ -1,0 +1,6 @@
+{
+  "parent": "%modid%:block/hedge_side",
+  "textures": {
+    "leaf": "minecraft:block/%name%_leaves"
+  }
+}

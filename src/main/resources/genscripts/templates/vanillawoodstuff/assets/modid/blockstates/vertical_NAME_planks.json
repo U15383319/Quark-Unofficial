@@ -1,0 +1,5 @@
+{
+	"variants": {
+		"": { "model": "%modid%:block/vertical_%name%_planks" }
+	}
+}

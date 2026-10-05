@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "quark:lootr_oak_chest", "required": false },
+    { "id": "quark:lootr_spruce_chest", "required": false },
+    { "id": "quark:lootr_birch_chest", "required": false },
+    { "id": "quark:lootr_jungle_chest", "required": false },
+    { "id": "quark:lootr_acacia_chest", "required": false },
+    { "id": "quark:lootr_dark_oak_chest", "required": false },
+    { "id": "quark:lootr_warped_chest", "required": false },
+    { "id": "quark:lootr_crimson_chest", "required": false },
+    { "id": "quark:lootr_nether_brick_chest", "required": false },
+    { "id": "quark:lootr_purpur_chest", "required": false },
+    { "id": "quark:lootr_prismarine_chest", "required": false },
+    { "id": "quark:lootr_azalea_chest", "required": false },
+    { "id": "quark:lootr_blossom_chest", "required": false },
+    { "id": "quark:lootr_mangrove_chest", "required": false },
+    { "id": "quark:lootr_bamboo_chest", "required": false },
+    { "id": "quark:lootr_ancient_chest", "required": false },
+    { "id": "quark:lootr_cherry_chest", "required": false }
+  ]
+}

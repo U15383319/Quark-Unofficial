@@ -1,0 +1,8 @@
+{
+    "parent": "%modid%:block/ladder_but_not_the_vanilla_one_so_resourcepacks_dont_override_it",
+    "textures": {
+        "particle": "%modid%:block/%name%_ladder",
+        "texture": "%modid%:block/%name%_ladder"
+    }
+}
+
