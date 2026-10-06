@@ -6,16 +6,16 @@
   "result": "minecraft:iron_block",
   "experience": 6.3,
   "cookingtime": 1800,
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "smelt_ore_blocks"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "raw_metal_bricks"
         }
       ]

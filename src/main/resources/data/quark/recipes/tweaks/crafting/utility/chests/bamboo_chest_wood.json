@@ -15,19 +15,19 @@
     "item": "quark:bamboo_chest",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "wood_to_chest_recipes"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "variant_chests"
         }
       ]
     }
   ]
-} 
+}

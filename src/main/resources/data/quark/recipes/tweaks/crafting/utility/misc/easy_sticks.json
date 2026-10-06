@@ -13,9 +13,9 @@
     "item": "minecraft:stick",
     "count": 16
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "easy_sticks"
     }
   ]

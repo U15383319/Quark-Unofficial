@@ -28,11 +28,10 @@
       "get_own_head"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "snow_golem_player_heads"
     }
   ]
-
 }

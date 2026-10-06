@@ -19,9 +19,9 @@
   "result": {
     "item": "minecraft:blast_furnace"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "variant_furnaces"
     }
   ]

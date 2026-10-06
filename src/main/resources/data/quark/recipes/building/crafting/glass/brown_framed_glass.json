@@ -26,19 +26,19 @@
       "item": "quark:framed_glass"
     },
     {
-      "tag": "forge:dyes/brown"
+      "tag": "c:brown_dyes"
     }
   ],
   "result": {
     "item": "quark:brown_framed_glass",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "framed_glass"
         }
       ]

@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredients": [{
+  "ingredients": [
+    {
       "item": "quark:raw_copper_bricks"
     }
   ],
@@ -8,10 +9,10 @@
     "item": "minecraft:raw_copper",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "raw_metal_bricks"
     }
   ]
-} 
+}

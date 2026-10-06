@@ -9,10 +9,10 @@
     "item": "minecraft:chorus_fruit",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "chorus_fruit_block"
+      "condition": "quark:flag",
+      "flag": "chorus_fruit_block"
     }
   ]
-} 
+}

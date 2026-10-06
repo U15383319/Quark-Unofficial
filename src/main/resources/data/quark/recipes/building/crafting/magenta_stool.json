@@ -10,16 +10,16 @@
     },
     "W": {
       "tag": "minecraft:wooden_slabs"
-    }    
+    }
   },
   "result": {
     "item": "quark:magenta_stool",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "stools"
     }
   ]
-} 
+}

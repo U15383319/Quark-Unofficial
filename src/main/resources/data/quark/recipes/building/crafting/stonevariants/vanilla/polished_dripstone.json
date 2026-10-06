@@ -13,10 +13,10 @@
     "item": "quark:polished_dripstone",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "dripstone"
     }
   ]
-} 
+}

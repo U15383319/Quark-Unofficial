@@ -9,10 +9,10 @@
     "item": "minecraft:rabbit_hide",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "bonded_rabbit_hide"
+      "condition": "quark:flag",
+      "flag": "bonded_rabbit_hide"
     }
   ]
-} 
+}

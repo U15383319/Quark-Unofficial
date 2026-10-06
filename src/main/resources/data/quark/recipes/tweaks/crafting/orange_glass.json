@@ -13,10 +13,10 @@
     "item": "minecraft:orange_stained_glass"
   },
   "group": "quark:glass_shard",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "glass_shard"
     }
   ]
-} 
+}

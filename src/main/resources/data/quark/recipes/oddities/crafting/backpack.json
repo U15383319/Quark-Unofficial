@@ -7,32 +7,32 @@
   ],
   "key": {
     "L": {
-      "tag": "forge:leather"
+      "tag": "c:leather"
     },
     "R": {
       "item": "quark:ravager_hide"
     },
     "C": {
-      "tag": "forge:chests/wooden"
+      "tag": "c:wooden_chests"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {
     "item": "quark:backpack",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "ravager_hide"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "backpack"
         }
       ]

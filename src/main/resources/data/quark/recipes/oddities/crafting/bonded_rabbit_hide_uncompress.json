@@ -9,10 +9,10 @@
     "item": "quark:ravager_hide",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "ravager_hide"
+      "condition": "quark:flag",
+      "flag": "ravager_hide"
     }
   ]
-} 
+}

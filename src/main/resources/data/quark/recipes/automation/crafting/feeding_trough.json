@@ -15,9 +15,9 @@
   "result": {
     "item": "quark:feeding_trough"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "feeding_trough"
     }
   ]

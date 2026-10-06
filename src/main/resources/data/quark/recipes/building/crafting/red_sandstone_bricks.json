@@ -13,10 +13,10 @@
     "item": "quark:red_sandstone_bricks",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "sandstone_bricks"
     }
   ]
-} 
+}

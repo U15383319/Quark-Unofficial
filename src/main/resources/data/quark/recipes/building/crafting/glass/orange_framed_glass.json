@@ -26,19 +26,19 @@
       "item": "quark:framed_glass"
     },
     {
-      "tag": "forge:dyes/orange"
+      "tag": "c:orange_dyes"
     }
   ],
   "result": {
     "item": "quark:orange_framed_glass",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "framed_glass"
         }
       ]

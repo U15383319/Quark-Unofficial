@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:wooden_rods"
     },
     "W": {
       "item": "minecraft:warped_planks"
@@ -17,9 +17,9 @@
     "item": "quark:warped_ladder",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "variant_ladders"
     }
   ]

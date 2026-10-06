@@ -5,9 +5,9 @@
   },
   "result": "quark:mud_brick_lattice",
   "count": 1,
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "more_mud_blocks"
     }
   ]

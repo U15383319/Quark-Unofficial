@@ -18,9 +18,9 @@
     "item": "quark:ancient_hanging_sign",
     "count": 6
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "ancient_wood"
     }
   ]

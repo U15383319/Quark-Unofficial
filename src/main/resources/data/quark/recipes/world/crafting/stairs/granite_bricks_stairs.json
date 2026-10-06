@@ -14,10 +14,10 @@
     "item": "quark:granite_bricks_stairs",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "more_stone_variants"
     }
   ]
-} 
+}

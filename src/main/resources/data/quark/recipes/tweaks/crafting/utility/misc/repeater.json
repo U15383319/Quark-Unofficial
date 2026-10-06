@@ -8,7 +8,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:wooden_rods"
     },
     "X": {
       "item": "minecraft:redstone"
@@ -20,9 +20,9 @@
   "result": {
     "item": "minecraft:repeater"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "repeater_and_torches"
     }
   ]

@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:bonded_rabbit_hide"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "bonded_rabbit_hide"
     }
   ]

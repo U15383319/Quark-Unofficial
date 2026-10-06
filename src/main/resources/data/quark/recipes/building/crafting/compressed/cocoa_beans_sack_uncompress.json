@@ -9,10 +9,10 @@
     "item": "minecraft:cocoa_beans",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "cocoa_beans_sack"
+      "condition": "quark:flag",
+      "flag": "cocoa_beans_sack"
     }
   ]
-} 
+}

@@ -10,18 +10,18 @@
       "tag": "minecraft:planks"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     },
     "C": {
-      "tag": "forge:chests/wooden"
+      "tag": "c:wooden_chests"
     }
   },
   "result": {
     "item": "quark:crate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "crate"
     }
   ]

@@ -5,16 +5,16 @@
   },
   "result": "quark:cyan_shingles_vertical_slab",
   "count": 2,
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "shingles"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "vertical_slabs"
         }
       ]

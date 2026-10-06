@@ -13,9 +13,9 @@
     "item": "quark:carved_mud_bricks",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "more_mud_blocks"
     }
   ]

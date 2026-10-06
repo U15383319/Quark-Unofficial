@@ -13,10 +13,10 @@
     "item": "quark:grate",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "grate"
     }
   ]
-} 
+}

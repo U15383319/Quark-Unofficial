@@ -13,10 +13,10 @@
     "item": "quark:soul_sandstone_wall",
     "count": 6
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "soul_sandstone"
     }
   ]
-} 
+}

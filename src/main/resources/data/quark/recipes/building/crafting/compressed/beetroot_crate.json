@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:beetroot_crate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "beetroot_crate"
     }
   ]

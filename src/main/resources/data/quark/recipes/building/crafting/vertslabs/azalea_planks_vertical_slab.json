@@ -14,10 +14,10 @@
     "item": "quark:azalea_planks_vertical_slab",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "vertical_slabs"
     }
   ]
-} 
+}

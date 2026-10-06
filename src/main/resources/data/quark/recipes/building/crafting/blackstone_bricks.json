@@ -16,10 +16,10 @@
     "item": "quark:blackstone_bricks",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "blackstone_bricks"
     }
   ]
-} 
+}

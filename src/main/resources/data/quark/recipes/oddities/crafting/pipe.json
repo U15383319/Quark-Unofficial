@@ -7,19 +7,19 @@
   ],
   "key": {
     "G": {
-      "tag": "forge:glass"
+      "tag": "c:glass_blocks"
     },
     "I": {
-      "tag": "forge:ingots/copper"
+      "tag": "c:copper_ingots"
     }
   },
   "result": {
     "item": "quark:pipe",
     "count": 6
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "pipes"
     }
   ]

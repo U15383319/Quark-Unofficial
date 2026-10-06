@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:chests/wooden"
+      "tag": "c:wooden_chests"
     },
     {
       "item": "minecraft:tripwire_hook"
@@ -11,11 +11,11 @@
   "result": {
     "item": "minecraft:trapped_chest"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:not",
+      "condition": "fabric:not",
       "value": {
-        "type": "quark:flag",
+        "condition": "quark:flag",
         "flag": "variant_chests"
       }
     }

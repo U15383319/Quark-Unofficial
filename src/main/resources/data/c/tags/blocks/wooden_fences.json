@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:wooden_fences",
+    "quark:azalea_fence",
+    "quark:blossom_fence",
+    "quark:ancient_fence"
+  ]
+}

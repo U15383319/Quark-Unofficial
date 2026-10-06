@@ -6,16 +6,16 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:ingots/gold"
+      "tag": "c:gold_ingots"
     }
   },
   "result": {
     "item": "quark:gold_bars",
     "count": 16
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "gold_bars"
     }
   ]

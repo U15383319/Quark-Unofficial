@@ -7,7 +7,7 @@
   ],
   "key": {
     "D": {
-      "tag": "forge:dyes/black"
+      "tag": "c:black_dyes"
     },
     "S": {
       "item": "quark:shingles"
@@ -17,10 +17,10 @@
     "item": "quark:black_shingles",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "shingles"
     }
   ]
-} 
+}

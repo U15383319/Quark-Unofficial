@@ -12,9 +12,9 @@
   "result": {
     "item": "minecraft:blue_wool"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "dye_any_wool"
     }
   ]

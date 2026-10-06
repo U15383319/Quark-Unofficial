@@ -17,10 +17,10 @@
     "item": "quark:bamboo_mat",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "bamboo_mat"
     }
   ]
-} 
+}

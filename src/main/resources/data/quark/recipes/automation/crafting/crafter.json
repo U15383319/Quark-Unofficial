@@ -7,7 +7,7 @@
   ],
   "key": {
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     },
     "C": {
       "item": "minecraft:crafting_table"
@@ -16,15 +16,15 @@
       "item": "minecraft:dropper"
     },
     "R": {
-      "tag": "forge:dusts/redstone"
+      "tag": "c:redstone_dusts"
     }
   },
   "result": {
     "item": "quark:crafter"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "crafter"
     }
   ]

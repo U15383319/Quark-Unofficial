@@ -147,12 +147,11 @@
       "rune_blank"
     ]
   ],
-  "conditions": [
+  "sends_telemetry_event": true,
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "color_runes"
     }
-  ],
-  "sends_telemetry_event": true
-
+  ]
 }

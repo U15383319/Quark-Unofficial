@@ -13,10 +13,10 @@
     "item": "quark:paper_wall_big",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "paper_decor"
     }
   ]
-} 
+}

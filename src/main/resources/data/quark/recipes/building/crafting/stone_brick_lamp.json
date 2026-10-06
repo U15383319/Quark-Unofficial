@@ -20,9 +20,9 @@
     "item": "quark:stone_brick_lamp",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "celebratory_lamps"
     }
   ]

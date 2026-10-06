@@ -10,15 +10,15 @@
       "tag": "minecraft:planks"
     },
     "S": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {
     "item": "quark:chute"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "chute"
     }
   ]

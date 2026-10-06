@@ -12,10 +12,10 @@
     "item": "quark:thatch_slab",
     "count": 6
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "thatch"
     }
   ]
-} 
+}

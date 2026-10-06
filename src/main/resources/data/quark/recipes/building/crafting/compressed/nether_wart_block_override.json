@@ -12,9 +12,9 @@
   "result": {
     "item": "minecraft:nether_wart_block"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "nether_wart_sack"
     }
   ]

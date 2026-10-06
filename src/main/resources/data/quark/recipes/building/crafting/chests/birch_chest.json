@@ -15,10 +15,10 @@
     "item": "quark:birch_chest",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "variant_chests"
     }
   ]
-} 
+}

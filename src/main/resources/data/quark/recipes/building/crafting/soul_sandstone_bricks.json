@@ -13,19 +13,19 @@
     "item": "quark:soul_sandstone_bricks",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "soul_sandstone"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "sandstone_bricks"
         }
       ]
     }
   ]
-} 
+}

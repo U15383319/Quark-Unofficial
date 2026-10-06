@@ -14,16 +14,16 @@
     "item": "quark:hollow_blossom_log",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "hollow_logs"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "blossom_trees"
         }
       ]

@@ -7,7 +7,7 @@
   ],
   "key": {
     "A": {
-      "tag": "forge:chests/wooden"
+      "tag": "c:wooden_chests"
     },
     "B": {
       "item": "minecraft:minecart"

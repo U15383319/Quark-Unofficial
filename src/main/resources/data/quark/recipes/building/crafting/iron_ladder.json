@@ -7,19 +7,19 @@
   ],
   "key": {
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     },
     "N": {
-      "tag": "forge:nuggets/iron"
+      "tag": "c:iron_nuggets"
     }
   },
   "result": {
     "item": "quark:iron_ladder",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "iron_ladder"
     }
   ]

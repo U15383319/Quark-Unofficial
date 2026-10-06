@@ -25,11 +25,10 @@
       "mine_fed_toretoise"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "toretoise_regrow"
     }
   ]
-
 }

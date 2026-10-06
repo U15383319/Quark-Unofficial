@@ -26,19 +26,19 @@
       "item": "quark:framed_glass"
     },
     {
-      "tag": "forge:dyes/red"
+      "tag": "c:red_dyes"
     }
   ],
   "result": {
     "item": "quark:red_framed_glass",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "framed_glass"
         }
       ]

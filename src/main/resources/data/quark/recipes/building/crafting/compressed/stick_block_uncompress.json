@@ -9,10 +9,10 @@
     "item": "minecraft:stick",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "stick_block"
+      "condition": "quark:flag",
+      "flag": "stick_block"
     }
   ]
-} 
+}

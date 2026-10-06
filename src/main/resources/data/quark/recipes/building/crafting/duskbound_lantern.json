@@ -17,10 +17,10 @@
     "item": "quark:duskbound_lantern",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "duskbound_blocks"
     }
   ]
-} 
+}

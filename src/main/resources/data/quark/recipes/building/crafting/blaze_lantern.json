@@ -16,9 +16,9 @@
   "result": {
     "item": "quark:blaze_lantern"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "blaze_lantern"
     }
   ]

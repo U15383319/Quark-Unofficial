@@ -3,7 +3,7 @@
   "group": "chest_boat",
   "ingredients": [
     {
-      "tag": "forge:chests/wooden"
+      "tag": "c:wooden_chests"
     },
     {
       "item": "quark:azalea_boat"
@@ -12,9 +12,9 @@
   "result": {
     "item": "quark:azalea_chest_boat"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "azalea_wood"
     }
   ]

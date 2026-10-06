@@ -7,19 +7,19 @@
   ],
   "key": {
     "S": {
-      "tag": "forge:sand/colorless"
+      "tag": "c:colorless_sand"
     },
     "E": {
-      "tag": "forge:ender_pearls"
+      "tag": "c:ender_pearls"
     }
   },
   "result": {
     "item": "quark:gravisand",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "gravisand"
     }
   ]

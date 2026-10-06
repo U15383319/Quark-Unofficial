@@ -26,19 +26,19 @@
       "item": "quark:framed_glass"
     },
     {
-      "tag": "forge:dyes/magenta"
+      "tag": "c:magenta_dyes"
     }
   ],
   "result": {
     "item": "quark:magenta_framed_glass",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "framed_glass"
         }
       ]

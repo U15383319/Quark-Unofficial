@@ -14,10 +14,10 @@
     "item": "quark:mossy_cobblestone_bricks_stairs",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "cobblestone_bricks"
     }
   ]
-} 
+}

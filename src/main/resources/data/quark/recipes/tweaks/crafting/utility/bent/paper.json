@@ -14,9 +14,9 @@
     "item": "minecraft:paper",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "bent_recipes"
     }
   ]

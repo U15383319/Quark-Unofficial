@@ -14,16 +14,16 @@
     "item": "quark:stripped_blossom_post",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "wooden_posts"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "blossom_trees"
         }
       ]

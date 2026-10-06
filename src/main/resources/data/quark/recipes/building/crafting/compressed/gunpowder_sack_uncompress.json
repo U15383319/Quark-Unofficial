@@ -9,10 +9,10 @@
     "item": "minecraft:gunpowder",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "gunpowder_sack"
+      "condition": "quark:flag",
+      "flag": "gunpowder_sack"
     }
   ]
-} 
+}

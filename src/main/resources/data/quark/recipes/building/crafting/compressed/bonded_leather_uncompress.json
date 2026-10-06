@@ -9,10 +9,10 @@
     "item": "minecraft:leather",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "bonded_leather"
+      "condition": "quark:flag",
+      "flag": "bonded_leather"
     }
   ]
-} 
+}

@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:glowberry_sack"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "glowberry_sack"
     }
   ]

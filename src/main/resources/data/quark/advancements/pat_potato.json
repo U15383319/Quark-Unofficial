@@ -25,11 +25,10 @@
       "pat_potato"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "tiny_potato"
     }
   ]
-
 }

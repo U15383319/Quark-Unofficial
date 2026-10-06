@@ -10,31 +10,31 @@
       "tag": "minecraft:planks"
     },
     "D": {
-      "tag": "forge:gems/diamond"
+      "tag": "c:diamonds"
     }
   },
   "result": {
     "item": "quark:pickarang"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "pickarang"
         },
         {
-          "type": "forge:or",
+          "condition": "fabric:or",
           "values": [
             {
-              "type": "quark:flag",
+              "condition": "quark:flag",
               "flag": "pickarang_never_uses_heart"
             },
             {
-              "type": "forge:not",
+              "condition": "fabric:not",
               "value": {
-                "type": "quark:flag",
+                "condition": "quark:flag",
                 "flag": "stonelings"
               }
             }

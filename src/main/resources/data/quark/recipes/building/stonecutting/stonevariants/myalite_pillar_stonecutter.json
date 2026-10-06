@@ -5,19 +5,19 @@
   },
   "result": "quark:myalite_pillar",
   "count": 1,
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "stone_pillar"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "myalite"
         }
       ]
     }
   ]
-} 
+}

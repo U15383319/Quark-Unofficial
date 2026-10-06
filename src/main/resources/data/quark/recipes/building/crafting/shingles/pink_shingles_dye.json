@@ -7,7 +7,7 @@
   ],
   "key": {
     "D": {
-      "tag": "forge:dyes/pink"
+      "tag": "c:pink_dyes"
     },
     "S": {
       "item": "quark:shingles"
@@ -17,10 +17,10 @@
     "item": "quark:pink_shingles",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "shingles"
     }
   ]
-} 
+}

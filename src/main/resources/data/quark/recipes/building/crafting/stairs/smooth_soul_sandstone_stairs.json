@@ -14,10 +14,10 @@
     "item": "quark:smooth_soul_sandstone_stairs",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "soul_sandstone"
     }
   ]
-} 
+}

@@ -9,10 +9,10 @@
     "item": "minecraft:birch_planks",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "vertical_planks"
+      "condition": "quark:flag",
+      "flag": "vertical_planks"
     }
   ]
-} 
+}

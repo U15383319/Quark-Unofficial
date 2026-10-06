@@ -25,11 +25,10 @@
       "throw_parrot_egg"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "parrot_eggs"
     }
   ]
-
 }

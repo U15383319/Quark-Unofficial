@@ -9,10 +9,10 @@
     "item": "minecraft:potato",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "potato_crate"
+      "condition": "quark:flag",
+      "flag": "potato_crate"
     }
   ]
-} 
+}

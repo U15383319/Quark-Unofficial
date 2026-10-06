@@ -7,9 +7,9 @@
     "item": "minecraft:blaze_powder"
   },
   "color": "rainbow",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "color_runes"
     }
   ]

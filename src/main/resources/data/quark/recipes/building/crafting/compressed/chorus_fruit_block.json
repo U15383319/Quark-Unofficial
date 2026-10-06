@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:chorus_fruit_block"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "chorus_fruit_block"
     }
   ]

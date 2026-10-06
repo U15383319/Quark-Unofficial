@@ -13,10 +13,10 @@
     "item": "quark:iron_pillar",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "iron_plates"
     }
   ]
-} 
+}

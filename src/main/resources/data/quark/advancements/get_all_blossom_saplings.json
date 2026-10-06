@@ -81,17 +81,26 @@
     "experience": 100
   },
   "requirements": [
-    [ "blue" ],
-    [ "lavender" ],
-    [ "orange" ],
-    [ "yellow" ],
-    [ "red" ]
+    [
+      "blue"
+    ],
+    [
+      "lavender"
+    ],
+    [
+      "orange"
+    ],
+    [
+      "yellow"
+    ],
+    [
+      "red"
+    ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "blossom_trees"
     }
   ]
-
 }

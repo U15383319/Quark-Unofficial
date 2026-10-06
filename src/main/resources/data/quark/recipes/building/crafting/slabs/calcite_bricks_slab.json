@@ -12,10 +12,10 @@
     "item": "quark:calcite_bricks_slab",
     "count": 6
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "more_stone_variants"
     }
   ]
-} 
+}

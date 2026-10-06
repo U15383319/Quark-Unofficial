@@ -9,10 +9,10 @@
     "item": "minecraft:nether_wart",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "nether_wart_sack"
+      "condition": "quark:flag",
+      "flag": "nether_wart_sack"
     }
   ]
-} 
+}

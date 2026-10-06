@@ -17,9 +17,9 @@
     "item": "minecraft:cookie",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "bent_recipes"
     }
   ]

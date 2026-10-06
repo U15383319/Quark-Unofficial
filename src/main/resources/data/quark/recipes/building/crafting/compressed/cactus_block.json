@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:cactus_block"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "cactus_block"
     }
   ]

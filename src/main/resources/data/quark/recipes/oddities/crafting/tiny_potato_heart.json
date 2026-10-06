@@ -15,22 +15,22 @@
   "result": {
     "item": "quark:tiny_potato"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "tiny_potato"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "stonelings"
         },
         {
-          "type": "forge:not",
+          "condition": "fabric:not",
           "value": {
-            "type": "quark:flag",
+            "condition": "quark:flag",
             "flag": "tiny_potato_never_uses_heart"
           }
         }

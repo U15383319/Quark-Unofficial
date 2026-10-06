@@ -25,11 +25,10 @@
       "influence"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "candle_influencing"
     }
   ]
-
 }

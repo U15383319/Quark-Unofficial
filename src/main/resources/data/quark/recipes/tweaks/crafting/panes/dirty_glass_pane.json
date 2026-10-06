@@ -13,10 +13,10 @@
     "item": "quark:dirty_glass_pane",
     "count": 16
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "glass_shard"
     }
   ]
-} 
+}

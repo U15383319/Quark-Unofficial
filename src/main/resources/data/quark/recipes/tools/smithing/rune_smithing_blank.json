@@ -5,9 +5,9 @@
   },
   "addition": null,
   "color": "blank",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "color_runes"
     }
   ]

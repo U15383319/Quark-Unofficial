@@ -9,10 +9,10 @@
     "item": "minecraft:beetroot",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "beetroot_crate"
+      "condition": "quark:flag",
+      "flag": "beetroot_crate"
     }
   ]
-} 
+}

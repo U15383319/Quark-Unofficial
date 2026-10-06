@@ -7,20 +7,20 @@
   ],
   "key": {
     "G": {
-      "tag": "forge:glass/colorless"
+      "tag": "c:colorless_glass"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {
     "item": "quark:framed_glass",
     "count": 8
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "framed_glass"
     }
   ]
-} 
+}

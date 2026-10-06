@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:ancient_boat"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "ancient_wood"
     }
   ]

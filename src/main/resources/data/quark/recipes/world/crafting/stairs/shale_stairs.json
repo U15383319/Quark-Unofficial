@@ -14,10 +14,10 @@
     "item": "quark:shale_stairs",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "shale"
     }
   ]
-} 
+}

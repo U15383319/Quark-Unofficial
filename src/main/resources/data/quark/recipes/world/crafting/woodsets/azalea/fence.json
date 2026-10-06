@@ -17,9 +17,9 @@
     "item": "quark:azalea_fence",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "azalea_wood"
     }
   ]

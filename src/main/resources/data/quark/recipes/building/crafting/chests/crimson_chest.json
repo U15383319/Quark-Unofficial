@@ -15,15 +15,15 @@
     "item": "quark:crimson_chest",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "variant_chests"
         }
       ]
     }
   ]
-} 
+}

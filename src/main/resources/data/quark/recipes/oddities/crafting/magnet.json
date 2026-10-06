@@ -7,16 +7,16 @@
   ],
   "key": {
     "C": {
-      "tag": "forge:cobblestone"
+      "tag": "c:cobblestone"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     },
     "B": {
-      "tag": "forge:dyes/blue"
+      "tag": "c:blue_dyes"
     },
     "R": {
-      "tag": "forge:dusts/redstone"
+      "tag": "c:redstone_dusts"
     },
     "F": {
       "item": "minecraft:chorus_fruit"
@@ -25,18 +25,18 @@
   "result": {
     "item": "quark:magnet"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "magnets"
         },
         {
-          "type": "forge:not",
+          "condition": "fabric:not",
           "value": {
-            "type": "quark:flag",
+            "condition": "quark:flag",
             "flag": "magnet_pre_end"
           }
         }

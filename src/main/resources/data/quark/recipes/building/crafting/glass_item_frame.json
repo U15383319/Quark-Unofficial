@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:glass_panes/colorless"
+      "tag": "c:colorless_glass_panes"
     },
     "F": {
       "item": "minecraft:item_frame"
@@ -17,9 +17,9 @@
     "item": "quark:glass_item_frame",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "glass_item_frame"
     }
   ]

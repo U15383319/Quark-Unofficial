@@ -11,9 +11,9 @@
   "result": {
     "item": "quark:glowing_glass_item_frame"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "glass_item_frame"
     }
   ]

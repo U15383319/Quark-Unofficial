@@ -8,9 +8,9 @@
   "result": {
     "item": "minecraft:chest"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "chest_reversion"
     }
   ]

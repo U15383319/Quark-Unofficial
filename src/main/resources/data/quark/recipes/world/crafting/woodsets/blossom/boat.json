@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:blossom_boat"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "blossom_trees"
     }
   ]

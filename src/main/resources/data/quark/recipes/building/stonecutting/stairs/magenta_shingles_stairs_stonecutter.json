@@ -5,9 +5,9 @@
   },
   "result": "quark:magenta_shingles_stairs",
   "count": 1,
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "shingles"
     }
   ]

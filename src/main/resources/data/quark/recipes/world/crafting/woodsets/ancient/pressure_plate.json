@@ -12,9 +12,9 @@
   "result": {
     "item": "quark:ancient_pressure_plate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "ancient_wood"
     }
   ]

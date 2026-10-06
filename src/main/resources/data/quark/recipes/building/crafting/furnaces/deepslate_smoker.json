@@ -16,9 +16,9 @@
   "result": {
     "item": "minecraft:smoker"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "variant_furnaces"
     }
   ]

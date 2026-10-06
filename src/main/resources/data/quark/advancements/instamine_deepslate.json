@@ -28,11 +28,10 @@
       "instamine_deepslate"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "deepslate_tweak"
     }
   ]
-
 }

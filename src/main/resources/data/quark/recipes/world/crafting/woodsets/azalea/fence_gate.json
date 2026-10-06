@@ -16,9 +16,9 @@
   "result": {
     "item": "quark:azalea_fence_gate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "azalea_wood"
     }
   ]

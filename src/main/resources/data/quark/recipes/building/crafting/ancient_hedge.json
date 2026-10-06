@@ -16,19 +16,19 @@
     "item": "quark:ancient_hedge",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "hedges"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "ancient_wood"
         }
       ]
     }
   ]
-} 
+}

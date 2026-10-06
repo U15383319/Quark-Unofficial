@@ -5,15 +5,15 @@
   ],
   "key": {
     "O": {
-      "tag": "forge:obsidian"
+      "tag": "c:obsidian"
     }
   },
   "result": {
     "item": "quark:obsidian_pressure_plate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "obsidian_plate"
     }
   ]

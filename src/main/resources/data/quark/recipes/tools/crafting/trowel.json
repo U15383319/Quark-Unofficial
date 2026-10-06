@@ -6,18 +6,18 @@
   ],
   "key": {
     "S": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:wooden_rods"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {
     "item": "quark:trowel"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "trowel"
     }
   ]

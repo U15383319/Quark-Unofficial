@@ -25,11 +25,10 @@
       "poison_baby"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "poison_potato_usage"
     }
   ]
-
 }

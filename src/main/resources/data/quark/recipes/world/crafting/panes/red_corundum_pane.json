@@ -14,10 +14,10 @@
     "count": 16
   },
   "group": "quark:corundum_sheet",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "corundum"
     }
   ]
-} 
+}

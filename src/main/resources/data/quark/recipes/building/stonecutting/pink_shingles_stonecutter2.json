@@ -5,9 +5,9 @@
   },
   "result": "quark:pink_shingles",
   "count": 1,
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "shingles"
     }
   ]

@@ -1,9 +1,9 @@
 {
   "type": "quark:elytra_duplication",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "dragon_scales"
     }
   ]
-} 
+}

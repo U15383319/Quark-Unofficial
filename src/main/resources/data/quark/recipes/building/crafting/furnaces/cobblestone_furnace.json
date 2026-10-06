@@ -7,16 +7,16 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:cobblestone"
+      "tag": "c:cobblestone"
     }
   },
   "result": {
     "item": "minecraft:furnace"
   },
-  "conditions": [
-      {
-        "type": "quark:flag",
-        "flag": "variant_furnaces"
-      }
+  "fabric:load_conditions": [
+    {
+      "condition": "quark:flag",
+      "flag": "variant_furnaces"
+    }
   ]
 }

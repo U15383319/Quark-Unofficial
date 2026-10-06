@@ -9,10 +9,10 @@
     "item": "minecraft:glow_berries",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "glowberry_sack"
+      "condition": "quark:flag",
+      "flag": "glowberry_sack"
     }
   ]
-} 
+}

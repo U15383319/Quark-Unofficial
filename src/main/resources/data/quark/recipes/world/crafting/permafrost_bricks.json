@@ -13,10 +13,10 @@
     "item": "quark:permafrost_bricks",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "permafrost"
     }
   ]
-} 
+}

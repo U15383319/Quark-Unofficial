@@ -15,9 +15,9 @@
     "count": 3
   },
   "group": "quark:corundum",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "corundum"
     }
   ]

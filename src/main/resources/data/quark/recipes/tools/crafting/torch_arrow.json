@@ -12,10 +12,10 @@
     "item": "quark:torch_arrow",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "torch_arrow"
     }
   ]
-} 
+}

@@ -4,12 +4,12 @@
     "item": "quark:smithing_template_rune"
   },
   "addition": {
-    "tag": "forge:dyes/cyan"
+    "tag": "c:cyan_dyes"
   },
   "color": "cyan",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "color_runes"
     }
   ]

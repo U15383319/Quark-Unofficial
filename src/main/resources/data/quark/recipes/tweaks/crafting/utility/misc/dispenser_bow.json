@@ -12,9 +12,9 @@
   "result": {
     "item": "minecraft:dispenser"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "dropper_upgrade"
     }
   ]

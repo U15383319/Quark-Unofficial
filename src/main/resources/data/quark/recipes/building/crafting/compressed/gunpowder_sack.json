@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:gunpowder_sack"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "gunpowder_sack"
     }
   ]

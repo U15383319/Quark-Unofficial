@@ -34,11 +34,10 @@
       "get_diamond_heart"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "stoneling_drop_diamond_heart"
     }
   ]
-
 }

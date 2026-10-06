@@ -23,28 +23,28 @@
     "item": "quark:white_crystal_lamp",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "rainbow_lamps"
         },
         {
-          "type": "forge:or",
+          "condition": "fabric:or",
           "values": [
             {
-              "type": "forge:not",
+              "condition": "fabric:not",
               "value": {
-                "type": "quark:flag",
+                "condition": "quark:flag",
                 "flag": "corundum"
               }
             },
             {
-              "type": "forge:not",
+              "condition": "fabric:not",
               "value": {
-                "type": "quark:flag",
+                "condition": "quark:flag",
                 "flag": "rainbow_lamp_corundum"
               }
             }

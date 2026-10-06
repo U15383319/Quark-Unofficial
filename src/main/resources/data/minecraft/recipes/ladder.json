@@ -7,18 +7,18 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:wooden_rods"
     }
   },
   "result": {
     "item": "minecraft:ladder",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:not",
+      "condition": "fabric:not",
       "value": {
-        "type": "quark:flag",
+        "condition": "quark:flag",
         "flag": "variant_ladders"
       }
     }

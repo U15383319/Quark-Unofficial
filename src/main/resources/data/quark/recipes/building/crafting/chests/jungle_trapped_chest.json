@@ -11,9 +11,9 @@
   "result": {
     "item": "quark:jungle_trapped_chest"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "variant_chests"
     }
   ]

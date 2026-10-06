@@ -9,10 +9,10 @@
     "item": "minecraft:smooth_red_sandstone_slab",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "vertical_slabs"
+      "condition": "quark:flag",
+      "flag": "vertical_slabs"
     }
   ]
-} 
+}

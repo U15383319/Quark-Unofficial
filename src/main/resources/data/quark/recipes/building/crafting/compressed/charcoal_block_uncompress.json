@@ -9,10 +9,10 @@
     "item": "minecraft:charcoal",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "charcoal_block"
+      "condition": "quark:flag",
+      "flag": "charcoal_block"
     }
   ]
-} 
+}

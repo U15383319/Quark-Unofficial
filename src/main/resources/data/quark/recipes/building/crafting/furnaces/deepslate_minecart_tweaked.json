@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     },
     "X": {
       "item": "quark:deepslate_furnace"
@@ -16,13 +16,13 @@
   "result": {
     "item": "minecraft:furnace_minecart"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "minecart_upgrade"
     },
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "variant_furnaces"
     }
   ]

@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-   "green": {
+    "green": {
       "conditions": {
         "items": [
           {
@@ -129,21 +129,38 @@
     "experience": 100
   },
   "requirements": [
-    [ "red" ],
-    [ "orange" ],
-    [ "yellow" ],
-    [ "green" ],
-    [ "blue" ],
-    [ "indigo" ],
-    [ "violet" ],
-    [ "white" ],
-    [ "black" ]
+    [
+      "red"
+    ],
+    [
+      "orange"
+    ],
+    [
+      "yellow"
+    ],
+    [
+      "green"
+    ],
+    [
+      "blue"
+    ],
+    [
+      "indigo"
+    ],
+    [
+      "violet"
+    ],
+    [
+      "white"
+    ],
+    [
+      "black"
+    ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "corundum"
     }
   ]
-
 }

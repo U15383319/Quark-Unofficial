@@ -14,10 +14,10 @@
     "item": "quark:polished_shale_vertical_slab",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "vertical_slabs"
     }
   ]
-} 
+}

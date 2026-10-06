@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:charcoal_block"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "charcoal_block"
     }
   ]

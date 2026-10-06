@@ -9,9 +9,9 @@
   "result": {
     "item": "quark:ancient_button"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "ancient_wood"
     }
   ]

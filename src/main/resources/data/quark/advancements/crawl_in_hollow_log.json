@@ -25,11 +25,10 @@
       "crawl_in_hollow_log"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "hollow_logs"
     }
   ]
-
 }

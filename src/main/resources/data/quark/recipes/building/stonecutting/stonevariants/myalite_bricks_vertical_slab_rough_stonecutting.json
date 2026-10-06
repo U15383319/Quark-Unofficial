@@ -5,23 +5,23 @@
   },
   "result": "quark:myalite_bricks_vertical_slab",
   "count": 2,
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "stone_bricks"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "myalite"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "vertical_slabs"
         }
       ]
     }
   ]
-} 
+}

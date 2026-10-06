@@ -7,15 +7,15 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:leather"
+      "tag": "c:leather"
     }
   },
   "result": {
     "item": "quark:bonded_leather"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "bonded_leather"
     }
   ]

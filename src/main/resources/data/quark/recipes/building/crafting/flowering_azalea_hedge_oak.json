@@ -16,22 +16,22 @@
     "item": "quark:flowering_azalea_hedge",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "hedges"
         },
         {
-          "type": "forge:not",
+          "condition": "fabric:not",
           "value": {
-            "type": "quark:flag",
-            "flag": "azalea_wood"  
+            "condition": "quark:flag",
+            "flag": "azalea_wood"
           }
         }
       ]
     }
   ]
-} 
+}

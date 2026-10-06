@@ -28,11 +28,10 @@
       "ancient_apple_overlevel"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "ancient_fruit_xp"
     }
   ]
-
 }

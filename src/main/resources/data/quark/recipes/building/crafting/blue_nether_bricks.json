@@ -12,9 +12,9 @@
     "item": "quark:blue_nether_bricks",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "blue_nether_bricks"
     }
   ]

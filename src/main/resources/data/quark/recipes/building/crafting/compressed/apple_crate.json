@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:apple_crate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "apple_crate"
     }
   ]

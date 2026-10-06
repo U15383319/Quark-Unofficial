@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:sugar_cane_block"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "sugar_cane_block"
     }
   ]

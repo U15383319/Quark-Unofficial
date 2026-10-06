@@ -16,9 +16,9 @@
   "result": {
     "item": "quark:ancient_fence_gate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "ancient_wood"
     }
   ]

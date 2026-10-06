@@ -6,8 +6,12 @@
   ],
   "key": {
     "D": [
-      { "tag": "forge:gems/diamond" },
-      { "tag": "forge:gems/emerald" }
+      {
+        "tag": "c:diamonds"
+      },
+      {
+        "tag": "c:emeralds"
+      }
     ],
     "P": {
       "item": "minecraft:potato"
@@ -16,25 +20,25 @@
   "result": {
     "item": "quark:tiny_potato"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "tiny_potato"
         },
         {
-          "type": "forge:or",
+          "condition": "fabric:or",
           "values": [
             {
-              "type": "quark:flag",
+              "condition": "quark:flag",
               "flag": "tiny_potato_never_uses_heart"
             },
             {
-              "type": "forge:not",
+              "condition": "fabric:not",
               "value": {
-                "type": "quark:flag",
+                "condition": "quark:flag",
                 "flag": "stonelings"
               }
             }

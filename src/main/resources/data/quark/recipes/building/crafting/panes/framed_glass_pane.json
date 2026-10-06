@@ -13,10 +13,10 @@
     "item": "quark:framed_glass_pane",
     "count": 16
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "framed_glass"
     }
   ]
-} 
+}

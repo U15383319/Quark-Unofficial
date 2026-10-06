@@ -14,10 +14,10 @@
     "item": "quark:vertical_ancient_planks",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "vertical_planks"
     }
   ]
-} 
+}

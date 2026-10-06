@@ -9,10 +9,10 @@
     "item": "minecraft:golden_carrot",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "golden_carrot_crate"
+      "condition": "quark:flag",
+      "flag": "golden_carrot_crate"
     }
   ]
-} 
+}

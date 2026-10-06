@@ -7,7 +7,7 @@
   ],
   "key": {
     "R": {
-      "tag": "forge:dusts/redstone"
+      "tag": "c:redstone_dusts"
     },
     "B": {
       "item": "minecraft:obsidian"
@@ -19,9 +19,9 @@
   "result": {
     "item": "quark:ender_watcher"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "ender_watcher"
     }
   ]

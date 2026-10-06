@@ -16,11 +16,11 @@
   "result": {
     "item": "minecraft:bookshelf"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:not",
+      "condition": "fabric:not",
       "value": {
-        "type": "quark:flag",
+        "condition": "quark:flag",
         "flag": "variant_bookshelves"
       }
     }

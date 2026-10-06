@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     },
     "X": {
       "item": "minecraft:hopper"
@@ -16,9 +16,9 @@
   "result": {
     "item": "minecraft:hopper_minecart"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "minecart_upgrade"
     }
   ]

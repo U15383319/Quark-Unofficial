@@ -10,24 +10,24 @@
       "item": "minecraft:end_rod"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {
     "item": "quark:iron_rod"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "iron_rod"
         },
         {
-          "type": "forge:not",
+          "condition": "fabric:not",
           "value": {
-            "type": "quark:flag",
+            "condition": "quark:flag",
             "flag": "iron_rod_pre_end"
           }
         }

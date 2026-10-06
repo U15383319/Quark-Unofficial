@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:wooden_rods"
     },
     "W": {
       "item": "quark:azalea_planks"
@@ -17,16 +17,16 @@
     "item": "quark:azalea_ladder",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "variant_ladders"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "azalea_wood"
         }
       ]

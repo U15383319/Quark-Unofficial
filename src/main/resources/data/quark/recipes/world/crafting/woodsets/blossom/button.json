@@ -9,9 +9,9 @@
   "result": {
     "item": "quark:blossom_button"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "blossom_trees"
     }
   ]

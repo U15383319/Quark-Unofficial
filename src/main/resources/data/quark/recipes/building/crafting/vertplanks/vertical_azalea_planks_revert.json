@@ -9,19 +9,19 @@
     "item": "quark:azalea_planks",
     "count": 1
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "vertical_planks"
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "azalea_wood"
         }
       ]
     }
   ]
-} 
+}

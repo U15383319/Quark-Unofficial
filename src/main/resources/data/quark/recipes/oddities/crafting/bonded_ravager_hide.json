@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:bonded_ravager_hide"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "ravager_hide"
     }
   ]

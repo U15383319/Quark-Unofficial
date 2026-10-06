@@ -10,15 +10,15 @@
       "item": "minecraft:spruce_planks"
     },
     "X": {
-      "tag": "forge:chests/wooden"
+      "tag": "c:wooden_chests"
     }
   },
   "result": {
     "item": "minecraft:spruce_chest_boat"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "direct_chest_boat"
     }
   ]

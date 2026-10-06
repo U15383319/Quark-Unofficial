@@ -17,11 +17,11 @@
   "result": {
     "item": "minecraft:stone_sword"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:not",
+      "condition": "fabric:not",
       "value": {
-        "type": "quark:flag",
+        "condition": "quark:flag",
         "flag": "better_stone_tools"
       }
     }

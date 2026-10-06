@@ -9,19 +9,21 @@
     "item": "minecraft:cobblestone",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "forge:not",
+          "condition": "fabric:not",
           "value": {
-            "type": "forge:mod_loaded",
-            "modid": "cyclic"  
+            "condition": "fabric:all_mods_loaded",
+            "values": [
+              "cyclic"
+            ]
           }
         },
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "sturdy_stone"
         }
       ]

@@ -9,10 +9,10 @@
     "item": "minecraft:sweet_berries",
     "count": 9
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
-        "flag": "berry_sack"
+      "condition": "quark:flag",
+      "flag": "berry_sack"
     }
   ]
-} 
+}

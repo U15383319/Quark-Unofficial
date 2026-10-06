@@ -12,10 +12,10 @@
     "item": "quark:white_shingles",
     "count": 2
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "shingles"
     }
   ]
-} 
+}

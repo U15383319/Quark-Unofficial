@@ -13,10 +13,10 @@
     "item": "quark:raw_iron_bricks_wall",
     "count": 6
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "raw_metal_bricks"
     }
   ]
-} 
+}

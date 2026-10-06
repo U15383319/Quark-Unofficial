@@ -14,9 +14,9 @@
   "result": {
     "item": "minecraft:pink_dye"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "coral_to_dye"
     }
   ]

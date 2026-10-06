@@ -13,16 +13,16 @@
       "item": "minecraft:paper"
     },
     "G": {
-      "tag": "forge:dusts/glowstone"
+      "tag": "c:glowstone_dusts"
     }
   },
   "result": {
     "item": "quark:paper_lantern"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "paper_decor"
     }
   ]
-} 
+}

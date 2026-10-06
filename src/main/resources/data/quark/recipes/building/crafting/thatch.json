@@ -13,9 +13,9 @@
     "item": "quark:thatch",
     "count": 4
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "thatch"
     }
   ]

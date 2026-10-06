@@ -15,9 +15,9 @@
     "item": "quark:azalea_door",
     "count": 3
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "azalea_wood"
     }
   ]

@@ -13,9 +13,9 @@
   "result": {
     "item": "quark:golden_carrot_crate"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "golden_carrot_crate"
     }
   ]

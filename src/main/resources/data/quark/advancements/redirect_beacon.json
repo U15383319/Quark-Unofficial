@@ -25,11 +25,10 @@
       "redirect_beacon"
     ]
   ],
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:advancement_flag",
+      "condition": "quark:advancement_flag",
       "flag": "beacon_redirection"
     }
   ]
-
 }

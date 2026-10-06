@@ -4,12 +4,12 @@
     "item": "quark:smithing_template_rune"
   },
   "addition": {
-    "tag": "forge:dyes/pink"
+    "tag": "c:pink_dyes"
   },
   "color": "pink",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "color_runes"
     }
   ]

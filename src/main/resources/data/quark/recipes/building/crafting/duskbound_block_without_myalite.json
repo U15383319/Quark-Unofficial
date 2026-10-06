@@ -17,22 +17,22 @@
     "item": "quark:duskbound_block",
     "count": 16
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:and",
+      "condition": "fabric:and",
       "values": [
         {
-          "type": "quark:flag",
+          "condition": "quark:flag",
           "flag": "duskbound_blocks"
         },
         {
-          "type": "forge:not",
+          "condition": "fabric:not",
           "value": {
-            "type": "quark:flag",
+            "condition": "quark:flag",
             "flag": "spiral_spires"
           }
         }
       ]
     }
   ]
-} 
+}

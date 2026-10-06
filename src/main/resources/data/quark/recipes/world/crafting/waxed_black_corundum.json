@@ -11,10 +11,10 @@
   "result": {
     "item": "quark:waxed_black_corundum"
   },
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "quark:flag",
+      "condition": "quark:flag",
       "flag": "corundum"
     }
   ]
-} 
+}
