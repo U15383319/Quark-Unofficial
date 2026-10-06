@@ -61,7 +61,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 		zeta$currentBreakChance = FabricZWorldEvents.fireAnvilRepair(player, inputSlots.getItem(0), inputSlots.getItem(1), stack);
 	}
 
-	@ModifyConstant(method = "lambda$onTake$2", constant = @Constant(floatValue = 0.12F))
+	@ModifyConstant(method = "method_24922" /* onTake lambda (intermediary name) */, constant = @Constant(floatValue = 0.12F))
 	private static float zeta$breakChance(float vanilla) {
 		return zeta$currentBreakChance;
 	}

@@ -27,7 +27,6 @@
     "DamageEnchantmentMixin",
     "DamageSourcesMixin",
     "DiggerItemMixin",
-    "ElytraItemMixin",
     "EnchantBookForEmeraldsMixin",
     "EnchantRandomlyFunctionMixin",
     "EnchantmentHelperMixin",

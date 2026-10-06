@@ -7,6 +7,9 @@ loom {
 	accessWidenerPath = file('src/main/resources/zeta.accesswidener')
 }
 
+// Zeta is launched as part of Quark (the root project's runs), not on its own
+tasks.matching { it.name.startsWith('run') }.configureEach { enabled = false }
+
 processResources {
 	def version = project.version
 	inputs.property 'version', version

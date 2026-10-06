@@ -28,8 +28,8 @@ public abstract class MinecraftMixin {
 	@Unique
 	private boolean zeta$replacingScreen = false;
 
-	// Forge FMLLoadCompleteEvent: every mod's entrypoints have run by the time the color registries are created
-	@Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/color/block/BlockColors;createDefault()Lnet/minecraft/client/color/block/BlockColors;"))
+	// Forge FMLLoadCompleteEvent: every mod's entrypoints have run, and (as on Forge) the color handlers are registered
+	@Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/color/item/ItemColors;createDefault(Lnet/minecraft/client/color/block/BlockColors;)Lnet/minecraft/client/color/item/ItemColors;", shift = At.Shift.AFTER))
 	private void zeta$loadComplete(CallbackInfo ci) {
 		ZetaModFabric.fireLoadComplete();
 	}

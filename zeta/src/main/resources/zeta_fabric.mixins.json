@@ -35,7 +35,8 @@
     "ext.EnchantmentExtMixin",
     "ext.EntityTypeBuilderExtMixin",
     "ext.EntityTypeExtMixin",
-    "ext.ItemStackExtMixin"
+    "ext.ItemStackExtMixin",
+    "ext.SimpleCookingSerializerExtMixin"
   ],
   "client": [
     "client.AbstractContainerScreenMixin",

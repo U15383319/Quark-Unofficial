@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.experimental.module;
 
+import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import com.mojang.serialization.Dynamic;
 
 import net.minecraft.ChatFormatting;
@@ -106,6 +107,11 @@ public class GameNerfsModule extends ZetaModule {
 	public static List<String> elytraAllowedDimensions = Arrays.asList("minecraft:the_end");
 
 	private static boolean staticEnabled;
+
+	static {
+		// Fabric: Forge used ElytraItemMixin on IForgeItem#canElytraFly
+		EntityElytraEvents.ALLOW.register(entity -> canEntityUseElytra(entity, true));
+	}
 
 	@LoadEvent
 	public final void configChanged(ZConfigChanged event) {

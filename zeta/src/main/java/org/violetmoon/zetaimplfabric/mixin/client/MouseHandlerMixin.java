@@ -28,8 +28,9 @@ public abstract class MouseHandlerMixin {
 	}
 
 	// Forge ScreenEvent.MouseButtonPressed.Pre/Post
-	@WrapOperation(method = "*", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;mouseClicked(DDI)Z"))
-	private boolean zeta$screenMouseClicked(Screen screen, double x, double y, int button, Operation<Boolean> original) {
+	// (the call lives in onPress's static lambda, intermediary name)
+	@WrapOperation(method = "method_1611", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;mouseClicked(DDI)Z"))
+	private static boolean zeta$screenMouseClicked(Screen screen, double x, double y, int button, Operation<Boolean> original) {
 		if(FabricZClientEvents.fireMouseClickPre(screen, x, y, button))
 			return true;
 		boolean handled = original.call(screen, x, y, button);

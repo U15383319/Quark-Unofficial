@@ -1,5 +1,6 @@
 package org.violetmoon.zeta.item.ext;
 
+import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import org.violetmoon.zeta.util.ZetaEnchantmentHelper;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -101,7 +102,8 @@ public interface IZetaItemExtensions {
 
 	default boolean canElytraFlyZeta(ItemStack stack, LivingEntity entity) {
 		//forge has a funky little extension for this
-		return stack.getItem() instanceof ElytraItem && ElytraItem.isFlyEnabled(stack);
+		// Fabric: mods veto elytra flight through EntityElytraEvents.ALLOW (Forge: mixins into ElytraItem#canElytraFly)
+		return stack.getItem() instanceof ElytraItem && ElytraItem.isFlyEnabled(stack) && EntityElytraEvents.ALLOW.invoker().allowElytraFlight(entity);
 	}
 
 	default int getDefaultTooltipHideFlagsZeta(@NotNull ItemStack stack) {

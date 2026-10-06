@@ -13,7 +13,7 @@ import org.violetmoon.quark.content.tweaks.module.MoreVillagersModule;
 @Mixin(VillagerTrades.class)
 public class VillagerTradesMixin {
 
-    @ModifyExpressionValue(method = "lambda$static$0",
+    @ModifyExpressionValue(method = "method_16929", // TRADES initializer lambda (intermediary name; lambda$static$0 on Forge)
             require = 1,
             at = @At(value = "INVOKE",
                     ordinal = 0,

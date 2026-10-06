@@ -15,7 +15,7 @@ import net.minecraft.world.entity.monster.Zombie;
 public abstract class ZombieMixin {
 
 	// Forge LivingConversionEvent.Pre: ForgeEventFactory.canLivingConvert is part of the villager-infection condition
-	@ModifyExpressionValue(method = "killedEntity", at = @At(value = "CONSTANT", args = "classValue=net/minecraft/world/entity/npc/Villager"))
+	@ModifyExpressionValue(method = "killedEntity", at = @At(value = "CONSTANT", args = "classValue=net/minecraft/world/entity/npc/Villager", ordinal = 0))
 	private boolean zeta$conversionPre(boolean isVillager, ServerLevel level, LivingEntity entity) {
 		return isVillager && FabricZEntityEvents.fireConversionPre(entity, EntityType.ZOMBIE_VILLAGER);
 	}

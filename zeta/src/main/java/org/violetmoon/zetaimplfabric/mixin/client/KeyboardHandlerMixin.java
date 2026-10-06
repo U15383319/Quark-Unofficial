@@ -28,9 +28,9 @@ public abstract class KeyboardHandlerMixin {
 			FabricZClientEvents.fireKeyInput(key, scanCode, action);
 	}
 
-	// Forge ScreenEvent.KeyPressed.Pre/Post; the call lives in a lambda, hence the wildcard
-	@WrapOperation(method = "*", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;keyPressed(III)Z"))
-	private boolean zeta$screenKeyPressed(Screen screen, int key, int scanCode, int modifiers, Operation<Boolean> original) {
+	// Forge ScreenEvent.KeyPressed.Pre/Post; the call lives in keyPress's static lambda (intermediary name)
+	@WrapOperation(method = "method_1454", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;keyPressed(III)Z"))
+	private static boolean zeta$screenKeyPressed(Screen screen, int key, int scanCode, int modifiers, Operation<Boolean> original) {
 		if(FabricZClientEvents.fireKeyPressed(screen, key, scanCode, modifiers, true))
 			return true;
 		boolean handled = original.call(screen, key, scanCode, modifiers);
@@ -40,8 +40,9 @@ public abstract class KeyboardHandlerMixin {
 	}
 
 	// Forge ScreenEvent.CharacterTyped.Pre/Post
-	@WrapOperation(method = "*", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/events/GuiEventListener;charTyped(CI)Z"))
-	private boolean zeta$screenCharTyped(GuiEventListener listener, char codePoint, int modifiers, Operation<Boolean> original) {
+	// (charTyped's two static lambdas: code points with and without surrogate pairs)
+	@WrapOperation(method = { "method_1458", "method_1473" }, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/events/GuiEventListener;charTyped(CI)Z"))
+	private static boolean zeta$screenCharTyped(GuiEventListener listener, char codePoint, int modifiers, Operation<Boolean> original) {
 		if(!(listener instanceof Screen screen))
 			return original.call(listener, codePoint, modifiers);
 		if(FabricZClientEvents.fireCharTyped(screen, codePoint, modifiers, true))

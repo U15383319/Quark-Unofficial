@@ -1,7 +1,5 @@
 package org.violetmoon.zeta.event.play.loading;
 
-import java.util.List;
-
 import org.violetmoon.zeta.event.bus.Cancellable;
 import org.violetmoon.zeta.event.bus.IZetaPlayEvent;
 import org.violetmoon.zeta.mixin.mixins.AccessorLootTable;
@@ -19,9 +17,9 @@ public interface ZLootTableLoad extends IZetaPlayEvent, Cancellable {
 	default void add(LootPoolEntryContainer entry) {
 		LootTable table = getTable();
 
-		List<LootPool> pools = ((AccessorLootTable) table).zeta$getPools();
-		if (pools != null && !pools.isEmpty()) {
-			LootPool firstPool = pools.get(0);
+		LootPool[] pools = ((AccessorLootTable) table).zeta$getPools();
+		if (pools != null && pools.length > 0) {
+			LootPool firstPool = pools[0];
 			LootPoolEntryContainer[] entries = firstPool.entries;
 
 			LootPoolEntryContainer[] newEntries = new LootPoolEntryContainer[entries.length + 1];

@@ -57,6 +57,14 @@ base {
 	archivesName = project.archives_base_name
 }
 
+// headless smoke tests (gradle runGametest); not part of the mod jar
+sourceSets {
+	gametest {
+		compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
+		runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
+	}
+}
+
 loom {
 	accessWidenerPath = file('src/main/resources/quark.accesswidener')
 	mods {
@@ -65,6 +73,9 @@ loom {
 		}
 		zeta {
 			sourceSet project(':zeta').sourceSets.main
+		}
+		'quark-gametest' {
+			sourceSet sourceSets.gametest
 		}
 	}
 
@@ -77,6 +88,22 @@ loom {
 		}
 		server {
 			runDir 'runServer'
+		}
+		// headless check: starts a game test server (loads all data packs, needs no EULA), runs the tests (none yet), exits
+		gametest {
+			server()
+			configName = 'Game Test'
+			source sourceSets.gametest
+			property 'fabric-api.gametest'
+			property 'fabric-api.gametest.report-file', "${project.buildDir}/junit.xml"
+			runDir 'build/gametest'
+		}
+		// applies all mixins at client init, logs every failure, then exits (see ZetaModFabricClient)
+		mixinAudit {
+			inherit client
+			configName = 'Mixin Audit'
+			property 'zeta.debug.mixinAudit', 'true'
+			property 'mixin.ignoreRequired', 'true'
 		}
 	}
 }

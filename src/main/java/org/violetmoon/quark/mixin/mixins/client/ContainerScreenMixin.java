@@ -14,7 +14,7 @@ public class ContainerScreenMixin {
 	@ModifyVariable(
 		method = "mouseClicked(DDI)Z",
 		at = @At("STORE"),
-		index = 15
+		index = 14 // Fabric: vanilla local index (15 with Forge patches)
 	)
 	private boolean hasShiftDownClick(boolean curr) {
 		return EasyTransferingModule.Client.hasShiftDown(curr);
@@ -23,7 +23,7 @@ public class ContainerScreenMixin {
 	@ModifyVariable(
 		method = "mouseReleased(DDI)Z",
 		at = @At("STORE"),
-		index = 12
+		index = 11 // Fabric: vanilla local index (12 with Forge patches)
 	)
 	private boolean hasShiftDownRelease(boolean curr) {
 		return EasyTransferingModule.Client.hasShiftDown(curr);

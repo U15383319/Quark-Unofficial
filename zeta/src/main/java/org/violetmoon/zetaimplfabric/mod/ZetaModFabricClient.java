@@ -10,6 +10,8 @@ import org.violetmoon.zeta.module.ZetaModule;
 import org.violetmoon.zetaimplfabric.client.ZetaSpawnDataClient;
 import org.violetmoon.zetaimplfabric.client.event.FabricZClientEvents;
 
+import org.spongepowered.asm.mixin.MixinEnvironment;
+
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -24,6 +26,13 @@ public class ZetaModFabricClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ensureInitialized();
+
+		// Dev check (gradle runMixinAudit): apply every mixin now, so all failures are logged in one launch, then quit
+		if(Boolean.getBoolean("zeta.debug.mixinAudit")) {
+			MixinEnvironment.getCurrentEnvironment().audit();
+			ZetaMod.ZETA.log.info("Mixin audit finished");
+			System.exit(0);
+		}
 	}
 
 	public static synchronized void ensureInitialized() {

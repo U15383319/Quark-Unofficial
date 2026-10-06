@@ -17,12 +17,12 @@ import org.violetmoon.quark.content.tools.module.AmbientDiscsModule;
 public class LevelRendererMixin {
 
 	@Inject(
-		method = "playStreamingMusic(Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/RecordItem;)V",
-		remap = false,
+		method = "playStreamingMusic",
 		at = @At(value = "JUMP", ordinal = 1),
 		cancellable = true
 	)
-	public void playStreamingMusic(SoundEvent soundIn, BlockPos pos, RecordItem musicDiscItem, CallbackInfo info) {
+	public void playStreamingMusic(SoundEvent soundIn, BlockPos pos, CallbackInfo info) {
+		RecordItem musicDiscItem = soundIn == null ? null : RecordItem.getBySound(soundIn); // Fabric: vanilla has no disc parameter
 		if(musicDiscItem instanceof QuarkMusicDiscItem quarkDisc && AmbientDiscsModule.Client.playAmbientSound(quarkDisc, pos))
 			info.cancel();
 	}
