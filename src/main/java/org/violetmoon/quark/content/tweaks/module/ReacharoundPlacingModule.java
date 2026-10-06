@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import net.minecraft.core.registries.Registries;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Window;
@@ -69,7 +70,7 @@ public class ReacharoundPlacingModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		reacharoundTag = ItemTags.create(new ResourceLocation(Quark.MOD_ID, "reacharound_able"));
+		reacharoundTag = TagKey.create(Registries.ITEM, new ResourceLocation(Quark.MOD_ID, "reacharound_able"));
 	}
 
 	@PlayEvent

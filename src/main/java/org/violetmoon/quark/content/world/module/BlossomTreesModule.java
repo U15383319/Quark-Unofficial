@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.Tags;
+import org.violetmoon.zeta.util.ZetaTags;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.base.handler.WoodSetHandler;
 import org.violetmoon.quark.base.handler.WoodSetHandler.WoodSet;
@@ -43,13 +43,13 @@ public class BlossomTreesModule extends ZetaModule {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> RED_BLOSSOM_KEY = registerKey("red_blossom");
 
 	@Config
-	public BlossomTreeConfig blue = new BlossomTreeConfig(200, Tags.Biomes.IS_SNOWY);
+	public BlossomTreeConfig blue = new BlossomTreeConfig(200, ZetaTags.Biomes.IS_SNOWY);
 	@Config
-	public BlossomTreeConfig lavender = new BlossomTreeConfig(100, Tags.Biomes.IS_SWAMP);
+	public BlossomTreeConfig lavender = new BlossomTreeConfig(100, ZetaTags.Biomes.IS_SWAMP);
 	@Config
 	public BlossomTreeConfig orange = new BlossomTreeConfig(100, BiomeTags.IS_SAVANNA);
 	@Config
-	public BlossomTreeConfig yellow = new BlossomTreeConfig(200, Tags.Biomes.IS_PLAINS);
+	public BlossomTreeConfig yellow = new BlossomTreeConfig(200, ZetaTags.Biomes.IS_PLAINS);
 	@Config
 	public BlossomTreeConfig red = new BlossomTreeConfig(30, BiomeTags.IS_BADLANDS);
 

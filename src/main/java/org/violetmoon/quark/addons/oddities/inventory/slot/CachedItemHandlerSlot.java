@@ -3,8 +3,8 @@ package org.violetmoon.quark.addons.oddities.inventory.slot;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.SlotItemHandler;
 
 import org.jetbrains.annotations.NotNull;
 

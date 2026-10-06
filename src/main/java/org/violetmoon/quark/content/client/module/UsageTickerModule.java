@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.client.module;
 
+import org.violetmoon.quark.api.event.QuarkApiEvents;
 import com.mojang.blaze3d.platform.Window;
 
 import net.minecraft.client.Minecraft;
@@ -15,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-import net.minecraftforge.common.MinecraftForge;
 import org.violetmoon.quark.api.IUsageTickerOverride;
 import org.violetmoon.quark.api.event.UsageTickerEvent;
 import org.violetmoon.quark.base.Quark;
@@ -209,7 +209,7 @@ public class UsageTickerModule extends ZetaModule {
 
 				//TODO ZETA: readd this
 				UsageTickerEvent.GetStack event = new UsageTickerEvent.GetStack(slot, returnStack, stack, count, renderPass, player);
-				MinecraftForge.EVENT_BUS.post(event);
+				QuarkApiEvents.USAGE_TICKER_GET_STACK.invoker().accept(event);
 				return event.isCanceled() ? ItemStack.EMPTY : event.getResultStack();
 			}
 
@@ -236,7 +236,7 @@ public class UsageTickerModule extends ZetaModule {
 
 				//TODO ZETA: readd this
 				UsageTickerEvent.GetCount event = new UsageTickerEvent.GetCount(slot, displayStack, original, val, renderPass, player);
-				MinecraftForge.EVENT_BUS.post(event);
+				QuarkApiEvents.USAGE_TICKER_GET_COUNT.invoker().accept(event);
 				return event.isCanceled() ? 0 : event.getResultCount();
 			}
 

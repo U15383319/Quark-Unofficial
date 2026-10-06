@@ -67,7 +67,7 @@ public class PipesModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		pipesTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "pipes"));
+		pipesTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "pipes"));
 	}
 
 	@LoadEvent

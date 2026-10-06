@@ -27,7 +27,7 @@ public class MinecraftMixin {
 	@Nullable
 	public HitResult hitResult;
 
-	@Shadow @javax.annotation.Nullable public LocalPlayer player;
+	@Shadow @org.jetbrains.annotations.Nullable public LocalPlayer player;
 
 	@Inject(method = "pickBlock", at = @At("HEAD"))
 	private void pickBlockHead(CallbackInfo ci, @Share("hitResult") LocalRef<HitResult> hitResult) {

@@ -1,5 +1,7 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import org.violetmoon.zeta.util.ZetaPlantable;
+import net.minecraft.core.registries.Registries;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.zeta.config.Config;
 import org.violetmoon.zeta.event.bus.LoadEvent;
@@ -33,8 +35,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
 import org.violetmoon.zeta.util.ToolActions;
 
 @ZetaLoadModule(category = "tweaks")
@@ -71,12 +71,12 @@ public class HoeHarvestingModule extends ZetaModule {
 		return !itemStack.isEmpty() &&
 				(itemStack.getItem() instanceof HoeItem
 						|| itemStack.is(ItemTags.HOES)
-						|| itemStack.getItem().canPerformAction(itemStack, ToolActions.HOE_DIG)); //TODO: IForgeItem
+						|| ToolActions.canPerformAction(itemStack, ToolActions.HOE_DIG)); //TODO: IForgeItem
 	}
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		bigHarvestingHoesTag = ItemTags.create(new ResourceLocation(Quark.MOD_ID, "big_harvesting_hoes"));
+		bigHarvestingHoesTag = TagKey.create(Registries.ITEM, new ResourceLocation(Quark.MOD_ID, "big_harvesting_hoes"));
 	}
 
 	@PlayEvent
@@ -121,9 +121,9 @@ public class HoeHarvestingModule extends ZetaModule {
 
 	private boolean canHarvest(Player player, LevelAccessor world, BlockPos pos, BlockState state) {
 		Block block = state.getBlock();
-		if(block instanceof IPlantable plant) {
-			PlantType type = plant.getPlantType(world, pos);
-			return type != PlantType.WATER && type != PlantType.DESERT;
+		if(ZetaPlantable.isPlantable(block)) {
+			String type = ZetaPlantable.getPlantType(block);
+			return !type.equals(ZetaPlantable.WATER) && !type.equals(ZetaPlantable.DESERT);
 		}
 
 		return isHarvestableMaterial(state) &&

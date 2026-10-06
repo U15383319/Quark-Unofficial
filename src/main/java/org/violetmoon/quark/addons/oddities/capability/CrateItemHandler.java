@@ -9,7 +9,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.ItemStackHandler;
+import org.violetmoon.zeta.item.handler.ItemStackHandler;
 
 import org.jetbrains.annotations.NotNull;
 

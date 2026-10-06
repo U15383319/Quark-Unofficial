@@ -138,7 +138,6 @@ public class CustomEmoteIconResourcePack extends AbstractPackResources {
 		return new File(EmotesModule.emotesDir, filename);
 	}
 
-	@Override
 	public boolean isHidden() {
 		return true;
 	}

@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.magnetsystem;
 
+import org.violetmoon.zeta.util.ZetaPlantable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -14,8 +15,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
+import net.fabricmc.fabric.api.entity.FakePlayer;
 import org.violetmoon.quark.addons.oddities.module.MagnetsModule;
 import org.violetmoon.quark.api.IMagnetMoveAction;
 
@@ -31,9 +31,8 @@ import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.IPlantable;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class DefaultMoveActions {
 
@@ -70,7 +69,7 @@ public class DefaultMoveActions {
 				level.levelEvent(2001, pPos, Block.getId(blockstate));
 			}
 
-			FakePlayer player = FakePlayerFactory.get(level, FAKE_PLAYER_PROFILE);
+			FakePlayer player = FakePlayer.get(level, FAKE_PLAYER_PROFILE);
 			ItemStack tool = Items.IRON_PICKAXE.getDefaultInstance();
 			EnchantmentHelper.setEnchantments(Map.of(Enchantments.SILK_TOUCH, 1), tool);
 			player.setItemInHand(InteractionHand.MAIN_HAND, tool);
@@ -113,9 +112,9 @@ public class DefaultMoveActions {
 							if(world.isEmptyBlock(groundPos))
 								groundPos = groundPos.below();
 							Block seedType = blockItem.getBlock();
-							if(seedType instanceof IPlantable plantable) {
+							if(ZetaPlantable.isPlantable(seedType)) {
 								BlockState groundBlock = world.getBlockState(groundPos);
-								if(groundBlock.getBlock().canSustainPlant(groundBlock, world, groundPos,Direction.UP, plantable)) {
+								if(ZetaPlantable.canSustainPlant(groundBlock, world, groundPos, Direction.UP, seedType)) {
 									BlockPos seedPos = groundPos.above();
 									if(state.canSurvive(world, seedPos)) {
 										BlockState seedState = seedType.defaultBlockState();

@@ -9,8 +9,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.SlotItemHandler;
 
 import org.jetbrains.annotations.NotNull;
 

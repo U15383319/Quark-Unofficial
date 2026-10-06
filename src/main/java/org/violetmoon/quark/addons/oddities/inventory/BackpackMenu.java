@@ -24,7 +24,7 @@ public class BackpackMenu extends InventoryMenu {
 
 		Inventory inventory = player.getInventory();
 		for(Slot slot : slots)
-			if(slot.container == inventory && slot.getSlotIndex() < inventory.getContainerSize() - 5)
+			if(slot.container == inventory && slot.getContainerSlot() < inventory.getContainerSize() - 5)
 				slot.y += 58;
 
 		Slot anchor = slots.get(9);

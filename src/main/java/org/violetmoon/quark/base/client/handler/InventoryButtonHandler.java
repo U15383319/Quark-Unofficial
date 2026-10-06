@@ -37,8 +37,6 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.Slot;
-import net.minecraftforge.client.settings.KeyConflictContext;
-import net.minecraftforge.client.settings.KeyModifier;
 
 public final class InventoryButtonHandler {
 
@@ -62,11 +60,11 @@ public final class InventoryButtonHandler {
 		if(screen instanceof AbstractContainerScreen<?> containerScreen && (apiAllowed || QuarkGeneralConfig.isScreenAllowed(screen))) {
 
 			if(containerScreen instanceof InventoryScreen || containerScreen.getClass().getName().contains("CuriosScreen"))
-				applyProviders(event, ButtonTargetType.PLAYER_INVENTORY, containerScreen, s -> s.container == mc.player.getInventory() && s.getSlotIndex() == 17);
+				applyProviders(event, ButtonTargetType.PLAYER_INVENTORY, containerScreen, s -> s.container == mc.player.getInventory() && s.getContainerSlot() == 17);
 			else {
 				if(apiAllowed || InventoryTransferHandler.accepts(containerScreen.getMenu(), mc.player)) {
-					applyProviders(event, ButtonTargetType.CONTAINER_INVENTORY, containerScreen, s -> s.container != mc.player.getInventory() && s.getSlotIndex() == 8);
-					applyProviders(event, ButtonTargetType.CONTAINER_PLAYER_INVENTORY, containerScreen, s -> s.container == mc.player.getInventory() && s.getSlotIndex() == 17);
+					applyProviders(event, ButtonTargetType.CONTAINER_INVENTORY, containerScreen, s -> s.container != mc.player.getInventory() && s.getContainerSlot() == 8);
+					applyProviders(event, ButtonTargetType.CONTAINER_PLAYER_INVENTORY, containerScreen, s -> s.container == mc.player.getInventory() && s.getContainerSlot() == 17);
 				}
 			}
 		}
@@ -101,8 +99,7 @@ public final class InventoryButtonHandler {
 
 			for(ButtonProviderHolder holder : holders) {
 				if(holder.keybind != null &&
-						holder.keybind.matchesMouse(pressed.getButton()) &&
-						(holder.keybind.getKeyModifier() == KeyModifier.NONE || holder.keybind.getKeyModifier().isActive(KeyConflictContext.GUI))) {
+						holder.keybind.matchesMouse(pressed.getButton())) {
 					holder.pressed.accept(screen);
 					pressed.setCanceled(true);
 				}
@@ -121,8 +118,7 @@ public final class InventoryButtonHandler {
 
 			for(ButtonProviderHolder holder : holders) {
 				if(holder.keybind != null &&
-						holder.keybind.matches(pressed.getKeyCode(), pressed.getScanCode()) &&
-						(holder.keybind.getKeyModifier() == KeyModifier.NONE || holder.keybind.getKeyModifier().isActive(KeyConflictContext.GUI))) {
+						holder.keybind.matches(pressed.getKeyCode(), pressed.getScanCode())) {
 					holder.pressed.accept(screen);
 					pressed.setCanceled(true);
 				}
@@ -166,7 +162,6 @@ public final class InventoryButtonHandler {
 
 	public static void addButtonProvider(ZKeyMapping event, ZetaModule module, ButtonTargetType type, int priority, String keybindName, Consumer<AbstractContainerScreen<?>> onKeybind, ButtonProvider provider, BooleanSupplier enableCond) {
 		KeyMapping keybind = event.init(keybindName, null, QuarkClient.INV_GROUP);
-		keybind.setKeyConflictContext(KeyConflictContext.GUI);
 		addButtonProvider(module, type, priority, keybind, onKeybind, provider, enableCond);
 	}
 

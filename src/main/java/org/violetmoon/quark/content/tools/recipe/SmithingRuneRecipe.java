@@ -26,7 +26,7 @@ import org.violetmoon.quark.content.tools.module.ColorRunesModule;
 import org.violetmoon.quark.content.tools.module.PickarangModule;
 import org.violetmoon.zeta.module.IDisableable;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.stream.Stream;
 
 /**
@@ -85,13 +85,13 @@ public final class SmithingRuneRecipe extends SmithingTrimRecipe { // Extends to
 	}
 
 	@Override
-	public boolean matches(Container container, @Nonnull Level level) {
+	public boolean matches(Container container, @NotNull Level level) {
 		return isTemplateIngredient(container.getItem(0)) && isBaseIngredient(container.getItem(1)) && isAdditionIngredient(container.getItem(2));
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack assemble(Container container, @Nonnull RegistryAccess registry) {
+	public ItemStack assemble(Container container, @NotNull RegistryAccess registry) {
 		ItemStack baseItem = container.getItem(1);
 		if (isBaseIngredient(baseItem)) {
 			if (ColorRunesModule.getStackColor(baseItem) == runeColor)
@@ -105,9 +105,9 @@ public final class SmithingRuneRecipe extends SmithingTrimRecipe { // Extends to
 		return ItemStack.EMPTY;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
-	public ItemStack getResultItem(@Nonnull RegistryAccess registry) {
+	public ItemStack getResultItem(@NotNull RegistryAccess registry) {
 		ItemStack displayStack = makeEnchantedDisplayItem(new ItemStack(Items.IRON_CHESTPLATE));
 		ColorRunesModule.withRune(displayStack, runeColor);
 
@@ -115,29 +115,29 @@ public final class SmithingRuneRecipe extends SmithingTrimRecipe { // Extends to
 	}
 
 	@Override
-	public boolean isTemplateIngredient(@Nonnull ItemStack stack) {
+	public boolean isTemplateIngredient(@NotNull ItemStack stack) {
 		return this.template.test(stack);
 	}
 
 	@Override
-	public boolean isBaseIngredient(@Nonnull ItemStack stack) {
+	public boolean isBaseIngredient(@NotNull ItemStack stack) {
 		return ColorRunesModule.canHaveRune(stack);
 	}
 
 	@Override
-	public boolean isAdditionIngredient(@Nonnull ItemStack stack) {
+	public boolean isAdditionIngredient(@NotNull ItemStack stack) {
 		if (this.addition.isEmpty())
 			return stack.isEmpty();
 		return this.addition.test(stack);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public ResourceLocation getId() {
 		return this.id;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public RecipeSerializer<?> getSerializer() {
 		return SERIALIZER;
@@ -145,9 +145,9 @@ public final class SmithingRuneRecipe extends SmithingTrimRecipe { // Extends to
 
 	public static class Serializer implements RecipeSerializer<SmithingRuneRecipe> {
 
-		@Nonnull
+		@NotNull
 		@Override
-		public SmithingRuneRecipe fromJson(@Nonnull ResourceLocation id, @Nonnull JsonObject serialized) {
+		public SmithingRuneRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject serialized) {
 			Ingredient template = Ingredient.fromJson(GsonHelper.getNonNull(serialized, "template"));
 
 			JsonElement additionElement = serialized.get("addition");
@@ -160,7 +160,7 @@ public final class SmithingRuneRecipe extends SmithingTrimRecipe { // Extends to
 		}
 
 		@Override
-		public SmithingRuneRecipe fromNetwork(@Nonnull ResourceLocation id, @Nonnull FriendlyByteBuf buf) {
+		public SmithingRuneRecipe fromNetwork(@NotNull ResourceLocation id, @NotNull FriendlyByteBuf buf) {
 			Ingredient template = Ingredient.fromNetwork(buf);
 			Ingredient addition = buf.readBoolean() ? Ingredient.EMPTY : Ingredient.fromNetwork(buf);
 			RuneColor runeColor = RuneColor.byName(buf.readUtf());
@@ -168,7 +168,7 @@ public final class SmithingRuneRecipe extends SmithingTrimRecipe { // Extends to
 		}
 
 		@Override
-		public void toNetwork(@Nonnull FriendlyByteBuf buf, SmithingRuneRecipe recipe) {
+		public void toNetwork(@NotNull FriendlyByteBuf buf, SmithingRuneRecipe recipe) {
 			recipe.template.toNetwork(buf);
 			boolean additionIsEmpty = recipe.addition.isEmpty();
 			buf.writeBoolean(additionIsEmpty);

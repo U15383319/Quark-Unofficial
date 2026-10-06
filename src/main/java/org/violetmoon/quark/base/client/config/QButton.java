@@ -92,7 +92,7 @@ public class QButton extends Button {
 	private boolean showBubble;
 
 	public QButton(int x, int y) {
-		super(Button.builder(Component.literal("q"), QButton::click).size(20, 20).pos(x, y));
+		super(x, y, 20, 20, Component.literal("q"), QButton::click, DEFAULT_NARRATION);
 
 		Calendar calendar = Calendar.getInstance();
 		int month = calendar.get(Calendar.MONTH) + 1;

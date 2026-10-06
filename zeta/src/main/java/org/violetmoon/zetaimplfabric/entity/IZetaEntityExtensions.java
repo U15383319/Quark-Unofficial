@@ -1,5 +1,6 @@
 package org.violetmoon.zetaimplfabric.entity;
 
+import net.minecraft.world.entity.MobCategory;
 import java.util.Collection;
 
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +42,20 @@ public interface IZetaEntityExtensions {
 	 */
 	default @Nullable Collection<ItemEntity> captureDrops(@Nullable Collection<ItemEntity> value) {
 		throw new AssertionError("implemented by EntityMixin");
+	}
+
+	/**
+	 * Forge: Entity#getStepHeight (step height including Forge's STEP_HEIGHT_ADDITION attribute, which Fabric lacks).
+	 */
+	default float getStepHeight() {
+		return ((Entity) this).maxUpStep();
+	}
+
+	/**
+	 * Forge: IForgeEntity#getClassification, the category an entity counts as for mob caps. Read by NaturalSpawnerMixin.
+	 */
+	default MobCategory getClassification(boolean forSpawnCount) {
+		return ((Entity) this).getType().getCategory();
 	}
 
 	/**

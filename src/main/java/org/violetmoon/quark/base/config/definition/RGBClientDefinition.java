@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.client.gui.widget.ForgeSlider;
+import org.violetmoon.zeta.client.widget.ZetaSlider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.config.type.RGBAColorConfig;
@@ -61,10 +61,10 @@ public class RGBClientDefinition implements ClientDefinitionExt<SectionDefinitio
 	}
 
 	class RGBInputScreen extends AbstractSectionInputScreen {
-		protected ForgeSlider rslide;
-		protected ForgeSlider gslide;
-		protected ForgeSlider bslide;
-		protected @Nullable ForgeSlider aslide;
+		protected ZetaSlider rslide;
+		protected ZetaSlider gslide;
+		protected ZetaSlider bslide;
+		protected @Nullable ZetaSlider aslide;
 
 		public RGBInputScreen(ZetaClient zc, Screen parent, ChangeSet changes, SectionDefinition def) {
 			super(zc, parent, changes, def);
@@ -100,9 +100,9 @@ public class RGBClientDefinition implements ClientDefinitionExt<SectionDefinitio
 
 		private static final Component EMPTY = Component.empty();
 
-		private ForgeSlider makeSliderPlease(int x, int y, int width, int height, ValueDefinition<Double> binding, String label, int labelColor) {
+		private ZetaSlider makeSliderPlease(int x, int y, int width, int height, ValueDefinition<Double> binding, String label, int labelColor) {
 			//TODO: keep this for forge with a platform delegate or copy paste in common
-			return new ForgeSlider(x, y + 50, width, height, EMPTY, EMPTY, 0f, 1f, 0, 0, 1, false) {
+			return new ZetaSlider(x, y + 50, width, height, EMPTY, EMPTY, 0f, 1f, 0, 0, 1, false) {
 				@Override
 				protected void applyValue() {
 					setValue(snap(this));
@@ -161,7 +161,7 @@ public class RGBClientDefinition implements ClientDefinitionExt<SectionDefinitio
 			guiGraphics.fill(cx, cy, cx + size, cy + size, color);
 		}
 
-		private double snap(ForgeSlider s) {
+		private double snap(ZetaSlider s) {
 			double val = s.getValue();
 			val = snap(val, 0.0, s);
 			val = snap(val, 0.25, s);
@@ -171,7 +171,7 @@ public class RGBClientDefinition implements ClientDefinitionExt<SectionDefinitio
 			return val;
 		}
 
-		private double snap(double val, double target, ForgeSlider s) {
+		private double snap(double val, double target, ZetaSlider s) {
 			if(Math.abs(val - target) < 0.02) {
 				s.setValue(target);
 				return target;

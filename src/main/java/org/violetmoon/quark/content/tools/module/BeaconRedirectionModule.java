@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tools.module;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -40,7 +41,7 @@ import java.util.HashSet;
 @ZetaLoadModule(category = "tools")
 public class BeaconRedirectionModule extends ZetaModule {
 
-	private static final TagKey<Block> BEACON_TRANSPARENT = BlockTags.create(new ResourceLocation("quark:beacon_transparent"));
+	private static final TagKey<Block> BEACON_TRANSPARENT = TagKey.create(Registries.BLOCK, new ResourceLocation("quark:beacon_transparent"));
 
 	@Config
 	public static int horizontalMoveLimit = 64;

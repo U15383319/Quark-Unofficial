@@ -37,7 +37,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import org.violetmoon.quark.content.automation.block.be.CrafterBlockEntity;
 import org.violetmoon.quark.content.automation.module.CrafterModule;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.function.Function;
 
 public class CrafterMenu extends AbstractContainerMenu {
@@ -77,7 +77,7 @@ public class CrafterMenu extends AbstractContainerMenu {
 				int index = j + i * 3;
 				this.addSlot(new Slot(crafter, index, 26 + j * 18, 17 + i * 18) {
 					@Override
-					public boolean mayPlace(@Nonnull ItemStack stack) {
+					public boolean mayPlace(@NotNull ItemStack stack) {
 						return (delegate.get(0) & (1 << index)) == 0;
 					}
 				});

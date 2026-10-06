@@ -6,8 +6,8 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -86,7 +86,7 @@ public class RuneColor implements StringRepresentable {
 		return dyeColor;
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getSerializedName() {
 		return this.name;

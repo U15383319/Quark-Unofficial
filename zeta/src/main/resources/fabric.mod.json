@@ -41,6 +41,45 @@
 		"loom:injected_interfaces": {
 			"net/minecraft/class_1297": [
 				"org/violetmoon/zetaimplfabric/entity/IZetaEntityExtensions"
+			],
+			"net/minecraft/class_2586": [
+				"org/violetmoon/zetaimplfabric/ext/IZetaBlockEntityExtensions"
+			],
+			"net/minecraft/class_1799": [
+				"org/violetmoon/zetaimplfabric/ext/IZetaItemStackExtensions"
+			],
+			"net/minecraft/class_4970$class_4971": [
+				"org/violetmoon/zetaimplfabric/ext/IZetaBlockStateExtensions"
+			],
+			"net/minecraft/class_2248": [
+				"org/violetmoon/zetaimplfabric/ext/IZetaBlockExtras"
+			],
+			"net/minecraft/class_1299$class_1300": [
+				"org/violetmoon/zetaimplfabric/ext/IZetaEntityTypeBuilderExtensions<TT;>"
+			],
+			"net/minecraft/class_465": [
+				"org/violetmoon/zetaimplfabric/ext/client/IZetaContainerScreenExtensions"
+			],
+			"net/minecraft/class_437": [
+				"org/violetmoon/zetaimplfabric/ext/client/IZetaScreenExtensions"
+			],
+			"net/minecraft/class_304": [
+				"org/violetmoon/zetaimplfabric/ext/client/IZetaKeyMappingExtensions"
+			],
+			"net/minecraft/class_332": [
+				"org/violetmoon/zetaimplfabric/ext/client/IZetaGuiGraphicsExtensions"
+			],
+			"net/minecraft/class_339": [
+				"org/violetmoon/zetaimplfabric/ext/client/IZetaWidgetExtensions"
+			],
+			"net/minecraft/class_1887": [
+				"org/violetmoon/zetaimplfabric/ext/IZetaEnchantmentExtensions"
+			],
+			"net/minecraft/class_350": [
+				"org/violetmoon/zetaimplfabric/ext/client/IZetaSelectionListExtensions"
+			],
+			"net/minecraft/class_826": [
+				"org/violetmoon/zetaimplfabric/ext/client/IZetaChestRendererExtensions<TT;>"
 			]
 		}
 	}

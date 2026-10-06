@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.block.be;
 
+import org.violetmoon.zeta.item.handler.ItemHandlers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -25,7 +26,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEvent.Context;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import org.violetmoon.quark.addons.oddities.block.pipe.BasePipeBlock;
@@ -418,7 +418,7 @@ public class PipeBlockEntity extends SimpleInventoryBlockEntity {
 		if(tile != null) {
 			if(tile instanceof PipeBlockEntity)
 				return ConnectionType.PIPE;
-			else if(tile instanceof Container || tile.getCapability(ForgeCapabilities.ITEM_HANDLER, face.getOpposite()).isPresent())
+			else if(tile instanceof Container || ItemHandlers.get(tile, face.getOpposite()).isPresent())
 				return canHaveOffset(state, pos, world, face) ? ConnectionType.TERMINAL_OFFSET : ConnectionType.TERMINAL;
 		}
 

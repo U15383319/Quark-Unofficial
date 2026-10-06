@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.building.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -97,7 +98,7 @@ public class Stool extends Entity {
 
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.mobs.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -34,7 +35,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraftforge.network.NetworkHooks;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
@@ -197,7 +198,7 @@ public class Forgotten extends Skeleton {
 	@NotNull
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 }

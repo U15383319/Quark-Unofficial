@@ -11,8 +11,9 @@ processResources {
 	def version = project.version
 	inputs.property 'version', version
 
+	// plain replace: fabric.mod.json contains '$' (inner class names in injected interfaces)
 	filesMatching('fabric.mod.json') {
-		expand 'version': version
+		filter { line -> line.replace('${version}', version.toString()) }
 	}
 }
 

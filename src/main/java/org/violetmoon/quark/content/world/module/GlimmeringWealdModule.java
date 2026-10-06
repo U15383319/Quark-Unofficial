@@ -116,7 +116,7 @@ public class GlimmeringWealdModule extends ZetaModule {
 
     @LoadEvent
     public void setup(ZCommonSetup e) {
-        glowShroomFeedablesTag = ItemTags.create(new ResourceLocation(Quark.MOD_ID, "glow_shroom_feedables"));
+        glowShroomFeedablesTag = TagKey.create(Registries.ITEM, new ResourceLocation(Quark.MOD_ID, "glow_shroom_feedables"));
 
         e.enqueueWork(() -> {
             ComposterBlock.COMPOSTABLES.put(glow_shroom.asItem(), 0.65F);

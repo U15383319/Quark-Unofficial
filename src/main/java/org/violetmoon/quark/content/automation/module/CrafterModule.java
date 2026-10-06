@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.automation.module;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
@@ -7,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.extensions.IForgeMenuType;
+
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.content.automation.block.CrafterBlock;
 import org.violetmoon.quark.content.automation.block.be.CrafterBlockEntity;
@@ -48,7 +49,7 @@ public class CrafterModule extends ZetaModule {
                         .ignitedByLava()
         );
 
-        menuType = IForgeMenuType.create(CrafterMenu::fromNetwork);
+        menuType = new ExtendedScreenHandlerType<>(CrafterMenu::fromNetwork);
         Quark.ZETA.registry.register(menuType, "crafter", Registries.MENU);
 
         blockEntityType = BlockEntityType.Builder.of(CrafterBlockEntity::new, crafter).build(null);

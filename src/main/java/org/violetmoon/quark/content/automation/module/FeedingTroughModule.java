@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.automation.module;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -27,9 +28,8 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
+
+import net.fabricmc.fabric.api.entity.FakePlayer;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.content.automation.block.FeedingTroughBlock;
@@ -187,7 +187,7 @@ public class FeedingTroughModule extends ZetaModule {
         PoiType feedingTroughPoi = new PoiType(ImmutableSet.copyOf(feeding_trough.getStateDefinition().getPossibleStates()), 1, 32);
         event.getRegistry().register(feedingTroughPoi, FEEDING_TROUGH_POI_KEY.location(), Registries.POINT_OF_INTEREST_TYPE);
 
-        menuType = IForgeMenuType.create((windowId, inv, data) -> new DispenserMenu(windowId, inv));
+        menuType = new ExtendedScreenHandlerType<>((windowId, inv, data) -> new DispenserMenu(windowId, inv));
         event.getRegistry().register(menuType, "feeding_trough", Registries.MENU);
     }
 
@@ -298,7 +298,7 @@ public class FeedingTroughModule extends ZetaModule {
         Optional<FakePlayer> any = FREE_FAKE_PLAYERS.stream().findAny();
         if(any.isEmpty()){
             GameProfile dummyProfile = new GameProfile(UUID.randomUUID(), "[FeedingTrough-"+ ++fakePlayersCount+"]");
-            var p = FakePlayerFactory.get(serverLevel, dummyProfile);
+            var p = FakePlayer.get(serverLevel, dummyProfile);
             FREE_FAKE_PLAYERS.add(p);
             return p;
         }

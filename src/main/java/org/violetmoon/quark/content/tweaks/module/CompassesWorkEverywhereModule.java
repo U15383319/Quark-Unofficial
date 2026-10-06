@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import org.violetmoon.zeta.client.ZetaItemProperties;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -131,10 +132,10 @@ public class CompassesWorkEverywhereModule extends ZetaModule {
 					return;
 
 				if(enableCompassNerf || enableNether || enableEnd)
-					ItemProperties.register(Items.COMPASS, new ResourceLocation("angle"), new CompassAnglePropertyFunction());
+					ZetaItemProperties.register(Items.COMPASS, new ResourceLocation("angle"), new CompassAnglePropertyFunction());
 
 				if(enableClockNerf)
-					ItemProperties.register(Items.CLOCK, new ResourceLocation("time"), new ClockTimePropertyFunction());
+					ZetaItemProperties.register(Items.CLOCK, new ResourceLocation("time"), new ClockTimePropertyFunction());
 			});
 		}
 

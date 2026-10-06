@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.mobs.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
+
 import org.jetbrains.annotations.NotNull;
 import org.violetmoon.quark.base.handler.QuarkSounds;
 import org.violetmoon.quark.content.mobs.ai.BarkAtDarknessGoal;
@@ -175,7 +176,7 @@ public class Shiba extends TamableAnimal {
 
 	@Override
 	public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 	@Override
@@ -333,7 +334,7 @@ public class Shiba extends TamableAnimal {
 					itemstack.shrink(1);
 				}
 
-				if(this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+				if(this.random.nextInt(3) == 0 && true /* Fabric: AnimalTame fires from TamableAnimal#tame */) {
 					WantLoveGoal.setPetTime(this);
 
 					this.tame(player);

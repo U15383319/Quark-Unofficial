@@ -20,8 +20,6 @@ import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.client.settings.KeyConflictContext;
-import net.minecraftforge.client.settings.KeyModifier;
 
 import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.zeta.client.event.load.ZKeyMapping;
@@ -67,12 +65,10 @@ public class NarratorReadoutModule extends ZetaModule {
 			Minecraft mc = Minecraft.getInstance();
 			if(mc.screen != null) {
 				if(mouse)
-					return (keybind.matchesMouse(key) &&
-							(keybind.getKeyModifier() == KeyModifier.NONE || keybind.getKeyModifier().isActive(KeyConflictContext.GUI)));
+					return (keybind.matchesMouse(key));
 
 				else
-					return (keybind.matches(key, scancode) &&
-							(keybind.getKeyModifier() == KeyModifier.NONE || keybind.getKeyModifier().isActive(KeyConflictContext.GUI)));
+					return (keybind.matches(key, scancode));
 			} else
 				return keybind.isDown();
 		}

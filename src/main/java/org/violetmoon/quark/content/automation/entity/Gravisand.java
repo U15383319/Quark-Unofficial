@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.automation.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -128,7 +129,7 @@ public class Gravisand extends FallingBlockEntity {
 	@NotNull
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 }

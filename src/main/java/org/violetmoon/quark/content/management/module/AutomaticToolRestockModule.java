@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.management.module;
 
+import org.violetmoon.quark.api.event.QuarkApiEvents;
 import com.google.common.collect.Lists;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,11 +12,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraftforge.common.MinecraftForge;
 import org.violetmoon.zeta.util.ToolAction;
 import org.violetmoon.zeta.util.ToolActions;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.PlayerInvWrapper;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.PlayerInvWrapper;
 
 import org.violetmoon.quark.addons.oddities.module.BackpackModule;
 import org.violetmoon.quark.api.event.GatherToolClassesEvent;
@@ -195,12 +195,12 @@ public class AutomaticToolRestockModule extends ZetaModule {
 			classes.add("crossbow");
 
 		for(ToolAction action : ACTION_TO_CLASS.keySet()) {
-			if(item.canPerformAction(stack, action)) //TODO: IForgeItem
+			if(ToolActions.canPerformAction(stack, action)) //TODO: IForgeItem
 				classes.add(ACTION_TO_CLASS.get(action));
 		}
 
 		GatherToolClassesEvent event = new GatherToolClassesEvent(stack, classes);
-		MinecraftForge.EVENT_BUS.post(event);
+		QuarkApiEvents.GATHER_TOOL_CLASSES.invoker().accept(event);
 
 		return classes;
 	}

@@ -1,5 +1,7 @@
 package org.violetmoon.quark.content.experimental.module;
 
+import org.violetmoon.zeta.util.ZetaEnchantmentHelper;
+import org.violetmoon.zeta.client.ZetaItemProperties;
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -49,10 +51,10 @@ public class EnchantmentPredicatesModule extends ZetaModule {
 					for(Enchantment enchant : enchants) {
 						ResourceLocation enchantRes = BuiltInRegistries.ENCHANTMENT.getKey(enchant);
 						ResourceLocation name = new ResourceLocation(Quark.MOD_ID + "_has_enchant_" + enchantRes.getNamespace() + "_" + enchantRes.getPath());
-						ItemPropertyFunction fun = (stack, level, entity, i) -> EnchantmentHelper.getTagEnchantmentLevel(enchant, stack);
+						ItemPropertyFunction fun = (stack, level, entity, i) -> ZetaEnchantmentHelper.getTagEnchantmentLevel(enchant, stack);
 
 						for(Item item : items)
-							ItemProperties.register(item, name, fun);
+							ZetaItemProperties.register(item, name, fun);
 					}
 				});
 			}

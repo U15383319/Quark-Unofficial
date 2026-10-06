@@ -23,7 +23,7 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.common.Tags;
+import org.violetmoon.zeta.util.ZetaTags;
 
 public class FairyRingGenerator extends Generator {
 
@@ -42,7 +42,7 @@ public class FairyRingGenerator extends Generator {
 		double chance = 0;
 		if(biome.is(BiomeTags.IS_FOREST))
 			chance = FairyRingsModule.forestChance;
-		else if(biome.is(Tags.Biomes.IS_PLAINS))
+		else if(biome.is(ZetaTags.Biomes.IS_PLAINS))
 			chance = FairyRingsModule.plainsChance;
 
 		if(rand.nextDouble() < chance) {
@@ -97,13 +97,13 @@ public class FairyRingGenerator extends Generator {
 		BlockPos orePos = pos.below(rand.nextInt(10) + 25);
 		BlockState stoneState = world.getBlockState(orePos);
 		int down = 0;
-		while(!stoneState.is(Tags.Blocks.STONE) && down < 10) {
+		while(!stoneState.is(ZetaTags.Blocks.STONE) && down < 10) {
 			orePos = orePos.below();
 			stoneState = world.getBlockState(orePos);
 			down++;
 		}
 
-		if(stoneState.is(Tags.Blocks.STONE)) {
+		if(stoneState.is(ZetaTags.Blocks.STONE)) {
 			BlockState ore = FairyRingsModule.ores.get(rand.nextInt(FairyRingsModule.ores.size()));
 			world.setBlock(orePos, ore, 2);
 			for(Direction face : Direction.values())

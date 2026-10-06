@@ -13,7 +13,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.Tags;
+import org.violetmoon.zeta.util.ZetaTags;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -73,7 +73,7 @@ public class MatrixEnchantingMenu extends AbstractContainerMenu {
 	}
 
 	private boolean isLapis(ItemStack stack) {
-		return stack.is(Tags.Items.GEMS_LAPIS);
+		return stack.is(ZetaTags.Items.GEMS_LAPIS);
 	}
 
 	private void finish(Player player, ItemStack stack) {

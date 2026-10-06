@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import org.violetmoon.quark.addons.oddities.client.render.entity.TotemOfHoldingRenderer;
 import org.violetmoon.quark.addons.oddities.entity.TotemOfHoldingEntity;
 import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.content.tweaks.compat.TotemOfHoldingCuriosCompat;
 import org.violetmoon.zeta.client.event.load.ZAddModels;
 import org.violetmoon.zeta.client.event.load.ZClientSetup;
 import org.violetmoon.zeta.config.Config;
@@ -88,8 +87,7 @@ public class TotemOfHoldingModule extends ZetaModule {
 						.map(ItemEntity::getItem)
 						.filter(stack -> !stack.isEmpty())
 						.forEach(totem::addItem);
-				if (zeta().isModLoaded("curios"))
-					TotemOfHoldingCuriosCompat.saveCurios(player, totem);
+				// Fabric: Curios does not exist on Fabric; Trinkets support comes with the integration phase
 				if(!player.level().isClientSide)
 					player.level().addFreshEntity(totem);
 

@@ -18,7 +18,6 @@ public class VariantChestBlockEntity extends ChestBlockEntity {
 		super(VariantChestsModule.chestTEType, pos, state);
 	}
 
-	@Override
 	public AABB getRenderBoundingBox() {
 		return new AABB(worldPosition.offset(-1, 0, -1), worldPosition.offset(2, 2, 2));
 	}

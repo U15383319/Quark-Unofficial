@@ -17,8 +17,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.items.ItemHandlerHelper;
+import org.violetmoon.zeta.util.ZetaTags;
+import org.violetmoon.zeta.item.handler.ItemHandlerHelper;
 
 import org.violetmoon.zeta.event.bus.PlayEvent;
 import org.violetmoon.zeta.event.play.entity.player.ZRightClickBlock;
@@ -44,7 +44,7 @@ public class ShulkerPackingModule extends ZetaModule {
 			if(mainHand.is(Items.SHULKER_SHELL) && offHand.is(Items.SHULKER_SHELL)) {
 				Level level = player.level();
 				BlockState state = level.getBlockState(pos);
-				if(state.is(Tags.Blocks.CHESTS) && !state.is(Blocks.ENDER_CHEST)) {
+				if(state.is(ZetaTags.Blocks.CHESTS) && !state.is(Blocks.ENDER_CHEST)) {
 					event.setCanceled(true);
 					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 					if(level.isClientSide())

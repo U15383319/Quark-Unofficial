@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.module;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -18,8 +19,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.common.util.FakePlayer;
+
+import net.fabricmc.fabric.api.entity.FakePlayer;
 import org.violetmoon.quark.addons.oddities.block.MatrixEnchantingTableBlock;
 import org.violetmoon.quark.addons.oddities.block.be.MatrixEnchantingTableBlockEntity;
 import org.violetmoon.quark.addons.oddities.client.render.be.MatrixEnchantingTableRenderer;
@@ -175,7 +176,7 @@ public class MatrixEnchantingModule extends ZetaModule {
 	public final void register(ZRegister event) {
 		matrixEnchanter = new MatrixEnchantingTableBlock(this);
 
-		menuType = IForgeMenuType.create(MatrixEnchantingMenu::fromNetwork);
+		menuType = new ExtendedScreenHandlerType<>(MatrixEnchantingMenu::fromNetwork);
 		Quark.ZETA.registry.register(menuType, "matrix_enchanting", Registries.MENU);
 
 		blockEntityType = BlockEntityType.Builder.of(MatrixEnchantingTableBlockEntity::new, matrixEnchanter).build(null);

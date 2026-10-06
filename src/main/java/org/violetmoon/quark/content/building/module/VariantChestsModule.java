@@ -60,7 +60,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraftforge.common.Tags;
+import org.violetmoon.zeta.util.ZetaTags;
 
 @ZetaLoadModule(category = "building", antiOverlap = { "woodworks" })
 public class VariantChestsModule extends ZetaModule {
@@ -231,7 +231,7 @@ public class VariantChestsModule extends ZetaModule {
 		if(!held.isEmpty() && target instanceof AbstractChestedHorse horse) {
 
 			if(!horse.hasChest() && held.getItem() != Items.CHEST) {
-				if(held.is(Tags.Items.CHESTS_WOODEN)) {
+				if(held.is(ZetaTags.Items.CHESTS_WOODEN)) {
 					event.setCanceled(true);
 					event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
 

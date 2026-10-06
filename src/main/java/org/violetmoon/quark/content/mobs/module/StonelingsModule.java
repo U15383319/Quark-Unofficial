@@ -8,7 +8,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements.Type;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
-import net.minecraftforge.common.Tags;
+import org.violetmoon.zeta.util.ZetaTags;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.content.mobs.client.render.entity.StonelingRenderer;
 import org.violetmoon.quark.content.mobs.entity.Stoneling;
@@ -36,7 +36,7 @@ public class StonelingsModule extends ZetaModule {
 	@Config
 	public static DimensionConfig dimensions = DimensionConfig.overworld(false);
 	@Config
-	public static EntitySpawnConfig spawnConfig = new EntitySpawnConfig(80, 1, 1, CompoundBiomeConfig.fromBiomeTags(true, Tags.Biomes.IS_VOID, BiomeTags.IS_NETHER, BiomeTags.IS_END));
+	public static EntitySpawnConfig spawnConfig = new EntitySpawnConfig(80, 1, 1, CompoundBiomeConfig.fromBiomeTags(true, ZetaTags.Biomes.IS_VOID, BiomeTags.IS_NETHER, BiomeTags.IS_END));
 	@Config(flag = "stoneling_drop_diamond_heart")
 	public static boolean enableDiamondHeart = true;
 	@Config(description = "When enabled, stonelings are much more aggressive in checking for players")

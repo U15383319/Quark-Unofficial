@@ -22,10 +22,10 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.ItemHandlerHelper;
+import org.violetmoon.zeta.item.handler.SlotItemHandler;
+import org.violetmoon.zeta.item.handler.InvWrapper;
 
 public class InventoryTransferHandler {
 
@@ -309,7 +309,7 @@ public class InventoryTransferHandler {
 		private Slot getSlot(int slotId) {
 			Container inv = getInv();
 			for(Slot slot : container.slots)
-				if(slot.container == inv && slot.getSlotIndex() == slotId)
+				if(slot.container == inv && slot.getContainerSlot() == slotId)
 					return slot;
 
 			return null;

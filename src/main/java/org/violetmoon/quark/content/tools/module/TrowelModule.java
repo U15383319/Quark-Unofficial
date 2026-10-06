@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tools.module;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -31,7 +32,7 @@ public class TrowelModule extends ZetaModule {
 		trowel = new TrowelItem(this);
 	}
 
-	public static final TagKey<Item> blacklist = ItemTags.create(Quark.asResource("trowel_blacklist"));
-	public static final TagKey<Item> whitelist = ItemTags.create(Quark.asResource("trowel_whitelist"));
+	public static final TagKey<Item> blacklist = TagKey.create(Registries.ITEM, Quark.asResource("trowel_blacklist"));
+	public static final TagKey<Item> whitelist = TagKey.create(Registries.ITEM, Quark.asResource("trowel_whitelist"));
 
 }

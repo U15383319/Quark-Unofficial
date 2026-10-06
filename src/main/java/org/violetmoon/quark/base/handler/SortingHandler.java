@@ -17,9 +17,9 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.SlotItemHandler;
+import org.violetmoon.zeta.item.handler.InvWrapper;
 
 import org.violetmoon.quark.addons.oddities.inventory.BackpackMenu;
 import org.violetmoon.quark.addons.oddities.inventory.slot.CachedItemHandlerSlot;

@@ -1,7 +1,7 @@
 package org.violetmoon.quark.content.tweaks.compat;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import org.violetmoon.zeta.item.handler.IItemHandlerModifiable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 

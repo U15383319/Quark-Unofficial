@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.TickPriority;
-import net.minecraftforge.event.ForgeEventFactory;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -201,7 +200,7 @@ public class RedstoneRandomizerBlock extends ZetaBlock {
 	public static void notifyNeighbors(Block block, Level world, BlockPos pos, BlockState state) {
 		Direction face = state.getValue(FACING);
 		BlockPos neighborPos = pos.relative(face.getOpposite());
-		if(ForgeEventFactory.onNeighborNotify(world, pos, world.getBlockState(pos), EnumSet.of(face.getOpposite()), false).isCanceled())
+		if(false) // Fabric: no NeighborNotifyEvent
 			return;
 		world.neighborChanged(neighborPos, block, pos);
 		world.updateNeighborsAtExceptFromFacing(neighborPos, block, face);

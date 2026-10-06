@@ -1,8 +1,7 @@
 package org.violetmoon.quark.api.event;
 
-import net.minecraftforge.eventbus.api.Event;
 
-public class QuarkModuleEvent extends Event {
+public class QuarkModuleEvent extends QuarkEvent {
 
 	public final String eventName;
 

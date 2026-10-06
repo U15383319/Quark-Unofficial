@@ -5,16 +5,9 @@ import java.time.Month;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
-import org.violetmoon.quark.api.ICustomSorting;
-import org.violetmoon.quark.api.IMagnetTracker;
-import org.violetmoon.quark.api.IPistonCallback;
-import org.violetmoon.quark.api.IRuneColorProvider;
-import org.violetmoon.quark.api.ITransferManager;
-import org.violetmoon.quark.api.QuarkCapabilities;
 import org.violetmoon.quark.api.event.SimpleHarvestEvent;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.base.capability.CapabilityHandler;
-import org.violetmoon.quark.base.capability.QuarkForgeCapabilities;
 import org.violetmoon.quark.base.config.QuarkGeneralConfig;
 import org.violetmoon.quark.base.handler.ContributorRewardHandler;
 import org.violetmoon.quark.base.handler.QuarkSounds;
@@ -28,7 +21,7 @@ import org.violetmoon.zeta.event.load.ZCommonSetup;
 import org.violetmoon.zeta.event.load.ZConfigChanged;
 import org.violetmoon.zeta.event.load.ZRegister;
 import org.violetmoon.zeta.module.ZetaCategory;
-import org.violetmoon.zetaimplforge.module.ModFileScanDataModuleFinder;
+import org.violetmoon.zetaimplfabric.module.ClassScanModuleFinder;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
@@ -38,9 +31,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 public class CommonProxy {
 
@@ -48,21 +38,7 @@ public class CommonProxy {
 
 	public void start() {
 		// CAPABILITIES
-		//todo put this bit in forge-specific code
-		Quark.ZETA.capabilityManager
-				.register(QuarkCapabilities.SORTING, QuarkForgeCapabilities.SORTING)
-				.register(QuarkCapabilities.TRANSFER, QuarkForgeCapabilities.TRANSFER)
-				.register(QuarkCapabilities.PISTON_CALLBACK, QuarkForgeCapabilities.PISTON_CALLBACK)
-				.register(QuarkCapabilities.MAGNET_TRACKER_CAPABILITY, QuarkForgeCapabilities.MAGNET_TRACKER_CAPABILITY)
-				.register(QuarkCapabilities.RUNE_COLOR, QuarkForgeCapabilities.RUNE_COLOR);
-		//weird forge capability-implementation-class stuff
-		MinecraftForge.EVENT_BUS.addListener((RegisterCapabilitiesEvent e) -> {
-			e.register(ICustomSorting.class);
-			e.register(ITransferManager.class);
-			e.register(IPistonCallback.class);
-			e.register(IMagnetTracker.class);
-			e.register(IRuneColorProvider.class);
-		});
+		// Fabric: Zeta capabilities need no platform-specific backing (FabricCapabilityManager)
 
 		// GLOBAL EVENT LISTENERS
 		Quark.ZETA.loadBus
@@ -92,7 +68,7 @@ public class CommonProxy {
 						new ZetaCategory("experimental", Items.TNT),
 						new ZetaCategory("oddities", Items.CHORUS_FRUIT, Quark.ODDITIES_ID)
 				),
-				new ModFileScanDataModuleFinder(Quark.MOD_ID), //forge only
+				new ClassScanModuleFinder(Quark.MOD_ID, "org.violetmoon.quark"),
 				QuarkGeneralConfig.INSTANCE
 		);
 

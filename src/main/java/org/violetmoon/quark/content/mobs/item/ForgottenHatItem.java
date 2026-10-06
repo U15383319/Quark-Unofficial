@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.mobs.item;
 
+import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
@@ -10,7 +11,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.*;
-import net.minecraftforge.common.ForgeMod;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -81,8 +81,8 @@ public class ForgottenHatItem extends ZetaArmorItem implements IZetaItem {
 			builder.put(Attributes.LUCK, new AttributeModifier(uuid, "Armor luck modifier", 1, AttributeModifier.Operation.ADDITION));
 
 			//TODO: Forge extension attributes (but these are on the way out, i guess)
-			builder.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(uuid, "Armor entity reach modifier", 2, AttributeModifier.Operation.ADDITION));
-			builder.put(ForgeMod.BLOCK_REACH.get(), new AttributeModifier(uuid, "Armor block reach modifier", 2, AttributeModifier.Operation.ADDITION));
+			builder.put(ReachEntityAttributes.ATTACK_RANGE, new AttributeModifier(uuid, "Armor entity reach modifier", 2, AttributeModifier.Operation.ADDITION));
+			builder.put(ReachEntityAttributes.REACH, new AttributeModifier(uuid, "Armor block reach modifier", 2, AttributeModifier.Operation.ADDITION));
 
 			attributes = builder.build();
 		}

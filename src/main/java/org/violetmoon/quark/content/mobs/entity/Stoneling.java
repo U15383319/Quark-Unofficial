@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.mobs.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
@@ -44,8 +45,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.network.NetworkHooks;
+import org.violetmoon.zeta.util.ZetaTags;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
@@ -103,7 +104,7 @@ public class Stoneling extends PathfinderMob {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.2, 0.98F));
-		goalSelector.addGoal(4, new FavorBlockGoal(this, 0.2, s -> s.is(Tags.Blocks.ORES_DIAMOND)));
+		goalSelector.addGoal(4, new FavorBlockGoal(this, 0.2, s -> s.is(ZetaTags.Blocks.ORES_DIAMOND)));
 		goalSelector.addGoal(3, new IfFlagGoal(new TemptGoal(this, 0.6, Ingredient.of(temptTag()), false), () -> StonelingsModule.enableDiamondHeart && !StonelingsModule.tamableStonelings));
 		goalSelector.addGoal(2, new RunAndPoofGoal<>(this, Player.class, 4, 0.5, 0.5));
 		goalSelector.addGoal(1, waryGoal = new ActWaryGoal(this, 0.1, 6, () -> StonelingsModule.cautiousStonelings));
@@ -111,7 +112,7 @@ public class Stoneling extends PathfinderMob {
 	}
 
 	private TagKey<Item> temptTag() {
-		return Quark.ZETA.modules.isEnabled(GlimmeringWealdModule.class) ? GlimmeringWealdModule.glowShroomFeedablesTag : Tags.Items.GEMS_DIAMOND;
+		return Quark.ZETA.modules.isEnabled(GlimmeringWealdModule.class) ? GlimmeringWealdModule.glowShroomFeedablesTag : ZetaTags.Items.GEMS_DIAMOND;
 	}
 
 	public static AttributeSupplier.Builder prepareAttributes() {
@@ -481,7 +482,7 @@ public class Stoneling extends PathfinderMob {
 
 	@Override
 	public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 	@Override

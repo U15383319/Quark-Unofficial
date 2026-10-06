@@ -1,5 +1,7 @@
 package org.violetmoon.quark.content.client.module;
 
+import java.util.Optional;
+import org.violetmoon.zeta.item.handler.ItemHandlers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -52,10 +54,8 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.EmptyHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.EmptyHandler;
 
 @ZetaLoadModule(category = "client")
 public class ChestSearchingModule extends ZetaModule {
@@ -237,7 +237,7 @@ public class ChestSearchingModule extends ZetaModule {
 
 					BlockEntity te = BlockEntity.loadStatic(BlockPos.ZERO, ((BlockItem) item).getBlock().defaultBlockState(), cmp);
 					if(te != null) {
-						LazyOptional<IItemHandler> handler = te.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+						Optional<IItemHandler> handler = ItemHandlers.get(te);
 						if(handler.isPresent()) {
 							IItemHandler items = handler.orElseGet(EmptyHandler::new);
 

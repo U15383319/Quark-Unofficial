@@ -1,6 +1,6 @@
 package org.violetmoon.quark.addons.oddities.inventory.slot;
 
-import net.minecraftforge.items.IItemHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
 
 @Deprecated(forRemoval = true)
 public class SlotCachingItemHandler extends CachedItemHandlerSlot {

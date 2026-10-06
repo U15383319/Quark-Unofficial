@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.block;
 
+import org.violetmoon.zetaimplfabric.menu.ZetaMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,7 +25,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -78,7 +79,7 @@ public class CrateBlock extends ZetaBlock implements EntityBlock {
 			BlockEntity be = worldIn.getBlockEntity(pos);
 			if(be instanceof CrateBlockEntity crate) {
 				if(player instanceof ServerPlayer serverPlayer)
-					NetworkHooks.openScreen(serverPlayer, crate, pos);
+					ZetaMenus.openScreen(serverPlayer, crate, pos);
 
 				PiglinAi.angerNearbyPiglins(player, true);
 			}

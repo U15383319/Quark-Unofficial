@@ -19,6 +19,7 @@
     "event.LivingEntityMixin",
     "event.MobMixin",
     "event.NaturalSpawnerMixin",
+    "event.NaturalSpawnerStateMixin",
     "event.NoteBlockMixin",
     "event.PersistentEntitySectionManagerMixin",
     "event.PlayerMixin",
@@ -27,7 +28,14 @@
     "event.ShovelItemMixin",
     "event.TamableAnimalMixin",
     "event.ThrownEnderpearlMixin",
-    "event.ZombieMixin"
+    "event.ZombieMixin",
+    "ext.BlockEntityExtMixin",
+    "ext.BlockExtMixin",
+    "ext.BlockStateBaseExtMixin",
+    "ext.EnchantmentExtMixin",
+    "ext.EntityTypeBuilderExtMixin",
+    "ext.EntityTypeExtMixin",
+    "ext.ItemStackExtMixin"
   ],
   "client": [
     "client.AbstractContainerScreenMixin",
@@ -47,7 +55,15 @@
     "client.ModelManagerMixin",
     "client.MouseHandlerMixin",
     "client.PlayerRendererMixin",
-    "client.ScreenshotMixin"
+    "client.ScreenshotMixin",
+    "client.ext.AbstractButtonExtMixin",
+    "client.ext.AbstractContainerScreenExtMixin",
+    "client.ext.AbstractSelectionListExtMixin",
+    "client.ext.AbstractWidgetExtMixin",
+    "client.ext.ChestRendererExtMixin",
+    "client.ext.GuiGraphicsExtMixin",
+    "client.ext.KeyMappingExtMixin",
+    "client.ext.ScreenExtMixin"
   ],
   "injectors": {
     "defaultRequire": 1

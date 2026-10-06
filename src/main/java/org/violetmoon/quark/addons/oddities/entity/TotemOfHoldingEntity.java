@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -18,12 +19,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkHooks;
+
 import org.jetbrains.annotations.NotNull;
 import org.violetmoon.quark.addons.oddities.item.BackpackItem;
 import org.violetmoon.quark.addons.oddities.module.TotemOfHoldingModule;
 import org.violetmoon.quark.base.Quark;
-import org.violetmoon.quark.content.tweaks.compat.TotemOfHoldingCuriosCompat;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -112,9 +112,7 @@ public class TotemOfHoldingEntity extends Entity {
 						player.setItemSlot(EquipmentSlot.OFFHAND, stack);
 						stack = null;
 					}
-				} else if (Quark.ZETA.isModLoaded("curios")) {
-					stack = TotemOfHoldingCuriosCompat.equipCurios(player, equipedCurios, stack);
-				}
+				} // Fabric: Curios does not exist on Fabric; Trinkets support comes with the integration phase
 
 				if(stack != null)
 					if(!player.addItem(stack))
@@ -232,6 +230,6 @@ public class TotemOfHoldingEntity extends Entity {
 	@NotNull
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 }

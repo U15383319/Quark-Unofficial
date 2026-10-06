@@ -1,10 +1,10 @@
 package org.violetmoon.quark.base.util;
 
+import java.util.Optional;
+import org.violetmoon.zeta.item.handler.ItemHandlers;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.IItemHandlerModifiable;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +16,7 @@ public class InventoryIIH implements IItemHandlerModifiable {
 
 	public InventoryIIH(ItemStack stack) {
 		this.stack = stack;
-		LazyOptional<IItemHandler> opt = stack.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+		Optional<IItemHandler> opt = ItemHandlers.get(stack);
 
 		if(opt.isPresent()) {
 			IItemHandler handler = opt.orElse(null);

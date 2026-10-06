@@ -1,5 +1,7 @@
 package org.violetmoon.quark.addons.oddities.client.render.be;
 
+import net.minecraft.util.RandomSource;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
@@ -15,7 +17,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.ForgeHooksClient;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,6 +61,8 @@ public class MagnetizedBlockRenderer implements BlockEntityRenderer<MagnetizedBl
 	}
 
 	private void renderStateModel(BlockPos pos, BlockState state, PoseStack matrix, MultiBufferSource buffer, Level world, boolean checkSides, int packedOverlay) {
-		ForgeHooksClient.renderPistonMovedBlocks(pos, state, matrix, buffer, world, checkSides, packedOverlay, blockRenderer);
+		// Fabric: vanilla PistonHeadRenderer#renderBlock (Forge renders every chunk layer of the model separately)
+		blockRenderer.getModelRenderer().tesselateBlock(world, blockRenderer.getBlockModel(state), state, pos, matrix,
+				buffer.getBuffer(ItemBlockRenderTypes.getMovingBlockRenderType(state)), checkSides, RandomSource.create(), state.getSeed(pos), packedOverlay);
 	}
 }

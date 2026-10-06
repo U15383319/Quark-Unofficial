@@ -10,6 +10,7 @@
  */
 package org.violetmoon.quark.content.mobs.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -56,7 +57,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -447,6 +448,6 @@ public class Foxhound extends Wolf implements Enemy {
 	@NotNull
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 }

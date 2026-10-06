@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.world.gen;
 
+import org.violetmoon.zeta.util.ZetaPlantable;
 import java.util.Optional;
 
 import org.violetmoon.quark.content.world.config.BlossomTreeConfig;
@@ -43,7 +44,7 @@ public class BlossomTreeGenerator extends Generator {
 
 			BlockState ground = worldIn.getBlockState(placePos);
 
-			if(ground.getBlock().canSustainPlant(ground, worldIn, pos, Direction.UP, (SaplingBlock) Blocks.OAK_SAPLING)) { //TODO: forge
+			if(ZetaPlantable.canSustainPlant(ground, worldIn, pos, Direction.UP, Blocks.OAK_SAPLING)) { //TODO: forge
 				BlockPos up = placePos.above();
 				BlockState upState = worldIn.getBlockState(up);
 

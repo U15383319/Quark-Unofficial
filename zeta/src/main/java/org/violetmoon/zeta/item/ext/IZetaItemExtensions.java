@@ -1,5 +1,6 @@
 package org.violetmoon.zeta.item.ext;
 
+import org.violetmoon.zeta.util.ZetaEnchantmentHelper;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -73,7 +74,7 @@ public interface IZetaItemExtensions {
 	}
 
 	default int getEnchantmentLevelZeta(ItemStack stack, Enchantment enchantment) {
-		return EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack); // Fabric: vanilla reads the tag directly (Forge renamed it getTagEnchantmentLevel)
+		return ZetaEnchantmentHelper.getTagEnchantmentLevel(enchantment, stack);
 	}
 
 	default Map<Enchantment, Integer> getAllEnchantmentsZeta(ItemStack stack) {

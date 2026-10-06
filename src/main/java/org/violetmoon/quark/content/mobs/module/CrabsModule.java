@@ -150,7 +150,7 @@ public class CrabsModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		crabSpawnableTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "crab_spawnable"));
+		crabSpawnableTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "crab_spawnable"));
 	}
 
 	@ZetaLoadModule(clientReplacement = true)

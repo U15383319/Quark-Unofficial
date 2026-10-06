@@ -32,7 +32,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.event.ForgeEventFactory;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -159,7 +158,7 @@ public class GrateBlock extends ZetaBlock implements SimpleFluidloggedBlock, ICr
 			if(neighborState.getFluidState().is(FluidTags.WATER) &&
 					fluidContained(state).isSame(Fluids.LAVA)) {
 				level.destroyBlock(pos, true);
-				level.setBlock(pos, ForgeEventFactory.fireFluidPlaceBlockEvent(level, pos, neighbor, Blocks.OBSIDIAN.defaultBlockState()), 3);
+				level.setBlock(pos, Blocks.OBSIDIAN.defaultBlockState() /* Fabric: no FluidPlaceBlockEvent */, 3);
 				level.levelEvent(LevelEvent.LAVA_FIZZ, pos, 0);
 			}
 		}

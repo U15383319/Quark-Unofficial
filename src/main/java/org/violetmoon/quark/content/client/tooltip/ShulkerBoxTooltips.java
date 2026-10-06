@@ -1,5 +1,7 @@
 package org.violetmoon.quark.content.client.tooltip;
 
+import java.util.Optional;
+import org.violetmoon.zeta.item.handler.ItemHandlers;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -23,9 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +55,7 @@ public class ShulkerBoxTooltips {
 				return;
 
 			BlockEntity te = BlockEntity.loadStatic(BlockPos.ZERO, ((BlockItem) stack.getItem()).getBlock().defaultBlockState(), cmp);
-			if(te != null && te.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent()) {
+			if(te != null && ItemHandlers.get(te).isPresent()) {
 				List<Either<FormattedText, TooltipComponent>> tooltip = event.getTooltipElements();
 				List<Either<FormattedText, TooltipComponent>> tooltipCopy = new ArrayList<>(tooltip);
 
@@ -112,7 +112,7 @@ public class ShulkerBoxTooltips {
 					if(te instanceof RandomizableContainerBlockEntity randomizable)
 						randomizable.setLootTable(null, 0);
 
-					LazyOptional<IItemHandler> handler = te.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+					Optional<IItemHandler> handler = ItemHandlers.get(te);
 					handler.ifPresent((capability) -> {
 						ItemStack currentBox = stack;
 						int currentX = tooltipX;

@@ -1,11 +1,13 @@
 package org.violetmoon.quark.addons.oddities.module;
 
+import org.violetmoon.zeta.item.handler.ItemHandlers;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.common.extensions.IForgeMenuType;
+
 
 import org.violetmoon.quark.addons.oddities.block.CrateBlock;
 import org.violetmoon.quark.addons.oddities.block.be.CrateBlockEntity;
@@ -36,11 +38,14 @@ public class CrateModule extends ZetaModule {
 	public final void register(ZRegister event) {
 		crate = new CrateBlock(this);
 
-		menuType = IForgeMenuType.create(CrateMenu::fromNetwork);
+		menuType = new ExtendedScreenHandlerType<>(CrateMenu::fromNetwork);
 		Quark.ZETA.registry.register(menuType, "crate", Registries.MENU);
 
 		blockEntityType = BlockEntityType.Builder.of(CrateBlockEntity::new, crate).build(null);
 		Quark.ZETA.registry.register(blockEntityType, "crate", Registries.BLOCK_ENTITY_TYPE);
+
+		// Fabric: expose the item handler to hoppers and other mods (Forge did this through the capability)
+		ItemHandlers.registerStorage(blockEntityType);
 	}
 
 	@ZetaLoadModule(clientReplacement = true)

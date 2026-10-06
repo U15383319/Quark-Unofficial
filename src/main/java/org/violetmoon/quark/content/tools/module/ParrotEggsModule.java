@@ -112,7 +112,7 @@ public class ParrotEggsModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		feedTag = ItemTags.create(new ResourceLocation(Quark.MOD_ID, "parrot_feed"));
+		feedTag = TagKey.create(Registries.ITEM, new ResourceLocation(Quark.MOD_ID, "parrot_feed"));
 	}
 
 	@LoadEvent

@@ -37,8 +37,6 @@ import net.minecraft.world.level.block.entity.BannerBlockEntity;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.RenderItemInFrameEvent;
-import net.minecraftforge.common.MinecraftForge;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -180,7 +178,7 @@ public class GlassItemFrameRenderer extends EntityRenderer<GlassItemFrame> {
 			int rotation = mapdata != null ? itemFrame.getRotation() % 4 * 2 : itemFrame.getRotation();
 			matrix.mulPose(Axis.ZP.rotationDegrees((float) rotation * 360.0F / 8.0F));
 
-			if(!MinecraftForge.EVENT_BUS.post(new RenderItemInFrameEvent(itemFrame, defaultRenderer, matrix, buff, light))) {
+			if(true) { // Fabric: no RenderItemInFrameEvent
 				if(mapdata != null) {
 					matrix.mulPose(Axis.ZP.rotationDegrees(180.0F));
 					matrix.scale(0.0078125F, 0.0078125F, 0.0078125F);

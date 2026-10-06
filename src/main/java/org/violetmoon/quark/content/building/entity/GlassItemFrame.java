@@ -1,5 +1,8 @@
 package org.violetmoon.quark.content.building.entity;
 
+import net.fabricmc.fabric.api.entity.FakePlayer;
+import org.violetmoon.zeta.item.handler.ItemHandlers;
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.core.BlockPos;
@@ -30,10 +33,8 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.network.NetworkHooks;
+import org.violetmoon.zetaimplfabric.entity.IEntityAdditionalSpawnData;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -81,7 +82,7 @@ public class GlassItemFrame extends ItemFrame implements IEntityAdditionalSpawnD
 			BlockPos behind = getBehindPos();
 			BlockEntity tile = level().getBlockEntity(behind);
 
-			if(tile != null && tile.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent()) {
+			if(tile != null && ItemHandlers.get(tile).isPresent()) {
 				BlockState behindState = level().getBlockState(behind);
 				InteractionResult result = behindState.use(level(), player, hand, new BlockHitResult(new Vec3(getX(), getY(), getZ()), direction, behind, true));
 
@@ -113,7 +114,7 @@ public class GlassItemFrame extends ItemFrame implements IEntityAdditionalSpawnD
 
 				MapItemSavedData data = MapItem.getSavedData(clone, level());
 				if(data != null && !data.locked) {
-					var fakePlayer = FakePlayerFactory.get(sworld, DUMMY_PROFILE);
+					var fakePlayer = FakePlayer.get(sworld, DUMMY_PROFILE);
 
 					clone.setEntityRepresentation(null);
 					fakePlayer.setPos(getX(), getY(), getZ());
@@ -213,7 +214,7 @@ public class GlassItemFrame extends ItemFrame implements IEntityAdditionalSpawnD
 
 	@NotNull
 	@Override
-	public ItemStack getPickedResult(HitResult target) {
+	public ItemStack getPickResult() {
 		ItemStack held = getItem();
 		if(held.isEmpty())
 			return new ItemStack(getDroppedItem());
@@ -242,7 +243,7 @@ public class GlassItemFrame extends ItemFrame implements IEntityAdditionalSpawnD
 	@NotNull
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 	@Override

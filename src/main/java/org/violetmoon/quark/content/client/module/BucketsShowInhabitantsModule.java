@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.client.module;
 
+import org.violetmoon.zeta.client.ZetaItemProperties;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -53,17 +54,17 @@ public class BucketsShowInhabitantsModule extends ZetaModule {
 		@LoadEvent
 		public void clientSetup(ZClientSetup e) {
 			e.enqueueWork(() -> {
-				ItemProperties.register(Items.AXOLOTL_BUCKET, new ResourceLocation(Quark.MOD_ID, "variant"),
+				ZetaItemProperties.register(Items.AXOLOTL_BUCKET, new ResourceLocation(Quark.MOD_ID, "variant"),
 						new MobBucketVariantProperty(Axolotl.Variant.values().length, () -> showAxolotls));
-				ItemProperties.register(CrabsModule.crab_bucket, new ResourceLocation(Quark.MOD_ID, "variant"),
+				ZetaItemProperties.register(CrabsModule.crab_bucket, new ResourceLocation(Quark.MOD_ID, "variant"),
 						new MobBucketVariantProperty(Crab.COLORS, () -> showCrabs));
 
-				ItemProperties.register(SlimeInABucketModule.slime_in_a_bucket, new ResourceLocation(Quark.MOD_ID, "shiny"),
+				ZetaItemProperties.register(SlimeInABucketModule.slime_in_a_bucket, new ResourceLocation(Quark.MOD_ID, "shiny"),
 						new ShinyMobBucketProperty(() -> showShinySlime && VariantAnimalTexturesModule.staticEnabled && VariantAnimalTexturesModule.enableShinySlime));
 
-				ItemProperties.register(Items.TROPICAL_FISH_BUCKET, new ResourceLocation(Quark.MOD_ID, "base"),
+				ZetaItemProperties.register(Items.TROPICAL_FISH_BUCKET, new ResourceLocation(Quark.MOD_ID, "base"),
 						new TropicalFishBucketVariantProperty((b) -> TropicalFish.getBaseColor(b).getId(), () -> showTropicalFish));
-				ItemProperties.register(Items.TROPICAL_FISH_BUCKET, new ResourceLocation(Quark.MOD_ID, "pattern"),
+				ZetaItemProperties.register(Items.TROPICAL_FISH_BUCKET, new ResourceLocation(Quark.MOD_ID, "pattern"),
 						new TropicalFishBucketVariantProperty((p) -> TropicalFish.getPattern(p).getPackedId(), () -> showTropicalFish));
 			});
 		}

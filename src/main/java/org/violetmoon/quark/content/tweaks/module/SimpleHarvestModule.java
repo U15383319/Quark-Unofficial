@@ -10,13 +10,14 @@
  */
 package org.violetmoon.quark.content.tweaks.module;
 
+import org.violetmoon.quark.api.event.QuarkApiEvents;
+import net.minecraft.core.registries.Registries;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.api.event.SimpleHarvestEvent;
@@ -69,7 +70,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
 
 @ZetaLoadModule(category = "tweaks")
 public class SimpleHarvestModule extends ZetaModule {
@@ -116,7 +116,7 @@ public class SimpleHarvestModule extends ZetaModule {
 
 	@LoadEvent
 	public void setup(ZCommonSetup event) {
-		simpleHarvestBlacklistedTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "simple_harvest_blacklisted"));
+		simpleHarvestBlacklistedTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "simple_harvest_blacklisted"));
 	}
 
 	@LoadEvent
@@ -245,7 +245,7 @@ public class SimpleHarvestModule extends ZetaModule {
 		if(action != ActionType.NONE) {
 			// event stuff
 			SimpleHarvestEvent event = new SimpleHarvestEvent(worldBlock, pos, level, hand, entity, action);
-			MinecraftForge.EVENT_BUS.post(event);
+			QuarkApiEvents.SIMPLE_HARVEST.invoker().accept(event);
 			if(event.isCanceled()) return false;
 
 			BlockPos newPos = event.getTargetPos();

@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.automation.block.be;
 
+import org.violetmoon.zeta.item.handler.IItemHandlerProvider;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,16 +16,13 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
 
 /**
  * @author WireSegal
  *         Created at 10:18 AM on 9/29/19.
  */
-public class ChuteBlockEntity extends ZetaBlockEntity {
+public class ChuteBlockEntity extends ZetaBlockEntity implements IItemHandlerProvider {
 
 	private static final AABB CLEARANCE = new AABB(BlockPos.ZERO).deflate(0.25).move(0, 0.25, 0);
 
@@ -96,11 +94,8 @@ public class ChuteBlockEntity extends ZetaBlockEntity {
 		}
 	};
 
-	@NotNull
 	@Override
-	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		if(side != Direction.DOWN && cap == ForgeCapabilities.ITEM_HANDLER)
-			return LazyOptional.of(() -> handler).cast();
-		return super.getCapability(cap, side);
+	public @Nullable IItemHandler getItemHandler(@Nullable Direction side) {
+		return side != Direction.DOWN ? handler : null;
 	}
 }

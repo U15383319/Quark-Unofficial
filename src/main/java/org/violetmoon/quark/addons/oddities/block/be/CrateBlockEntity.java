@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.block.be;
 
+import org.violetmoon.zeta.item.handler.IItemHandlerProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -19,17 +20,15 @@ import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.EmptyHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.EmptyHandler;
 import org.jetbrains.annotations.NotNull;
 import org.violetmoon.quark.addons.oddities.block.CrateBlock;
 import org.violetmoon.quark.addons.oddities.capability.CrateItemHandler;
 import org.violetmoon.quark.addons.oddities.inventory.CrateMenu;
 import org.violetmoon.quark.addons.oddities.module.CrateModule;
 
-public class CrateBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
+public class CrateBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, IItemHandlerProvider {
 
     private int numPlayersUsing;
 
@@ -83,13 +82,16 @@ public class CrateBlockEntity extends BaseContainerBlockEntity implements Worldl
         itemHandler().deserializeNBT(nbt);
     }
 
-    public CrateItemHandler itemHandler() {
-        LazyOptional<IItemHandler> handler = getCapability(ForgeCapabilities.ITEM_HANDLER);
-        if (handler.isPresent() && handler.orElse(new EmptyHandler()) instanceof CrateItemHandler crateHandler)
-            return crateHandler;
+    // Fabric: Forge created this lazily through createUnSidedHandler for the ITEM_HANDLER capability
+    private final CrateItemHandler itemHandler = new CrateItemHandler();
 
-        // Should never happen, but just to prevent null-pointers
-        return new CrateItemHandler();
+    public CrateItemHandler itemHandler() {
+        return itemHandler;
+    }
+
+    @Override
+    public IItemHandler getItemHandler(Direction side) {
+        return itemHandler;
     }
 
     @NotNull
@@ -162,12 +164,6 @@ public class CrateBlockEntity extends BaseContainerBlockEntity implements Worldl
     @Override
     protected AbstractContainerMenu createMenu(int id, @NotNull Inventory player) {
         return new CrateMenu(id, player, this, crateData);
-    }
-
-    @NotNull
-    @Override
-    protected IItemHandler createUnSidedHandler() {
-        return new CrateItemHandler();
     }
 
     // Vaniller copy =========================

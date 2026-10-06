@@ -1,5 +1,6 @@
 package org.violetmoon.quark.base.recipe;
 
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -15,7 +16,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.IShapedRecipe;
+import org.violetmoon.zeta.recipe.IZetaShapedRecipe;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -124,23 +125,24 @@ public class ExclusionRecipe implements CraftingRecipe {
 		return parent.category();
 	}
 
-	private static class ShapedExclusionRecipe extends ExclusionRecipe implements IShapedRecipe<CraftingContainer> {
-		private final IShapedRecipe<CraftingContainer> shapedParent;
+	private static class ShapedExclusionRecipe extends ExclusionRecipe implements IZetaShapedRecipe<CraftingContainer> {
+		private final CraftingRecipe shapedParent;
 
 		@SuppressWarnings("unchecked")
 		public ShapedExclusionRecipe(CraftingRecipe shapedParent, List<ResourceLocation> excluded) {
 			super(shapedParent, excluded);
-			this.shapedParent = (IShapedRecipe<CraftingContainer>) shapedParent;
+			this.shapedParent = shapedParent;
 		}
 
+		// Fabric: vanilla ShapedRecipe isn't an IShapedRecipe like on Forge
 		@Override
 		public int getRecipeWidth() {
-			return shapedParent.getRecipeWidth();
+			return shapedParent instanceof ShapedRecipe shaped ? shaped.getWidth() : ((IZetaShapedRecipe<?>) shapedParent).getRecipeWidth();
 		}
 
 		@Override
 		public int getRecipeHeight() {
-			return shapedParent.getRecipeHeight();
+			return shapedParent instanceof ShapedRecipe shaped ? shaped.getHeight() : ((IZetaShapedRecipe<?>) shapedParent).getRecipeHeight();
 		}
 	}
 
@@ -168,7 +170,7 @@ public class ExclusionRecipe implements CraftingRecipe {
 			if(!(parent instanceof CraftingRecipe))
 				throw new JsonSyntaxException("Type '" + trueType + "' is not a crafting recipe");
 
-			if(parent instanceof IShapedRecipe)
+			if(parent instanceof ShapedRecipe || parent instanceof IZetaShapedRecipe)
 				return new ShapedExclusionRecipe((CraftingRecipe) parent, excludedRecipes);
 			return new ExclusionRecipe((CraftingRecipe) parent, excludedRecipes);
 		}
@@ -192,7 +194,7 @@ public class ExclusionRecipe implements CraftingRecipe {
 			if(!(parent instanceof CraftingRecipe craftingRecipe))
 				throw new IllegalArgumentException("Type '" + trueType + "' is not a crafting recipe");
 
-			if(parent instanceof IShapedRecipe)
+			if(parent instanceof ShapedRecipe || parent instanceof IZetaShapedRecipe)
 				return new ShapedExclusionRecipe(craftingRecipe, excludedRecipes);
 			return new ExclusionRecipe(craftingRecipe, excludedRecipes);
 		}

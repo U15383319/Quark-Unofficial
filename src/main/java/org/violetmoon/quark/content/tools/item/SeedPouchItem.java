@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tools.item;
 
+import org.violetmoon.zeta.item.handler.ItemHandlers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,9 +25,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.api.ITrowelable;
@@ -212,7 +212,7 @@ public class SeedPouchItem extends ZetaItem implements IUsageTickerOverride, ITr
 			if (player != null && player.isShiftKeyDown() && !context.getLevel().isClientSide()) {
 				BlockEntity targetedBE = context.getLevel().getBlockEntity(BlockPos.containing(context.getClickLocation()));
 				if (targetedBE instanceof ChestBlockEntity chest) {
-					Optional<IItemHandler> optionalItemHandler = chest.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.NORTH).resolve();
+					Optional<IItemHandler> optionalItemHandler = ItemHandlers.get(chest, Direction.NORTH);
 					if (optionalItemHandler.isPresent()) {
 						// Copy stack and set it to the amount in the pouch
 						ItemStack toInsert = seed.copy();

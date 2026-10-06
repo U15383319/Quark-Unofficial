@@ -1,10 +1,11 @@
 package org.violetmoon.quark.base.network.message.oddities;
 
+import org.violetmoon.zetaimplfabric.menu.ZetaMenus;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkHooks;
+
 
 import org.violetmoon.quark.addons.oddities.inventory.BackpackMenu;
 import org.violetmoon.zeta.network.IZetaMessage;
@@ -34,7 +35,7 @@ public class HandleBackpackMessage implements IZetaMessage {
 				if(stack.getItem() instanceof MenuProvider && player.containerMenu != null) {
 					ItemStack holding = player.containerMenu.getCarried().copy();
 					player.containerMenu.setCarried(ItemStack.EMPTY);
-					NetworkHooks.openScreen(player, (MenuProvider) stack.getItem(), player.blockPosition());
+					ZetaMenus.openScreen(player, (MenuProvider) stack.getItem(), player.blockPosition());
 					player.containerMenu.setCarried(holding);
 				}
 			} else {

@@ -11,7 +11,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraftforge.common.Tags;
+import org.violetmoon.zeta.util.ZetaTags;
 import org.violetmoon.quark.base.util.QuarkWorldGenWeights;
 import org.violetmoon.quark.content.world.config.AirStoneClusterConfig;
 import org.violetmoon.quark.content.world.config.BigStoneClusterConfig;
@@ -51,11 +51,11 @@ public class BigStoneClustersModule extends ZetaModule {
 	@Config
 	public static BigStoneClusterConfig calcite = bob(BiomeTags.IS_MOUNTAIN).build();
 	@Config
-	public static BigStoneClusterConfig limestone = bob(Tags.Biomes.IS_SWAMP, BiomeTags.IS_OCEAN).build();
+	public static BigStoneClusterConfig limestone = bob(ZetaTags.Biomes.IS_SWAMP, BiomeTags.IS_OCEAN).build();
 	@Config
-	public static BigStoneClusterConfig jasper = bob(BiomeTags.IS_BADLANDS, Tags.Biomes.IS_SANDY).build();
+	public static BigStoneClusterConfig jasper = bob(BiomeTags.IS_BADLANDS, ZetaTags.Biomes.IS_SANDY).build();
 	@Config
-	public static BigStoneClusterConfig shale = bob(Tags.Biomes.IS_SNOWY).build();
+	public static BigStoneClusterConfig shale = bob(ZetaTags.Biomes.IS_SNOWY).build();
 
 	@Config
 	public static AirStoneClusterConfig myalite = AirStoneClusterConfig.airStoneBuilder()

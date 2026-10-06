@@ -20,3 +20,7 @@ accessible field net/minecraft/world/item/ShovelItem FLATTENABLES Ljava/util/Map
 accessible field net/minecraft/client/Minecraft itemColors Lnet/minecraft/client/color/item/ItemColors;
 accessible method net/minecraft/world/entity/Entity getEncodeId ()Ljava/lang/String;
 accessible field net/minecraft/server/network/ServerLoginPacketListenerImpl connection Lnet/minecraft/network/Connection;
+accessible field net/minecraft/client/renderer/item/ItemProperties PROPERTIES Ljava/util/Map;
+accessible field net/minecraft/world/level/biome/Biome climateSettings Lnet/minecraft/world/level/biome/Biome$ClimateSettings;
+accessible field net/minecraft/client/renderer/entity/EntityRenderDispatcher playerRenderers Ljava/util/Map;
+accessible field net/minecraft/world/entity/Entity wasTouchingWater Z

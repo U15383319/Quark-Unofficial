@@ -81,8 +81,33 @@ loom {
 	}
 }
 
+repositories {
+	maven {
+		name = 'JamiesWhiteShirt'
+		url = 'https://maven.jamieswhiteshirt.com/libs-release'
+		content {
+			includeGroup 'com.jamieswhiteshirt'
+		}
+	}
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/releases'
+		content {
+			includeGroup 'com.terraformersmc'
+		}
+	}
+}
+
 dependencies {
 	implementation project(path: ':zeta', configuration: 'namedElements')
+
+	// Forge's BLOCK_REACH / ENTITY_REACH attributes (forgotten hat)
+	modImplementation "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attributes_version}"
+	include "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attributes_version}"
+
+	// optional: config screen button in Mod Menu (Forge's ConfigScreenFactory)
+	modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modLocalRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
 	include project(':zeta')
 }
 
@@ -90,8 +115,9 @@ processResources {
 	def version = project.version
 	inputs.property 'version', version
 
+	// plain replace: fabric.mod.json contains '$' (inner class names in injected interfaces)
 	filesMatching('fabric.mod.json') {
-		expand 'version': version
+		filter { line -> line.replace('${version}', version.toString()) }
 	}
 }
 
@@ -99,4 +125,16 @@ jar {
 	from('LICENSE.md') {
 		rename { "${it}_quark" }
 	}
+}
+
+// Third-party integrations are ported in a later phase (see PORTING.md); their interfaces and dummy fallbacks stay
+sourceSets.main.java {
+	exclude 'org/violetmoon/quark/integration/jei/**'
+	exclude 'org/violetmoon/quark/integration/mixin/**'
+	exclude 'org/violetmoon/quark/integration/claim/FlanIntegration.java'
+	exclude 'org/violetmoon/quark/integration/lootr/Lootr*.java'
+	exclude 'org/violetmoon/quark/integration/lootr/client/ClientLootrIntegration.java'
+	exclude 'org/violetmoon/quark/integration/lootr/client/LootrVariantChestRenderer.java'
+	exclude 'org/violetmoon/quark/integration/terrablender/TerrablenderUndergroundBiomeHandler.java'
+	exclude 'org/violetmoon/quark/content/tweaks/compat/**'
 }

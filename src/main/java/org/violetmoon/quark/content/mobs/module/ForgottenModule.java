@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.mobs.module;
 
+import org.violetmoon.zetaimplfabric.event.play.FabricZEntityEvents;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.quark.base.client.handler.ModelHandler;
@@ -34,9 +35,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
-import net.minecraftforge.eventbus.api.Event.Result;
 
 @ZetaLoadModule(category = "mobs")
 public class ForgottenModule extends ZetaModule {
@@ -93,10 +91,8 @@ public class ForgottenModule extends ZetaModule {
 				BlockPos pos = BlockPos.containing(event.getX(), event.getY(), event.getZ());
 
 				//fixme maybe broken? - IThundxr
-				MobSpawnEvent.FinalizeSpawn newEvent = new MobSpawnEvent.FinalizeSpawn(forgotten, world, event.getX(), event.getY(), event.getZ(), world.getCurrentDifficultyAt(pos), event.getSpawnType(), null, null, event.getSpawner());
-				MinecraftForge.EVENT_BUS.post(newEvent);
-
-				if(newEvent.getResult() != Result.DENY) {
+				ZResult newResult = FabricZEntityEvents.fireCheckSpawn(forgotten, world, event.getX(), event.getY(), event.getZ(), event.getSpawner(), event.getSpawnType());
+				if(newResult != ZResult.DENY) {
 					world.addFreshEntity(forgotten);
 					event.setResult(ZResult.DENY);
 				}

@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
 import net.minecraft.core.BlockPos;
@@ -70,8 +71,8 @@ public class EnhancedLaddersModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		laddersTag = ItemTags.create(new ResourceLocation(Quark.MOD_ID, "ladders"));
-		laddersBlockTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "ladders"));
+		laddersTag = TagKey.create(Registries.ITEM, new ResourceLocation(Quark.MOD_ID, "ladders"));
+		laddersBlockTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "ladders"));
 	}
 
 	@LoadEvent

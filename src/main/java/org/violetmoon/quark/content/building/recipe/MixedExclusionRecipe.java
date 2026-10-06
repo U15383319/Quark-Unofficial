@@ -17,11 +17,11 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.IShapedRecipe;
+import org.violetmoon.zeta.recipe.IZetaShapedRecipe;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MixedExclusionRecipe implements CraftingRecipe, IShapedRecipe<CraftingContainer> {
+public class MixedExclusionRecipe implements CraftingRecipe, IZetaShapedRecipe<CraftingContainer> {
 
 	public static final RecipeSerializer<MixedExclusionRecipe> SERIALIZER = new Serializer();
 

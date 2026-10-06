@@ -116,7 +116,7 @@ public class WraithModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		wraithSpawnableTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "wraith_spawnable"));
+		wraithSpawnableTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "wraith_spawnable"));
 		soulBeadTargetTag = TagKey.create(Registries.STRUCTURE, new ResourceLocation(Quark.MOD_ID, "soul_bead_target"));
 	}
 

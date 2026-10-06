@@ -1,5 +1,7 @@
 package org.violetmoon.quark.addons.oddities.client.particle;
 
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -16,13 +18,6 @@ import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.fabricmc.api.EnvType;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.client.event.RegisterShadersEvent;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.opengl.GL13;
 import org.violetmoon.quark.addons.oddities.module.MagnetsModule;
 import org.violetmoon.quark.base.Quark;
@@ -32,7 +27,6 @@ import java.util.function.Supplier;
 import static com.mojang.blaze3d.vertex.DefaultVertexFormat.PARTICLE;
 
 // Im putting here some stuff idk where else to put
-@Mod.EventBusSubscriber(modid = "quark", value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MagnetParticleRenderType {
 
     //I think this just makes it so stuff with low alpha isn't cutoff
@@ -64,24 +58,18 @@ public class MagnetParticleRenderType {
         }
     };
 
-    // On fabric don't add this if its too much. just leave on forge. Shader just makes particles a tiny bit nicer as it doesnt cut off alpha
-    @SubscribeEvent
-    public static void registerShader(RegisterShadersEvent event) {
-        try {
-            ShaderInstance translucentParticleShader = new ShaderInstance(event.getResourceProvider(),
-                    Quark.asResource("particle_no_alpha_cutoff"), DefaultVertexFormat.POSITION_TEX);
+    // Fabric: Forge's RegisterShadersEvent / RegisterParticleProvidersEvent subscribers. Called from MagnetsModule.Client.
+    public static void init() {
+        CoreShaderRegistrationCallback.EVENT.register(context -> {
+            try {
+                context.register(Quark.asResource("particle_no_alpha_cutoff"), DefaultVertexFormat.POSITION_TEX, s -> PARTICLE_SHADER = () -> s);
+            } catch (Exception e) {
+                Quark.LOG.error("Failed to parse shader: " + e);
+            }
+        });
 
-            event.registerShader(translucentParticleShader, s -> PARTICLE_SHADER = () -> s);
-
-        } catch (Exception e) {
-            Quark.LOG.error("Failed to parse shader: " + e);
-        }
-    }
-
-    @SubscribeEvent
-    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(MagnetsModule.attractorParticle, MagnetParticle.Provider::new);
-        event.registerSpriteSet(MagnetsModule.repulsorParticle, MagnetParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(MagnetsModule.attractorParticle, MagnetParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(MagnetsModule.repulsorParticle, MagnetParticle.Provider::new);
     }
 /*
     static{

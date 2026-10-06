@@ -4,13 +4,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemHandlerHelper;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.IItemHandlerModifiable;
+import org.violetmoon.zeta.item.handler.ItemHandlerHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +17,7 @@ import org.violetmoon.zeta.util.ItemNBTHelper;
  * @author WireSegal
  *         Created at 4:27 PM on 12/15/18.
  */
-public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifiable, ICapabilityProvider {
+public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifiable {
 
 	protected final ItemStack stack;
 	protected final String key;
@@ -163,11 +159,5 @@ public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifi
 
 	protected void onContentsChanged(int slot) {
 		// NO-OP
-	}
-
-	@NotNull
-	@Override
-	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction facing) {
-		return ForgeCapabilities.ITEM_HANDLER.orEmpty(capability, LazyOptional.of(() -> this));
 	}
 }

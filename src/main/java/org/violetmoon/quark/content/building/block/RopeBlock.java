@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.building.block;
 
+import net.minecraft.world.level.block.BucketPickup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.content.automation.module.PistonsMoveTileEntitiesModule;
@@ -49,9 +50,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidActionResult;
-import net.minecraftforge.fluids.FluidUtil;
 
 public class RopeBlock extends ZetaBlock implements IZetaBlockItemProvider, SimpleWaterloggedBlock {
 
@@ -130,15 +128,20 @@ public class RopeBlock extends ZetaBlock implements IZetaBlockItemProvider, Simp
 					worldIn.playSound(null, pos, soundType.getPlaceSound(), SoundSource.BLOCKS, 0.5F, 1F);
 					return InteractionResult.sidedSuccess(worldIn.isClientSide);
 				}
-			} else if(stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) { //TODO: Forge extension
-				FluidActionResult interact = FluidUtil.tryPickUpFluid(stack, player, worldIn, getBottomPos(worldIn, pos), Direction.UP);
-				if(interact.success) {
+			} else if(stack.is(Items.BUCKET)) {
+				// Fabric: Forge picked fluid up into any fluid container item (FluidUtil#tryPickUpFluid); buckets are what vanilla has
+				BlockPos bottomPos = getBottomPos(worldIn, pos);
+				BlockState bottomState = worldIn.getBlockState(bottomPos);
+				BucketPickup pickup = bottomState.getBlock() instanceof BucketPickup p ? p : null;
+				ItemStack result = pickup != null ? pickup.pickupBlock(worldIn, bottomPos, bottomState) : ItemStack.EMPTY;
+				if(!result.isEmpty()) {
+					pickup.getPickupSound().ifPresent(sound -> player.playSound(sound, 1F, 1F));
 					stack.shrink(1);
-					if(!player.addItem(interact.result))
-						player.drop(interact.result, false);
+					if(!player.addItem(result))
+						player.drop(result, false);
 				}
-				
-				return interact.success ? InteractionResult.sidedSuccess(worldIn.isClientSide) : InteractionResult.PASS;
+
+				return !result.isEmpty() ? InteractionResult.sidedSuccess(worldIn.isClientSide) : InteractionResult.PASS;
 			} else if(stack.getItem() == Items.GLASS_BOTTLE) {
 				BlockPos bottomPos = getBottomPos(worldIn, pos);
 				BlockState stateAt = worldIn.getBlockState(bottomPos);

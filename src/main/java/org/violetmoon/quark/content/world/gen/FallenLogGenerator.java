@@ -184,7 +184,7 @@ public class FallenLogGenerator extends Generator {
             Holder<Biome> b = level.getBiome(pos);
             var biome = b.value();
 			List<Decor> list = new ArrayList<>();
-            var climateSettings = biome.getModifiedClimateSettings();
+            var climateSettings = biome.climateSettings /* Fabric: no Forge biome modifiers changing the climate */;
             double temperature = Mth.clamp(climateSettings.temperature(), 0.0F, 1.0F);
             double humidify = Mth.clamp(climateSettings.downfall(), 0.0F, 1.0F);
             humidify *= temperature;

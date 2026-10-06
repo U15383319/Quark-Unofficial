@@ -1,5 +1,8 @@
 package org.violetmoon.quark.addons.oddities.item;
 
+import java.util.Optional;
+import org.violetmoon.zeta.item.handler.IItemStackHandlerProvider;
+import org.violetmoon.zeta.item.handler.ItemHandlers;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
@@ -21,11 +24,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.ItemStackHandler;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 
-public class BackpackItem extends DyeableArmorItem implements IZetaItem, IZetaItemExtensions, MenuProvider {
+public class BackpackItem extends DyeableArmorItem implements IZetaItem, IZetaItemExtensions, MenuProvider, IItemStackHandlerProvider {
 
 	private static final String WORN_TEXTURE = Quark.MOD_ID + ":textures/misc/backpack_worn.png";
 	private static final String WORN_OVERLAY_TEXTURE = Quark.MOD_ID + ":textures/misc/backpack_worn_overlay.png";
@@ -90,7 +90,7 @@ public class BackpackItem extends DyeableArmorItem implements IZetaItem, IZetaIt
 	}
 
 	public static boolean doesBackpackHaveItems(ItemStack stack) {
-		LazyOptional<IItemHandler> handlerOpt = stack.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+		Optional<IItemHandler> handlerOpt = ItemHandlers.get(stack);
 
 		if(!handlerOpt.isPresent())
 			return false;
@@ -152,7 +152,7 @@ public class BackpackItem extends DyeableArmorItem implements IZetaItem, IZetaIt
 				}
 
 				if(BackpackModule.itemsInBackpackTick) {
-					LazyOptional<IItemHandler> handlerOpt = stack.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+					Optional<IItemHandler> handlerOpt = ItemHandlers.get(stack);
 					IItemHandler handler = handlerOpt.orElse(new ItemStackHandler());
 					for(int i = 0; i < handler.getSlots(); i++) {
 						ItemStack inStack = handler.getStackInSlot(i);
@@ -182,7 +182,7 @@ public class BackpackItem extends DyeableArmorItem implements IZetaItem, IZetaIt
 		if(!stack.hasTag())
 			return false;
 
-		LazyOptional<IItemHandler> handlerOpt = stack.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+		Optional<IItemHandler> handlerOpt = ItemHandlers.get(stack);
 
 		if(!handlerOpt.isPresent())
 			return false;
@@ -209,24 +209,11 @@ public class BackpackItem extends DyeableArmorItem implements IZetaItem, IZetaIt
 		return false;
 	}
 
-	//TODO: IForgeItem
+	// Fabric: Forge initCapabilities. The legacy "Parent" capability NBT migration only applied to very old Forge saves.
 	@NotNull
 	@Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag oldCapNbt) {
-		ProxiedItemStackHandler handler = new ProxiedItemStackHandler(stack, 27);
-
-		if(oldCapNbt != null && oldCapNbt.contains("Parent")) {
-			CompoundTag itemData = oldCapNbt.getCompound("Parent");
-			ItemStackHandler stacks = new ItemStackHandler();
-			stacks.deserializeNBT(itemData);
-
-			for(int i = 0; i < stacks.getSlots(); i++)
-				handler.setStackInSlot(i, stacks.getStackInSlot(i));
-
-			oldCapNbt.remove("Parent");
-		}
-
-		return handler;
+	public IItemHandler getItemHandler(ItemStack stack) {
+		return new ProxiedItemStackHandler(stack, 27);
 	}
 
 	@Override

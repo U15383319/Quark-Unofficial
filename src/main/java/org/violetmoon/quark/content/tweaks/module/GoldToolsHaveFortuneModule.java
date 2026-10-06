@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import org.violetmoon.zeta.util.ZetaEnchantmentHelper;
 import com.google.common.collect.Lists;
 
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
@@ -155,7 +156,7 @@ public class GoldToolsHaveFortuneModule extends ZetaModule {
 	public static void fakeEnchantmentTooltip(ItemStack stack, List<Component> components) {
 		if(staticEnabled && displayBakedEnchantmentsInTooltip)
 			for(Map.Entry<Enchantment, Integer> entry : Quark.ZETA.itemExtensions.get(stack).getAllEnchantmentsZeta(stack).entrySet()) {
-				int actualLevel = EnchantmentHelper.getTagEnchantmentLevel(entry.getKey(), stack);
+				int actualLevel = ZetaEnchantmentHelper.getTagEnchantmentLevel(entry.getKey(), stack);
 				if(actualLevel != entry.getValue()) {
 					Component comp = entry.getKey().getFullname(entry.getValue());
 					if(italicTooltip)
@@ -174,7 +175,7 @@ public class GoldToolsHaveFortuneModule extends ZetaModule {
 		if(staticEnabled && displayBakedEnchantmentsInTooltip) {
 			List<ResourceLocation> toRemove = Lists.newArrayList();
 			for(Map.Entry<Enchantment, Integer> entry : Quark.ZETA.itemExtensions.get(stack).getAllEnchantmentsZeta(stack).entrySet()) {
-				int actualLevel = EnchantmentHelper.getTagEnchantmentLevel(entry.getKey(), stack);
+				int actualLevel = ZetaEnchantmentHelper.getTagEnchantmentLevel(entry.getKey(), stack);
 				if(actualLevel != entry.getValue() && actualLevel != 0) {
 					toRemove.add(EnchantmentHelper.getEnchantmentId(entry.getKey()));
 				}

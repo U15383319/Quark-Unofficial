@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.block;
 
+import org.violetmoon.zetaimplfabric.menu.ZetaMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -94,7 +95,7 @@ public class MatrixEnchantingTableBlock extends EnchantmentTableBlock implements
 
 		if(Quark.ZETA.modules.isEnabled(MatrixEnchantingModule.class)) {
 			if(player instanceof ServerPlayer serverPlayer)
-				NetworkHooks.openScreen(serverPlayer, (MatrixEnchantingTableBlockEntity) worldIn.getBlockEntity(pos), pos);
+				ZetaMenus.openScreen(serverPlayer, (MatrixEnchantingTableBlockEntity) worldIn.getBlockEntity(pos), pos);
 		} else
 			worldIn.setBlockAndUpdate(pos, Blocks.ENCHANTING_TABLE.defaultBlockState());
 

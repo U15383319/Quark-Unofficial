@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.building.module;
 
+import net.minecraft.core.registries.Registries;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,7 +65,7 @@ public class HollowLogsModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		hollowLogsTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "hollow_logs"));
+		hollowLogsTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "hollow_logs"));
 	}
 
 	@PlayEvent

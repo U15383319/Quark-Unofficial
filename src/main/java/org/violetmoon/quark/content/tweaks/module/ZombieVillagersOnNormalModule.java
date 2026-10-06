@@ -9,7 +9,6 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LevelEvent;
-import net.minecraftforge.event.ForgeEventFactory;
 
 import org.violetmoon.zeta.event.bus.PlayEvent;
 import org.violetmoon.zeta.event.play.entity.living.ZLivingConversion;
@@ -35,7 +34,7 @@ public class ZombieVillagersOnNormalModule extends ZetaModule {
 				zombievillager.setTradeOffers(villager.getOffers().createTag());
 				zombievillager.setVillagerXp(villager.getVillagerXp());
 
-				ForgeEventFactory.onLivingConvert(villager, zombievillager);
+				// Fabric: ZLivingConversion.Post already fired from Mob#convertTo
 				level.levelEvent(null, LevelEvent.SOUND_ZOMBIE_INFECTED, villager.blockPosition(), 0);
 
 				event.setCanceled(true);

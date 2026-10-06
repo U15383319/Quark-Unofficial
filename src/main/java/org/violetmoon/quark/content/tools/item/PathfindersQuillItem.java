@@ -197,7 +197,7 @@ public class PathfindersQuillItem extends ZetaItem implements CreativeTabManager
 				player.displayClientMessage(Component.translatable(msg), true);
 
 				Vec3 pos = player.getPosition(1F);
-				level.playSound(null, pos.x, pos.y, pos.z, SoundEvents.NOTE_BLOCK_CHIME.get(), SoundSource.PLAYERS, 0.5F, 1F);
+				level.playSound(null, pos.x, pos.y, pos.z, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.PLAYERS, 0.5F, 1F);
 
 				//we have to check for off hand manually as game uses same slot index....
 				if(player.getOffhandItem() == stack){

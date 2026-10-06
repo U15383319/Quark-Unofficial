@@ -42,7 +42,7 @@ public class HugeGlowShroomBlock extends HugeMushroomBlock implements IZetaBlock
 	}
 
 	@Override
-	public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+	public boolean isFlammableZeta(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
 		return false;
 	}
 

@@ -28,7 +28,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements.Type;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
-import net.minecraftforge.common.Tags;
+import org.violetmoon.zeta.util.ZetaTags;
 
 @ZetaLoadModule(category = "mobs")
 public class ToretoiseModule extends ZetaModule {
@@ -58,7 +58,7 @@ public class ToretoiseModule extends ZetaModule {
 
 	@Config
 	public static EntitySpawnConfig spawnConfig = new EntitySpawnConfig(120, 2, 4,
-			CompoundBiomeConfig.fromBiomeTags(true, Tags.Biomes.IS_VOID, BiomeTags.IS_NETHER, BiomeTags.IS_END));
+			CompoundBiomeConfig.fromBiomeTags(true, ZetaTags.Biomes.IS_VOID, BiomeTags.IS_NETHER, BiomeTags.IS_END));
 
 	public static ManualTrigger mineToretoiseTrigger;
 	public static ManualTrigger mineFedToretoiseTrigger;

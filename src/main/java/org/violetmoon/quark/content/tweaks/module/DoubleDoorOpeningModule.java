@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tweaks.module;
 
+import net.minecraft.core.registries.Registries;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -59,7 +60,7 @@ public class DoubleDoorOpeningModule extends ZetaModule {
 
 	@LoadEvent
 	public void setup(ZCommonSetup e) {
-		nonDoubleDoorTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "non_double_door"));
+		nonDoubleDoorTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "non_double_door"));
 	}
 
 	public boolean openBlock(Level world, Player player, BlockPos pos) {

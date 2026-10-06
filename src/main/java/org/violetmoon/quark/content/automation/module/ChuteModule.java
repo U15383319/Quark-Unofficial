@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.automation.module;
 
+import org.violetmoon.zeta.item.handler.ItemHandlers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -38,5 +39,8 @@ public class ChuteModule extends ZetaModule {
 
 		blockEntityType = BlockEntityType.Builder.of(ChuteBlockEntity::new, chute).build(null);
 		Quark.ZETA.registry.register(blockEntityType, "chute", Registries.BLOCK_ENTITY_TYPE);
+
+		// Fabric: expose the item handler to hoppers and other mods (Forge did this through the capability)
+		ItemHandlers.registerStorage(blockEntityType);
 	}
 }

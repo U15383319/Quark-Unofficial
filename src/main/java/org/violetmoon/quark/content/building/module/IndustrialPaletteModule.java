@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.common.util.ForgeSoundType;
+import org.violetmoon.zeta.block.ZetaSoundType;
 
 import org.violetmoon.quark.content.building.block.VariantLadderBlock;
 import org.violetmoon.zeta.block.IZetaBlock;
@@ -24,7 +24,7 @@ import java.util.function.BooleanSupplier;
 @ZetaLoadModule(category = "building")
 public class IndustrialPaletteModule extends ZetaModule {
 
-	private static final SoundType IRON_LADDER_SOUND_TYPE = new ForgeSoundType(1.0F, 1.0F,
+	private static final SoundType IRON_LADDER_SOUND_TYPE = new ZetaSoundType(1.0F, 1.0F,
 			() -> SoundEvents.METAL_BREAK,
 			() -> SoundEvents.LADDER_STEP,
 			() -> SoundEvents.METAL_PLACE,

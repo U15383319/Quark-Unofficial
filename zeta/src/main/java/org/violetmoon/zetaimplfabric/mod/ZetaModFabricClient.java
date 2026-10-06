@@ -7,6 +7,7 @@ import org.violetmoon.zeta.item.IZetaItem;
 import org.violetmoon.zeta.block.IZetaBlock;
 import org.violetmoon.zeta.mod.ZetaMod;
 import org.violetmoon.zeta.module.ZetaModule;
+import org.violetmoon.zetaimplfabric.client.ZetaSpawnDataClient;
 import org.violetmoon.zetaimplfabric.client.event.FabricZClientEvents;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -32,6 +33,7 @@ public class ZetaModFabricClient implements ClientModInitializer {
 
 		ZetaModFabric.ensureInitialized();
 		FabricZClientEvents.init();
+		ZetaSpawnDataClient.init();
 
 		ZetaMod.ZETA.playBus
 			.subscribe(ClientTicker.INSTANCE)

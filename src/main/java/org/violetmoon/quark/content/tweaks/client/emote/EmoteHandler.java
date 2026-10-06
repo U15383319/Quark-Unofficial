@@ -154,7 +154,7 @@ public final class EmoteHandler {
 		Minecraft mc = Minecraft.getInstance();
 		EntityRenderDispatcher manager = mc.getEntityRenderDispatcher();
 
-		EntityRenderer<? extends Player> render = manager.getSkinMap().get(player.getModelName());
+		EntityRenderer<? extends Player> render = manager.playerRenderers.get(player.getModelName());
 		if(render instanceof PlayerRenderer playerRenderer)
 			return playerRenderer;
 		return null;

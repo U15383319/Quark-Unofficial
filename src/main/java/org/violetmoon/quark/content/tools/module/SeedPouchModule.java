@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.tools.module;
 
+import net.minecraft.core.registries.Registries;
 import java.util.List;
 
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -34,8 +35,8 @@ public class SeedPouchModule extends ZetaModule {
 	@Hint
 	public static Item seed_pouch;
 
-	public static final TagKey<Item> seedPouchHoldableTag = ItemTags.create(Quark.asResource("seed_pouch_holdable"));
-	public static final TagKey<Item> seedPouchFertilizersTag = ItemTags.create(Quark.asResource("seed_pouch_fertilizers"));
+	public static final TagKey<Item> seedPouchHoldableTag = TagKey.create(Registries.ITEM, Quark.asResource("seed_pouch_holdable"));
+	public static final TagKey<Item> seedPouchFertilizersTag = TagKey.create(Registries.ITEM, Quark.asResource("seed_pouch_fertilizers"));
 
 	@Config
 	public static int maxItems = 640;

@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.module;
 
+import org.violetmoon.quark.addons.oddities.client.particle.MagnetParticleRenderType;
 import com.google.common.collect.Lists;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -122,6 +123,7 @@ public class MagnetsModule extends ZetaModule {
 
         @LoadEvent
         public void clientSetup(ZClientSetup event) {
+			MagnetParticleRenderType.init();
             BlockEntityRenderers.register(magnetizedBlockType, MagnetizedBlockRenderer::new);
         }
     }

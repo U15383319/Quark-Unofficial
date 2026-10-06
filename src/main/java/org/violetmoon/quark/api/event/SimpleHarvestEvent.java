@@ -6,8 +6,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.eventbus.api.Cancelable;
-import net.minecraftforge.eventbus.api.Event;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.content.tweaks.module.SimpleHarvestModule;
 
@@ -17,8 +15,7 @@ import org.violetmoon.quark.content.tweaks.module.SimpleHarvestModule;
  * Can also be used for blocks that hae other max age requirements as it fires for all crop blocks
  */
 //TODO: this can me moved to a zeta event no problem
-@Cancelable
-public class SimpleHarvestEvent extends Event {
+public class SimpleHarvestEvent extends QuarkEvent {
 
     public final BlockState blockState;
     public final BlockPos pos;

@@ -1,5 +1,9 @@
 package org.violetmoon.quark.content.management.module;
 
+import java.util.Optional;
+import org.violetmoon.zeta.item.handler.ItemHandlers;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import org.violetmoon.zetaimplfabric.menu.ZetaMenus;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -30,13 +34,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.wrapper.EmptyHandler;
-import net.minecraftforge.network.NetworkHooks;
+
+import org.violetmoon.zeta.item.handler.IItemHandler;
+import org.violetmoon.zeta.item.handler.ItemHandlerHelper;
+import org.violetmoon.zeta.item.handler.EmptyHandler;
+
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.quark.base.config.QuarkGeneralConfig;
@@ -89,7 +91,7 @@ public class ExpandedItemInteractionsModule extends ZetaModule {
 
 	@LoadEvent
 	public final void register(ZRegister event) {
-		heldShulkerBoxMenuType = IForgeMenuType.create(HeldShulkerBoxMenu::fromNetwork);
+		heldShulkerBoxMenuType = new ExtendedScreenHandlerType<>(HeldShulkerBoxMenu::fromNetwork);
 		Quark.ZETA.registry.register(heldShulkerBoxMenuType, "held_shulker_box", Registries.MENU);
 	}
 
@@ -256,11 +258,11 @@ public class ExpandedItemInteractionsModule extends ZetaModule {
 			return false;
 
 		if(isStackedOnMe && canOpenShulkerBox(shulkerStack, incoming, slot, player)) {
-			int lockedSlot = slot.getSlotIndex();
+			int lockedSlot = slot.getContainerSlot();
 			if(player instanceof ServerPlayer splayer) {
 				HeldShulkerBoxContainer container = new HeldShulkerBoxContainer(splayer, lockedSlot);
 
-				NetworkHooks.openScreen(splayer, container, buf -> buf.writeInt(lockedSlot));
+				ZetaMenus.openScreen(splayer, container, buf -> buf.writeInt(lockedSlot));
 			} else
 				player.playSound(SoundEvents.SHULKER_BOX_OPEN, 1F, 1F);
 
@@ -310,13 +312,13 @@ public class ExpandedItemInteractionsModule extends ZetaModule {
 		BlockEntity tile = getShulkerBoxEntity(shulkerBox);
 
 		if(tile != null) {
-			LazyOptional<IItemHandler> handlerHolder = tile.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+			Optional<IItemHandler> handlerHolder = ItemHandlers.get(tile);
 			if(handlerHolder.isPresent()) {
 				IItemHandler handler = handlerHolder.orElseGet(EmptyHandler::new);
 				if(SimilarBlockTypeHandler.isShulkerBox(stack) && allowDump) {
 					BlockEntity otherShulker = getShulkerBoxEntity(stack);
 					if(otherShulker != null) {
-						LazyOptional<IItemHandler> otherHolder = otherShulker.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+						Optional<IItemHandler> otherHolder = ItemHandlers.get(otherShulker);
 						if(otherHolder.isPresent()) {
 							IItemHandler otherHandler = otherHolder.orElseGet(EmptyHandler::new);
 							boolean any = false;

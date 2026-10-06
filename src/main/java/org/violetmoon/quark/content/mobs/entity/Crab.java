@@ -10,6 +10,9 @@
  */
 package org.violetmoon.quark.content.mobs.entity;
 
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -56,10 +59,8 @@ import net.minecraft.world.level.gameevent.*;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.network.NetworkHooks;
+import org.violetmoon.zetaimplfabric.entity.IEntityAdditionalSpawnData;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -323,12 +324,9 @@ public class Crab extends Animal implements IEntityAdditionalSpawnData, Bucketab
 	}
 
 	@Override
-	public float getStepHeight() {
-		float baseStep = wasTouchingWater ? 1F : 0.6F;
-		AttributeInstance stepHeightAttribute = getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
-		if(stepHeightAttribute != null)
-			return (float) Math.max(0, baseStep + stepHeightAttribute.getValue());
-		return baseStep;
+	// Fabric: Forge getStepHeight; there is no STEP_HEIGHT_ADDITION attribute
+	public float maxUpStep() {
+		return wasTouchingWater ? 1F : 0.6F;
 	}
 
 	@NotNull
@@ -338,7 +336,7 @@ public class Crab extends Animal implements IEntityAdditionalSpawnData, Bucketab
 	}
 
 	@Override
-	public boolean isPushedByFluid(FluidType type) {
+	public boolean isPushedByFluid() {
 		return false;
 	}
 
@@ -413,7 +411,7 @@ public class Crab extends Animal implements IEntityAdditionalSpawnData, Bucketab
 	private Ingredient getTemptationItems() {
 		if(temptationItems == null)
 			temptationItems = Ingredient.of(
-					ItemTags.create(new ResourceLocation(Quark.MOD_ID, "crab_tempt_items")));
+					TagKey.create(Registries.ITEM, new ResourceLocation(Quark.MOD_ID, "crab_tempt_items")));
 
 		return temptationItems;
 	}
@@ -472,7 +470,7 @@ public class Crab extends Animal implements IEntityAdditionalSpawnData, Bucketab
 	@NotNull
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 	@Override

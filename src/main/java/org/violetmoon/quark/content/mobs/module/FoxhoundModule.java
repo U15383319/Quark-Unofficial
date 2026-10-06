@@ -1,6 +1,6 @@
 package org.violetmoon.quark.content.mobs.module;
 
-import static net.minecraftforge.event.entity.living.LivingChangeTargetEvent.LivingTargetType.BEHAVIOR_TARGET;
+import static org.violetmoon.zeta.event.play.entity.living.ZLivingChangeTarget.LivingTargetType.BEHAVIOR_TARGET;
 
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.quark.content.mobs.client.render.entity.FoxhoundRenderer;
@@ -95,7 +95,7 @@ public class FoxhoundModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		foxhoundSpawnableTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "foxhound_spawnable"));
+		foxhoundSpawnableTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "foxhound_spawnable"));
 	}
 
 	@PlayEvent

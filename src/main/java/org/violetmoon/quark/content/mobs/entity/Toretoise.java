@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.mobs.entity;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -53,7 +54,7 @@ import java.util.List;
 
 public class Toretoise extends Animal {
 
-	private static final TagKey<Block> BREAKS_TORETOISE_ORE = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "breaks_toretoise_ore"));
+	private static final TagKey<Block> BREAKS_TORETOISE_ORE = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "breaks_toretoise_ore"));
 
 	public static final int ORE_TYPES = 5;
 	public static final int ANGERY_TIME = 20;
@@ -237,7 +238,7 @@ public class Toretoise extends Animal {
 		if(e instanceof LivingEntity living) {
 			ItemStack held = living.getMainHandItem();
 
-			if(ore != 0 && held.getItem().canPerformAction(held, ToolActions.PICKAXE_DIG)) { //TODO: IForgeItem
+			if(ore != 0 && ToolActions.canPerformAction(held, ToolActions.PICKAXE_DIG)) { //TODO: IForgeItem
 				if(level() instanceof ServerLevel serverLevel) {
 					if(held.isDamageableItem() && e instanceof Player)
 						MiscUtil.damageStack((Player) e, InteractionHand.MAIN_HAND, held, 1);

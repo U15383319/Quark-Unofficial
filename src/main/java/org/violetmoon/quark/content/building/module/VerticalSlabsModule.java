@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.building.module;
 
+import net.minecraft.core.registries.Registries;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -111,7 +112,7 @@ public class VerticalSlabsModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		verticalSlabTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "vertical_slabs"));
+		verticalSlabTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "vertical_slabs"));
 	}
 
 	@LoadEvent

@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.client.gui.widget.ForgeSlider;
+import org.violetmoon.zeta.client.widget.ZetaSlider;
 import org.jetbrains.annotations.NotNull;
 import org.violetmoon.quark.base.config.type.ConvulsionMatrixConfig;
 import org.violetmoon.zeta.client.ZetaClient;
@@ -68,7 +68,7 @@ public class ConvulsionMatrixClientDefinition implements ClientDefinitionExt<Sec
 	}
 
 	class ConvulsionMatrixInputScreen extends AbstractSectionInputScreen {
-		ForgeSlider[] sliders = new ForgeSlider[9];
+		ZetaSlider[] sliders = new ZetaSlider[9];
 
 		public ConvulsionMatrixInputScreen(ZetaClient zc, Screen parent, ChangeSet changes, SectionDefinition def) {
 			super(zc, parent, changes, def);
@@ -120,8 +120,8 @@ public class ConvulsionMatrixClientDefinition implements ClientDefinitionExt<Sec
 
 		private static final Component EMPTY = Component.empty();
 
-		private ForgeSlider makeSliderPlease(int x, int y, int width, int height, ValueDefinition<List<Double>> binding, int bindingIndex) {
-			return new ForgeSlider(x, y, width, height, EMPTY, EMPTY, 0d, 2d, 0d, 0, 1, false) {
+		private ZetaSlider makeSliderPlease(int x, int y, int width, int height, ValueDefinition<List<Double>> binding, int bindingIndex) {
+			return new ZetaSlider(x, y, width, height, EMPTY, EMPTY, 0d, 2d, 0d, 0, 1, false) {
 				@Override
 				public void setValue(double value) {
 					super.setValue(value);
@@ -170,7 +170,7 @@ public class ConvulsionMatrixClientDefinition implements ClientDefinitionExt<Sec
 			//copied from the original
 			int sliders = 0;
 			for (Renderable renderable : renderables) {
-				if (renderable instanceof ForgeSlider s) {
+				if (renderable instanceof ZetaSlider s) {
 					switch (sliders) {
 						case 0 -> {
 							guiGraphics.drawString(font, "R =", s.getX() - 20, s.getY() + 5, 0xFF0000);
@@ -249,7 +249,7 @@ public class ConvulsionMatrixClientDefinition implements ClientDefinitionExt<Sec
 			return values;
 		}
 
-		private double snap(ForgeSlider s) {
+		private double snap(ZetaSlider s) {
 			double val = s.getValue();
 			val = snap(val, 0.5, s);
 			val = snap(val, 1.0, s);
@@ -257,7 +257,7 @@ public class ConvulsionMatrixClientDefinition implements ClientDefinitionExt<Sec
 			return val;
 		}
 
-		private double snap(double val, double correct, ForgeSlider s) {
+		private double snap(double val, double correct, ZetaSlider s) {
 			if(Math.abs(val - correct) < 0.02) {
 				s.setValue(correct);
 				return correct;

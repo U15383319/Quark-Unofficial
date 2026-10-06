@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.world.module;
 
+import net.minecraft.core.registries.Registries;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -91,7 +92,7 @@ public class CorundumModule extends ZetaModule {
 	public static List<CorundumBlock> crystals = Lists.newArrayList();
 	public static List<CorundumClusterBlock> clusters = Lists.newArrayList();
 	@Hint
-	public static final TagKey<Block> corundumTag = BlockTags.create(new ResourceLocation(Quark.MOD_ID, "corundum"));
+	public static final TagKey<Block> corundumTag = TagKey.create(Registries.BLOCK, new ResourceLocation(Quark.MOD_ID, "corundum"));
 
 	@LoadEvent
 	public final void register(ZRegister event) {

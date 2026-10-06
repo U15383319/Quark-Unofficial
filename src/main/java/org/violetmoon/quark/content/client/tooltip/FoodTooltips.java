@@ -98,7 +98,7 @@ public class FoodTooltips {
 			Minecraft mc = Minecraft.getInstance();
 
 			if(stack.isEdible()) {
-				FoodProperties food = stack.getItem().getFoodProperties(stack, mc.player);
+				FoodProperties food = stack.getItem().getFoodProperties();
 				if(food != null) {
 					RenderSystem.setShader(GameRenderer::getPositionTexShader);
 					RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

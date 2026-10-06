@@ -41,7 +41,7 @@ public class VariantLadderBlock extends LadderBlock implements IZetaBlock {
 	}
 
 	@Override
-	public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+	public boolean isFlammableZeta(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
 		return flammable;
 	}
 

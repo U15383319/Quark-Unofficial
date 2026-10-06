@@ -1,5 +1,6 @@
 package org.violetmoon.quark.addons.oddities.module;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import org.violetmoon.quark.addons.oddities.client.screen.BackpackInventoryScreen;
 import org.violetmoon.quark.addons.oddities.inventory.BackpackMenu;
 import org.violetmoon.quark.addons.oddities.item.BackpackItem;
@@ -57,7 +58,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraftforge.common.extensions.IForgeMenuType;
+
 
 @ZetaLoadModule(category = "oddities")
 public class BackpackModule extends ZetaModule {
@@ -96,7 +97,7 @@ public class BackpackModule extends ZetaModule {
 		backpack = new BackpackItem(this);
 		ravager_hide = new ZetaItem("ravager_hide", this, new Item.Properties().rarity(Rarity.RARE)).setCondition(() -> enableRavagerHide).setCreativeTab(CreativeModeTabs.INGREDIENTS, Items.RABBIT_HIDE, false);
 
-		menyType = IForgeMenuType.create(BackpackMenu::fromNetwork);
+		menyType = new ExtendedScreenHandlerType<>(BackpackMenu::fromNetwork);
 		Quark.ZETA.registry.register(menyType, "backpack", Registries.MENU);
 
 		bonded_ravager_hide = new ZetaBlock("bonded_ravager_hide", this, Block.Properties.of()
@@ -113,7 +114,7 @@ public class BackpackModule extends ZetaModule {
 
 	@LoadEvent
 	public final void setup(ZCommonSetup event) {
-		backpackBlockedTag = ItemTags.create(new ResourceLocation(Quark.MOD_ID, "backpack_blocked"));
+		backpackBlockedTag = TagKey.create(Registries.ITEM, new ResourceLocation(Quark.MOD_ID, "backpack_blocked"));
 	}
 
 	@PlayEvent

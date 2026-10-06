@@ -1,5 +1,6 @@
 package org.violetmoon.quark.content.automation.block;
 
+import org.violetmoon.zetaimplfabric.menu.ZetaMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -27,9 +28,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
-import net.minecraftforge.common.util.ForgeSoundType;
+import org.violetmoon.zeta.block.ZetaSoundType;
 
-import net.minecraftforge.network.NetworkHooks;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +45,7 @@ import org.violetmoon.zeta.module.ZetaModule;
  */
 public class FeedingTroughBlock extends ZetaBlock implements EntityBlock {
 
-	private static final SoundType WOOD_WITH_PLANT_STEP = new ForgeSoundType(1.0F, 1.0F, () -> SoundEvents.WOOD_BREAK, () -> SoundEvents.GRASS_STEP, () -> SoundEvents.WOOD_PLACE, () -> SoundEvents.WOOD_HIT, () -> SoundEvents.WOOD_FALL);
+	private static final SoundType WOOD_WITH_PLANT_STEP = new ZetaSoundType(1.0F, 1.0F, () -> SoundEvents.WOOD_BREAK, () -> SoundEvents.GRASS_STEP, () -> SoundEvents.WOOD_PLACE, () -> SoundEvents.WOOD_HIT, () -> SoundEvents.WOOD_FALL);
 
 	public static final BooleanProperty FULL = BooleanProperty.create("full");
 
@@ -135,7 +136,7 @@ public class FeedingTroughBlock extends ZetaBlock implements EntityBlock {
 		else {
 			MenuProvider container = this.getMenuProvider(state, world, pos);
 			if(container != null)
-				NetworkHooks.openScreen((ServerPlayer) player, container);
+				ZetaMenus.openScreen((ServerPlayer) player, container);
 
 			return InteractionResult.CONSUME;
 		}

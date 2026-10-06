@@ -1,5 +1,8 @@
 package org.violetmoon.quark.content.tools.entity.rang;
 
+import org.violetmoon.zetaimplfabric.event.play.FabricZPlayerEvents;
+import net.minecraft.tags.FluidTags;
+import org.violetmoon.zetaimplfabric.entity.ZetaSpawnData;
 import com.google.common.collect.Multimap;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
@@ -43,10 +46,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.HitResult.Type;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.network.NetworkHooks;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
@@ -323,7 +323,7 @@ public abstract class AbstractPickarang<T extends AbstractPickarang<T>> extends 
 		if(f == -1.0F) {
 			return 0.0F;
 		} else {
-			float i = ForgeHooks.isCorrectToolForDrops(state, player) ? 30 : 100;
+			float i = (!state.requiresCorrectToolForDrops() || player.hasCorrectToolForDrops(state)) ? 30 : 100;
 			float digSpeed = getPlayerDigSpeed(player, state, pos);
 			return (digSpeed / (f * i));
 		}
@@ -347,10 +347,10 @@ public abstract class AbstractPickarang<T extends AbstractPickarang<T>> extends 
 
 			f *= f1;
 		}
-		if(this.isEyeInFluidType(ForgeMod.WATER_TYPE.get())) {
+		if(this.isEyeInFluid(FluidTags.WATER)) {
 			f /= 5.0F;
 		}
-		f = ForgeEventFactory.getBreakSpeed(player, state, f, pos);
+		f = FabricZPlayerEvents.fireBreakSpeed(player, state, f);
 		return f;
 	}
 
@@ -640,7 +640,7 @@ public abstract class AbstractPickarang<T extends AbstractPickarang<T>> extends 
 	@NotNull
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return ZetaSpawnData.getEntitySpawningPacket(this);
 	}
 
 }
