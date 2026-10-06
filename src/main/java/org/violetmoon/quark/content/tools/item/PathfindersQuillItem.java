@@ -32,8 +32,8 @@ import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.saveddata.maps.MapDecoration.Type;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -379,7 +379,7 @@ public class PathfindersQuillItem extends ZetaItem implements CreativeTabManager
 		return stack;
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static MutableComponent getSearchingComponent() {
 		MutableComponent comp = Component.translatable("quark.misc.quill_searching");
 
@@ -414,7 +414,7 @@ public class PathfindersQuillItem extends ZetaItem implements CreativeTabManager
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, Level level, List<Component> comps, TooltipFlag flags) {
 		ResourceLocation biome = this.getTarget(stack);
 		if(biome != null) {

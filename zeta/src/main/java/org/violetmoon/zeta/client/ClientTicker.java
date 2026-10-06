@@ -26,7 +26,7 @@ public final class ClientTicker {
     @ApiStatus.Internal
     @PlayEvent
     public void onRenderTick(ZRenderTick.Start event) {
-        partialTicks = Minecraft.getInstance().getPartialTick();
+        partialTicks = Minecraft.getInstance().getFrameTime();
         delta = Minecraft.getInstance().getDeltaFrameTime();
         total = ticksInGame + partialTicks;
     }

@@ -1,12 +1,11 @@
 package org.violetmoon.zeta.client.event.play;
 
 import org.violetmoon.zeta.event.bus.IZetaPlayEvent;
-import org.violetmoon.zetaimplforge.mixin.mixins.client.GameRenderMixin;
 
 import net.minecraft.client.gui.GuiGraphics;
 
 /**
- * Called inside {@link GameRenderMixin}
+ * Called inside {@code org.violetmoon.zetaimplfabric.mixin.client.GameRendererMixin}
  * <br>
  * Injected into {@link net.minecraft.client.renderer.GameRenderer} after
  * <pre>{@code this.minecraft.getProfiler().popPush("gui");}</pre>

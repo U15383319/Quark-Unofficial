@@ -57,7 +57,7 @@ public class ZetaGlassBlock extends ZetaBlock {
 	}
 
 	@Override
-	public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter world, BlockPos pos, FluidState fluidState) {
+	public boolean shouldDisplayFluidOverlayZeta(BlockState state, BlockAndTintGetter world, BlockPos pos, FluidState fluidState) {
 		return true;
 	}
 

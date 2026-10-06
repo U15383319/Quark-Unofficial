@@ -24,8 +24,8 @@ import net.minecraft.world.item.CreativeModeTab.TabVisibility;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.util.MutableHashedLinkedMap;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public class CreativeTabManager {
 
@@ -108,10 +108,13 @@ public class CreativeTabManager {
 		return additions.computeIfAbsent(tab, tabRk -> new CreativeTabAdditions());
 	}
 
-	public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+	// Fabric: hooked to ItemGroupEvents.MODIFY_ENTRIES_ALL (Forge: BuildCreativeModeTabContentsEvent at LOWEST priority)
+	public static void buildContents(CreativeModeTab tab, FabricItemGroupEntries event) {
 		synchronized(MUTEX) {
-			ResourceKey<CreativeModeTab> tabKey = event.getTabKey();
-			MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries = event.getEntries();
+			ResourceKey<CreativeModeTab> tabKey = BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab).orElse(null);
+			if(tabKey == null)
+				return;
+			List<ItemStack> entries = event.getDisplayStacks();
 			
 			if(additions.containsKey(tabKey)) {
 				CreativeTabAdditions add = additions.get(tabKey);
@@ -149,9 +152,9 @@ public class CreativeTabManager {
             		}
             		
             		if(!front.isEmpty())
-            			missed = appendNextTo(tabKey, entries, front, false, failsafing);
+            			missed = appendNextTo(tabKey, event, front, false, failsafing);
             		if(!behind.isEmpty())
-            			missed |= appendNextTo(tabKey, entries, behind, true, failsafing);
+            			missed |= appendNextTo(tabKey, event, behind, true, failsafing);
 
             		if(missed) {
             			int fMisses = misses;
@@ -164,8 +167,8 @@ public class CreativeTabManager {
             		if(misses > failsafe) {
                   		logVerbose(() -> {
                 			StringBuilder sb = new StringBuilder();
-                			for(Entry<ItemStack, TabVisibility> entry : entries) {
-                				sb.append(entry.getKey());
+                			for(ItemStack entry : entries) {
+                				sb.append(entry);
                 				sb.append("; ");
                 			}
                 			return sb.toString();
@@ -190,7 +193,7 @@ public class CreativeTabManager {
 		return true;
 	}
 
-	private static void acceptItem(BuildCreativeModeTabContentsEvent event, ItemLike item) {
+	private static void acceptItem(FabricItemGroupEntries event, ItemLike item) {
 		if(!isItemEnabled(item))
 			return;
 		
@@ -200,7 +203,7 @@ public class CreativeTabManager {
 			event.accept(item);
 	}
 	
-	private static void addToEntries(ItemStack target, MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries, ItemLike item, boolean behind) {
+	private static void addToEntries(ItemStack target, FabricItemGroupEntries entries, ItemLike item, boolean behind) {
 		logVerbose(() -> "adding target=" + target + " next to " + item + " with behind=" + behind);
 		if(!isItemEnabled(item))
 			return;
@@ -214,16 +217,16 @@ public class CreativeTabManager {
 		
 		for(ItemStack addStack : stacksToAdd) {
 			if(behind)
-				entries.putBefore(target, addStack, TabVisibility.PARENT_AND_SEARCH_TABS);
+				entries.addBefore(target, List.of(addStack), TabVisibility.PARENT_AND_SEARCH_TABS);
 			else 
-				entries.putAfter(target, addStack, TabVisibility.PARENT_AND_SEARCH_TABS);
+				entries.addAfter(target, List.of(addStack), TabVisibility.PARENT_AND_SEARCH_TABS);
 		}
 	}
 
 	/**
 	 * Returns true if the item needs to be tried again later 
 	 */
-	private static boolean appendNextTo(ResourceKey<CreativeModeTab> tabKey, MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries, Map<ItemSet, ItemLike> map, boolean behind, boolean log) {
+	private static boolean appendNextTo(ResourceKey<CreativeModeTab> tabKey, FabricItemGroupEntries entries, Map<ItemSet, ItemLike> map, boolean behind, boolean log) {
 		logVerbose(() -> "appendNextTo " + tabKey + " / behind=" + behind);
 		Collection<ItemSet> coll = map.keySet();
 		if(coll.isEmpty())
@@ -250,8 +253,7 @@ public class CreativeTabManager {
 			itemLikeCache.put(target, target.asItem());
 		Item targetItem = itemLikeCache.get(target);
 		
-		for(Entry<ItemStack, TabVisibility> entry : entries) {
-			ItemStack stack = entry.getKey();
+		for(ItemStack stack : entries.getDisplayStacks()) {
 			Item item = stack.getItem();
 			
 			logVerbose(() -> "Comparing item " + item + " to our target " + targetItem);

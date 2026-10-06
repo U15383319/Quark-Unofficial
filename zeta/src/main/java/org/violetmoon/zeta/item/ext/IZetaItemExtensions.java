@@ -73,7 +73,7 @@ public interface IZetaItemExtensions {
 	}
 
 	default int getEnchantmentLevelZeta(ItemStack stack, Enchantment enchantment) {
-		return EnchantmentHelper.getTagEnchantmentLevel(enchantment, stack);
+		return EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack); // Fabric: vanilla reads the tag directly (Forge renamed it getTagEnchantmentLevel)
 	}
 
 	default Map<Enchantment, Integer> getAllEnchantmentsZeta(ItemStack stack) {

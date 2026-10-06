@@ -1,8 +1,8 @@
 package org.violetmoon.zeta.module;
 
 import org.violetmoon.zeta.Zeta;
+import org.violetmoon.zeta.event.load.ZModulesReady;
 import org.violetmoon.zeta.util.ZetaSide;
-import org.violetmoon.zetaimplforge.event.load.ForgeZModulesReady;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -122,7 +122,7 @@ public class ZetaModuleManager {
 
         z.log.info("Constructed {} modules.", modulesByKey.size());
 
-        z.loadBus.fire(new ForgeZModulesReady());
+        z.loadBus.fire(new ZModulesReady() { }, ZModulesReady.class);
     }
 
 

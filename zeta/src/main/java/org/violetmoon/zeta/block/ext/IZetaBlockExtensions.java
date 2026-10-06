@@ -40,6 +40,13 @@ public interface IZetaBlockExtensions {
 
 	IZetaBlockExtensions DEFAULT = new IZetaBlockExtensions() { };
 
+	/**
+	 * Fabric: there is no IForgeBlock to dispatch to, so look the extensions up directly.
+	 */
+	static IZetaBlockExtensions get(BlockState state) {
+		return state.getBlock() instanceof IZetaBlockExtensions ext ? ext : DEFAULT;
+	}
+
 	default int getLightEmissionZeta(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.getLightEmission();
 	}
@@ -86,7 +93,7 @@ public interface IZetaBlockExtensions {
 			return false;
 		else if(state.getBlock() == Blocks.SLIME_BLOCK && other.getBlock() == Blocks.HONEY_BLOCK)
 			return false;
-		else return state.isStickyBlock() || other.isStickyBlock();
+		else return get(state).isStickyBlockZeta(state) || get(other).isStickyBlockZeta(other);
 	}
 
 	default int getFlammabilityZeta(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
@@ -118,10 +125,10 @@ public interface IZetaBlockExtensions {
 		//	return null;
 
 		return switch(toolActionType) {
-			case "axe_strip" -> AxeItem.getAxeStrippingState(state); //TODO forge extension
+			case "axe_strip" -> ((AxeItem) Items.WOODEN_AXE).getStripped(state).orElse(null); // Fabric: getStripped is widened, it reads STRIPPABLES (incl. StrippableBlockRegistry)
 			case "axe_scrape" -> WeatheringCopper.getPrevious(state).orElse(null);
 			case "axe_wax_off" -> Optional.ofNullable(HoneycombItem.WAX_OFF_BY_BLOCK.get().get(state.getBlock())).map(block -> block.withPropertiesOf(state)).orElse(null);
-			case "shovel_flatten" -> ShovelItem.getShovelPathingState(state); //TODO forge extension
+			case "shovel_flatten" -> ShovelItem.FLATTENABLES.get(state.getBlock()); // Fabric: FLATTENABLES is widened (incl. FlattenableBlockRegistry)
 			case "hoe_till" -> {
 				Block block = state.getBlock();
 				if (block == Blocks.ROOTED_DIRT) {

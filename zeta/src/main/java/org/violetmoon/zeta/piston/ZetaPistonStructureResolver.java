@@ -1,5 +1,7 @@
 package org.violetmoon.zeta.piston;
 
+import org.violetmoon.zeta.block.ext.IZetaBlockExtensions;
+
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -162,7 +164,7 @@ public class ZetaPistonStructureResolver extends PistonStructureResolver {
                     state = world.getBlockState(target);
 
 					//vanilla logic
-                    if (state.isAir() ||  !(oldState.canStickTo(state) && state.canStickTo(oldState)) || !PistonBaseBlock.isPushable(state, world, target, moveDirection, false, moveDirection.getOpposite()) || target.equals(pistonPos))
+                    if (state.isAir() ||  !(IZetaBlockExtensions.get(oldState).canStickToZeta(oldState, state) && IZetaBlockExtensions.get(state).canStickToZeta(state, oldState)) || !PistonBaseBlock.isPushable(state, world, target, moveDirection, false, moveDirection.getOpposite()) || target.equals(pistonPos))
                         break;
 
                     if (getStickCompatibility(world, state, oldState, target, oldPos) != MoveResult.MOVE)
@@ -347,7 +349,7 @@ public class ZetaPistonStructureResolver extends PistonStructureResolver {
         if (indirect != null)
             return indirect.isEnabled() ? indirect.getStickyCondition() : null;
 
-        if (state.isStickyBlock())
+        if (IZetaBlockExtensions.get(state).isStickyBlockZeta(state))
             return DefaultStickCondition.INSTANCE;
 
         return null;
@@ -380,7 +382,7 @@ public class ZetaPistonStructureResolver extends PistonStructureResolver {
     }
 
     private static boolean isBlockSticky(BlockState state) {
-        if (state.isStickyBlock())
+        if (IZetaBlockExtensions.get(state).isStickyBlockZeta(state))
             return true;
 
         IIndirectConnector indirect = getIndirectStickiness(state);

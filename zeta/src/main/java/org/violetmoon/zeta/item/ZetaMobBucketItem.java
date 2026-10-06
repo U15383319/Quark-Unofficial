@@ -22,7 +22,7 @@ public class ZetaMobBucketItem extends MobBucketItem implements IZetaItem {
 	private BooleanSupplier enabledSupplier = BooleanSuppliers.TRUE;
 
 	public ZetaMobBucketItem(Supplier<? extends EntityType<?>> entity, Supplier<? extends Fluid> fluid, Supplier<? extends SoundEvent> sound, String name, @Nullable ZetaModule module) {
-		super(entity, fluid, sound, (new Properties()).stacksTo(1));
+		super(entity.get(), fluid.get(), sound.get(), (new Properties()).stacksTo(1)); // Fabric: vanilla constructor takes the objects directly
 
 		this.module = module;
 

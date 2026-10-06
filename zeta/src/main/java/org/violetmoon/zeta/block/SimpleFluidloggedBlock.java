@@ -57,7 +57,7 @@ public interface SimpleFluidloggedBlock extends BucketPickup, LiquidBlockContain
 		return Optional.empty(); // Irrelevant - using state variant below
 	}
 
-	@Override
+	// Fabric: Forge adds BucketPickup#getPickupSound(BlockState); called from BucketItemMixin instead
 	default Optional<SoundEvent> getPickupSound(BlockState state) {
 		return fluidContained(state).getPickupSound();
 	}

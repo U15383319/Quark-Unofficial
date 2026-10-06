@@ -70,7 +70,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.ToolActions;
+import org.violetmoon.zeta.util.ToolActions;
 
 public class WoodSetHandler {
 

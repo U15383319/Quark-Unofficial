@@ -7,15 +7,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import org.violetmoon.quark.content.tweaks.module.CompassesWorkEverywhereModule;
 
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 public class ClockTimePropertyFunction implements ItemPropertyFunction {
 
 	private double rotation;
@@ -23,7 +23,7 @@ public class ClockTimePropertyFunction implements ItemPropertyFunction {
 	private long lastUpdateTick;
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public float call(@NotNull ItemStack stack, @Nullable ClientLevel worldIn, @Nullable LivingEntity entityIn, int id) {
 		if(!CompassesWorkEverywhereModule.isClockCalculated(stack))
 			return 0F;

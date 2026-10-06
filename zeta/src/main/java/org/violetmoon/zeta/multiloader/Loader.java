@@ -5,8 +5,7 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.function.Supplier;
 
 public enum Loader {
-    // TODO - impl fabric once it gets xplat-ified
-    FORGE/*, FABRIC*/;
+    FORGE, FABRIC;
 
     public static final Loader CURRENT = getCurrent();
 
@@ -21,6 +20,6 @@ public enum Loader {
 
     @ApiStatus.Internal
     public static Loader getCurrent() {
-        return Loader.FORGE;
+        return Loader.FABRIC;
     }
 }

@@ -5,9 +5,18 @@ import org.violetmoon.zeta.event.bus.IZetaPlayEvent;
 import org.violetmoon.zeta.event.bus.helpers.LivingGetter;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 
 public interface ZLivingChangeTarget extends IZetaPlayEvent, Cancellable, LivingGetter {
     LivingEntity getNewTarget();
-    LivingChangeTargetEvent.ILivingTargetType getTargetType();
+    LivingTargetType getTargetType();
+
+    /**
+     * Fabric: mirrors Forge's LivingChangeTargetEvent.LivingTargetType.
+     */
+    enum LivingTargetType {
+        /** Fired from Mob#setTarget. */
+        MOB_TARGET,
+        /** Fired when a Brain sets ATTACK_TARGET (StartAttacking behavior). */
+        BEHAVIOR_TARGET
+    }
 }

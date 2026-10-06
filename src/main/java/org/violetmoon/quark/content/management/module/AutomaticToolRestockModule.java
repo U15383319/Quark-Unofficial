@@ -12,8 +12,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.ToolAction;
-import net.minecraftforge.common.ToolActions;
+import org.violetmoon.zeta.util.ToolAction;
+import org.violetmoon.zeta.util.ToolActions;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 

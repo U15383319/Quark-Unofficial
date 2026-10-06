@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import org.violetmoon.zeta.Zeta;
 
 /**
- * @see org.violetmoon.zetaimplforge.module.ModFileScanDataModuleFinder alternative Forge-only implementation
+ * (Forge used a ModFileScanData-based finder; Fabric uses {@code org.violetmoon.zetaimplfabric.module.ClassScanModuleFinder})
  */
 public class ServiceLoaderModuleFinder implements ModuleFinder {
 	public ServiceLoaderModuleFinder(Zeta z) {

@@ -14,7 +14,7 @@ public class CategoryButton extends Button {
 	private final Component text;
 
 	public CategoryButton(int x, int y, int w, int h, Component text, ItemStack icon, OnPress onClick) {
-		super(new Button.Builder(Component.literal(""), onClick).pos(x, y).size(w, h));
+		super(x, y, w, h, Component.literal(""), onClick, DEFAULT_NARRATION);
 		this.icon = icon;
 		this.text = text;
 	}
@@ -30,6 +30,6 @@ public class CategoryButton extends Button {
 		guiGraphics.renderFakeItem(icon, getX() + 5, getY() + 2);
 
 		int iconPad = (16 + 5) / 2;
-		guiGraphics.drawCenteredString(mc.font, text, getX() + width / 2 + iconPad, getY() + (height - 8) / 2, getFGColor());
+		guiGraphics.drawCenteredString(mc.font, text, getX() + width / 2 + iconPad, getY() + (height - 8) / 2, active ? 0xFFFFFF : 0xA0A0A0); // Fabric: Forge getFGColor() default
 	}
 }

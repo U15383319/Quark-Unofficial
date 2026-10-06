@@ -33,7 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraftforge.common.ToolActions;
+import org.violetmoon.zeta.util.ToolActions;
 
 @ZetaLoadModule(category = "building")
 public class VerticalSlabsModule extends ZetaModule {

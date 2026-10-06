@@ -35,7 +35,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
-import net.minecraftforge.common.ToolActions;
+import org.violetmoon.zeta.util.ToolActions;
 
 @ZetaLoadModule(category = "tweaks")
 public class HoeHarvestingModule extends ZetaModule {

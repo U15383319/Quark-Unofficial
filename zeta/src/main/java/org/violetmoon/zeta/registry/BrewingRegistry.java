@@ -111,7 +111,7 @@ public abstract class BrewingRegistry {
 			flag,
 			zeta.configManager.getConfigFlagManager(),
 			zeta.configManager.getConfigFlagManager().flagIngredientSerializer
-		);
+		).toVanilla();
 
 		addBrewingRecipe(potion, flagIngredientSupplier, to);
 	}

@@ -32,7 +32,7 @@ public class ZetaFenceGateBlock extends FenceGateBlock implements IZetaBlock {
 	}
 
 	public ZetaFenceGateBlock(String regname, @Nullable ZetaModule module, SoundEvent open, SoundEvent close, Properties properties) {
-		super(properties, open, close);
+		super(properties, new WoodType(WoodType.OAK.name(), WoodType.OAK.setType(), WoodType.OAK.soundType(), WoodType.OAK.hangingSignSoundType(), close, open)); // Fabric: no Forge (props, open, close) ctor
 		this.module = module;
 
 		if(module == null) //auto registration below this line

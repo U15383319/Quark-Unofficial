@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public interface ZAttachCapabilities<T> extends IZetaPlayEvent {
     ZetaCapabilityManager getCapabilityManager();
@@ -20,6 +19,4 @@ public interface ZAttachCapabilities<T> extends IZetaPlayEvent {
     interface BlockEntityCaps extends ZAttachCapabilities<BlockEntity> { }
     interface LevelCaps extends ZAttachCapabilities<Level> { }
 
-    @Deprecated //Forge only API, we should migrate off ICapabilityProvider.
-    void addCapabilityForgeApi(ResourceLocation key, ICapabilityProvider cap);
 }

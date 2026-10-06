@@ -35,9 +35,8 @@ allprojects {
 		modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 		modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
+		// Forge Config API Port shades night-config, so it is not declared separately
 		modApi "maven.modrinth:forge-config-api-port:${project.forge_config_api_port_version}"
-		compileOnly "com.electronwill.night-config:core:${project.night_config_version}"
-		compileOnly "com.electronwill.night-config:toml:${project.night_config_version}"
 	}
 
 	tasks.withType(JavaCompile).configureEach {

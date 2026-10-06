@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.WorldlyContainerHolder;
@@ -37,13 +38,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
-import net.minecraftforge.items.wrapper.SidedInvWrapper;
+import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import org.violetmoon.zetaimplfabric.transfer.TransferUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashSet;
@@ -175,22 +174,17 @@ public class MiscUtil {
 	}
 
 	public static ItemStack putIntoInv(ItemStack stack, LevelAccessor level, BlockPos blockPos, BlockEntity tile, Direction face, boolean simulate, boolean doSimulation) {
-		IItemHandler handler = null;
+		// Fabric: Transfer API instead of Forge IItemHandler. ItemStorage.SIDED already covers
+		// WorldlyContainerHolder blocks (composter), sided containers and plain containers.
+		Storage<ItemVariant> storage = null;
 
-		if(level != null && blockPos != null && level.getBlockState(blockPos).getBlock() instanceof WorldlyContainerHolder holder) {
-			handler = new SidedInvWrapper(holder.getContainer(level.getBlockState(blockPos), level, blockPos), face);
-		} else if(tile != null) {
-			LazyOptional<IItemHandler> opt = tile.getCapability(ForgeCapabilities.ITEM_HANDLER, face);
-			if(opt.isPresent())
-				handler = opt.orElse(new ItemStackHandler());
-			else if(tile instanceof WorldlyContainer container)
-				handler = new SidedInvWrapper(container, face);
-			else if(tile instanceof Container container)
-				handler = new InvWrapper(container);
-		}
+		if(level instanceof Level realLevel && blockPos != null)
+			storage = ItemStorage.SIDED.find(realLevel, blockPos, realLevel.getBlockState(blockPos), tile, face);
+		else if(tile instanceof Container container)
+			storage = InventoryStorage.of(container, face);
 
-		if(handler != null)
-			return (simulate && !doSimulation) ? ItemStack.EMPTY : ItemHandlerHelper.insertItem(handler, stack, simulate);
+		if(storage != null)
+			return (simulate && !doSimulation) ? ItemStack.EMPTY : TransferUtil.insert(storage, stack, simulate);
 
 		return stack;
 	}

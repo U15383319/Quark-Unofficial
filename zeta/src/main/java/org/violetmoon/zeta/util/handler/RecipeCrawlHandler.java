@@ -156,7 +156,7 @@ public class RecipeCrawlHandler {
 		for (Ingredient ingredient : ingredients) {
 			for (ItemStack inStack : ingredient.getItems()) {
 				//don't include catalyst items. This includes partial ones like buckets and such
-				ItemStack remaining = inStack.getCraftingRemainingItem();
+				ItemStack remaining = inStack.getItem().getRecipeRemainder(inStack); // Fabric: FabricItem#getRecipeRemainder (Forge: ItemStack#getCraftingRemainingItem)
 
 				if(remaining == null) {
 					//sigh. let's at least not make this into our problem

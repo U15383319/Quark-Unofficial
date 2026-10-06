@@ -11,15 +11,15 @@ import org.violetmoon.zeta.util.BooleanSuppliers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraft.world.item.SpawnEggItem;
 
-public class ZetaSpawnEggItem extends ForgeSpawnEggItem implements IZetaItem {
+public class ZetaSpawnEggItem extends SpawnEggItem implements IZetaItem {
 
 	private final @Nullable ZetaModule module;
 	private BooleanSupplier enabledSupplier = BooleanSuppliers.TRUE;
 
 	public ZetaSpawnEggItem(Supplier<EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, String regname, @Nullable ZetaModule module, Properties properties) {
-		super(type, primaryColor, secondaryColor, properties);
+		super(type.get(), primaryColor, secondaryColor, properties); // Fabric: no ForgeSpawnEggItem; type is already constructed here
 		this.module = module;
 
 		if(module == null) //auto registration below this line

@@ -1,7 +1,7 @@
 package org.violetmoon.zeta.multiloader;
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.function.Supplier;
@@ -29,6 +29,6 @@ public enum Env {
 
     @ApiStatus.Internal
     public static Env getCurrent() {
-        return FMLEnvironment.dist == Dist.CLIENT ? Env.CLIENT : Env.SERVER;
+        return FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT ? Env.CLIENT : Env.SERVER;
     }
 }

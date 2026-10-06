@@ -13,3 +13,8 @@ accessible field net/minecraft/world/level/storage/loot/LootPool entries [Lnet/m
 mutable field net/minecraft/world/level/storage/loot/LootPool entries [Lnet/minecraft/world/level/storage/loot/entries/LootPoolEntryContainer;
 accessible field net/minecraft/world/level/block/Block descriptionId Ljava/lang/String;
 accessible field net/minecraft/world/item/Item descriptionId Ljava/lang/String;
+accessible method net/minecraft/world/level/block/FireBlock getBurnOdds (Lnet/minecraft/world/level/block/state/BlockState;)I
+accessible method net/minecraft/world/level/block/FireBlock getIgniteOdds (Lnet/minecraft/world/level/block/state/BlockState;)I
+accessible method net/minecraft/world/item/AxeItem getStripped (Lnet/minecraft/world/level/block/state/BlockState;)Ljava/util/Optional;
+accessible field net/minecraft/world/item/ShovelItem FLATTENABLES Ljava/util/Map;
+accessible field net/minecraft/client/Minecraft itemColors Lnet/minecraft/client/color/item/ItemColors;

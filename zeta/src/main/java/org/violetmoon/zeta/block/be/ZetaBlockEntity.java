@@ -12,8 +12,6 @@ package org.violetmoon.zeta.block.be;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -60,12 +58,7 @@ public abstract class ZetaBlockEntity extends BlockEntity {
 		return cmp;
 	}
 	
-	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
-		super.onDataPacket(net, packet);
-		
-		if(packet != null)
-			readSharedNBT(packet.getTag());
-	}
+	// Fabric: no IForgeBlockEntity#onDataPacket. Vanilla ClientPacketListener calls load(tag) for
+	// block entity data packets, which already runs readSharedNBT.
 
 }

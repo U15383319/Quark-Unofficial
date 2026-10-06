@@ -44,7 +44,7 @@ public final class ConfigFlagManager {
 		FlagLootCondition.FlagSerializer flagSerializer = new FlagLootCondition.FlagSerializer(this);
 		Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, new ResourceLocation(zeta.modid, "flag"), flagSerializer.selfType);
 
-		ext.registerIngredientSerializer(new ResourceLocation(zeta.modid, "flag"), flagIngredientSerializer);
+		ext.registerIngredientSerializer(flagIngredientSerializer);
 
 		//TODO: make this Quark-independent
 		SyncedFlagHandler.setupFlagManager(this);

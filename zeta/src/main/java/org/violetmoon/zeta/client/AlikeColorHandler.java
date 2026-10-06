@@ -50,6 +50,6 @@ public class AlikeColorHandler implements BlockColor, ItemColor {
 
 	@Override
 	public int getColor(ItemStack stack, int tintIndex) {
-		return Minecraft.getInstance().getItemColors().getColor(likeItem, tintIndex);
+		return Minecraft.getInstance().itemColors.getColor(likeItem, tintIndex);
 	}
 }

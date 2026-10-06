@@ -21,7 +21,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ToolActions;
+import org.violetmoon.zeta.util.ToolActions;
 
 @ZetaLoadModule(category = "building")
 public class WoodenPostsModule extends ZetaModule {

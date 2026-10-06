@@ -1,7 +1,7 @@
 package org.violetmoon.zeta.util;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.server.ServerLifecycleHooks;
+import org.violetmoon.zetaimplfabric.util.ServerTracker;
 import org.violetmoon.zeta.Zeta;
 
 public class ZetaCommonProxy {
@@ -16,7 +16,7 @@ public class ZetaCommonProxy {
 	 * but on the physical server... make a best-effort to use the server thread, and otherwise yolo
 	 */
 	public void tryToExecuteOnMainThread(Runnable runnable) {
-		MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+		MinecraftServer server = ServerTracker.getCurrentServer();
 		if(server != null)
 			server.execute(runnable);
 		else {
