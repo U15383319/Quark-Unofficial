@@ -141,9 +141,31 @@ public final class FabricZEntityEvents {
 		return !event.isCanceled();
 	}
 
+	// the entity a mobGriefing read is attributed to: the entity being ticked, or the one a call site names
+	private static final ThreadLocal<Entity> GRIEFER = new ThreadLocal<>();
+
 	/**
-	 * Replacement for {@code level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)} at an entity's call site.
+	 * Attributes mobGriefing reads to {@code entity} until {@link #restoreGriefer} is called with the result.
 	 */
+	public static @Nullable Entity swapGriefer(@Nullable Entity entity) {
+		Entity previous = GRIEFER.get();
+		GRIEFER.set(entity);
+		return previous;
+	}
+
+	public static void restoreGriefer(@Nullable Entity previous) {
+		GRIEFER.set(previous);
+	}
+
+	/**
+	 * Forge ForgeEventFactory#getMobGriefingEvent. Forge replaces (nearly) every read of the mobGriefing game rule with
+	 * it; here every read goes through GameRulesMixin and is attributed to the entity being ticked (see
+	 * ServerLevelMixin), or to the entity Forge passes where that differs (projectile owners, wither rose source).
+	 */
+	public static boolean fireMobGriefing(boolean gameRuleValue) {
+		return fireMobGriefing(gameRuleValue, GRIEFER.get());
+	}
+
 	public static boolean fireMobGriefing(boolean gameRuleValue, @Nullable Entity entity) {
 		if(!FabricZetaEvents.hasPlayListeners(ZEntityMobGriefing.class))
 			return gameRuleValue;
