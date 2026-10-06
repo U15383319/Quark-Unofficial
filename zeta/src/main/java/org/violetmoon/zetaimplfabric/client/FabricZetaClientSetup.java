@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.violetmoon.zeta.Zeta;
+import org.violetmoon.zeta.block.ext.IZetaBlockExtensions;
 import org.violetmoon.zeta.client.event.load.ZAddModels;
 import org.violetmoon.zeta.client.event.load.ZClientSetup;
 import org.violetmoon.zeta.client.event.load.ZKeyMapping;
@@ -16,9 +17,11 @@ import org.violetmoon.zeta.client.event.load.ZModel;
 import org.violetmoon.zeta.client.event.load.ZRegisterClientReloadListener;
 import org.violetmoon.zeta.client.event.load.ZRegisterLayerDefinitions;
 import org.violetmoon.zeta.client.event.load.ZTooltipComponents;
+import org.violetmoon.zetaimplfabric.ext.ZetaHooks;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
@@ -27,12 +30,15 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Fires the client-side load events that Forge sends on the mod bus during client startup.
@@ -75,6 +81,16 @@ final class FabricZetaClientSetup {
 			z.loadBus.fire((ZAddModels) ctx::addModels, ZAddModels.class);
 			z.loadBus.fire((ZModel.RegisterAdditional) ctx::addModels, ZModel.RegisterAdditional.class);
 		});
+
+		// Forge IForgeBlock#shouldDisplayFluidOverlay: Fabric draws the overlay texture next to "transparent" blocks
+		for(Block block : BuiltInRegistries.BLOCK) {
+			if(!BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals(z.modid))
+				continue;
+			BlockState state = block.defaultBlockState();
+			IZetaBlockExtensions ext = ZetaHooks.block(state, "shouldDisplayFluidOverlayZeta");
+			if(ext != null && ext.shouldDisplayFluidOverlayZeta(state, null, null, state.getFluidState()))
+				FluidRenderHandlerRegistry.INSTANCE.setBlockTransparency(block, true);
+		}
 
 		// Forge FMLClientSetupEvent; enqueued work runs after every listener
 		List<Runnable> work = new ArrayList<>();

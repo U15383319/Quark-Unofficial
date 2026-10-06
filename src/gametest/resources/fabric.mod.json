@@ -6,7 +6,8 @@
 	"environment": "*",
 	"entrypoints": {
 		"fabric-gametest": [
-			"org.violetmoon.quark.gametest.QuarkDataTests"
+			"org.violetmoon.quark.gametest.QuarkDataTests",
+			"org.violetmoon.quark.gametest.QuarkHookTests"
 		]
 	},
 	"depends": {

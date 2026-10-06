@@ -36,7 +36,20 @@
     "ext.EntityTypeBuilderExtMixin",
     "ext.EntityTypeExtMixin",
     "ext.ItemStackExtMixin",
-    "ext.SimpleCookingSerializerExtMixin"
+    "ext.SimpleCookingSerializerExtMixin",
+    "hook.AnvilMenuHookMixin",
+    "hook.BeaconBlockEntityHookMixin",
+    "hook.BushBlockHookMixin",
+    "hook.EnchantmentHelperHookMixin",
+    "hook.EnchantmentTableBlockHookMixin",
+    "hook.EntityHookMixin",
+    "hook.FireBlockHookMixin",
+    "hook.InventoryMenuArmorSlotHookMixin",
+    "hook.ItemEntityHookMixin",
+    "hook.ItemHookMixin",
+    "hook.ItemStackHookMixin",
+    "hook.LivingEntityHookMixin",
+    "hook.ServerPlayerGameModeHookMixin"
   ],
   "client": [
     "client.AbstractContainerScreenMixin",
@@ -64,7 +77,9 @@
     "client.ext.ChestRendererExtMixin",
     "client.ext.GuiGraphicsExtMixin",
     "client.ext.KeyMappingExtMixin",
-    "client.ext.ScreenExtMixin"
+    "client.ext.ScreenExtMixin",
+    "client.hook.ItemInHandRendererHookMixin",
+    "client.hook.MultiPlayerGameModeHookMixin"
   ],
   "injectors": {
     "defaultRequire": 1
