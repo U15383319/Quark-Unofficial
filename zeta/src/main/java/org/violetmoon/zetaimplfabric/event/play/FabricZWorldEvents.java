@@ -20,6 +20,7 @@ import org.violetmoon.zeta.event.play.ZServerTick;
 import org.violetmoon.zeta.event.play.loading.ZLootTableLoad;
 import org.violetmoon.zeta.event.play.loading.ZVillagerTrades;
 import org.violetmoon.zeta.event.play.loading.ZWandererTrades;
+import org.violetmoon.zeta.item.ext.IZetaItemExtensions;
 import org.violetmoon.zeta.util.ToolAction;
 import org.violetmoon.zetaimplfabric.event.FabricZEvent;
 import org.violetmoon.zetaimplfabric.event.FabricZetaEvents;
@@ -41,6 +42,8 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -126,6 +129,19 @@ public final class FabricZWorldEvents {
 		Bonemeal event = new Bonemeal(level, pos, state, stack);
 		FabricZetaEvents.firePlay(event, ZBonemeal.class);
 		return event;
+	}
+
+	/**
+	 * Forge ForgeHooks#getBurnTime: the item's own burn time (Zeta items) or the vanilla/Fabric fuel map, then the event.
+	 */
+	public static int getBurnTime(ItemStack stack, @Nullable RecipeType<?> recipeType) {
+		if(stack.isEmpty())
+			return 0;
+
+		int base = stack.getItem() instanceof IZetaItemExtensions ext
+			? ext.getBurnTimeZeta(stack, recipeType)
+			: AbstractFurnaceBlockEntity.getFuel().getOrDefault(stack.getItem(), 0);
+		return fireFuelBurnTime(stack, base);
 	}
 
 	public static int fireFuelBurnTime(ItemStack stack, int burnTime) {

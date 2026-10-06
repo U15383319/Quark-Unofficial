@@ -59,10 +59,6 @@ base {
 
 loom {
 	accessWidenerPath = file('src/main/resources/quark.accesswidener')
-	mixin {
-		defaultRefmapName = 'quark.mixins.refmap.json'
-	}
-
 	mods {
 		quark {
 			sourceSet sourceSets.main

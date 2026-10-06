@@ -84,3 +84,5 @@ accessible method net/minecraft/world/level/block/FireBlock getIgniteOdds (Lnet/
 accessible method net/minecraft/world/item/AxeItem getStripped (Lnet/minecraft/world/level/block/state/BlockState;)Ljava/util/Optional;
 accessible field net/minecraft/world/item/ShovelItem FLATTENABLES Ljava/util/Map;
 accessible field net/minecraft/client/Minecraft itemColors Lnet/minecraft/client/color/item/ItemColors;
+accessible method net/minecraft/world/entity/Entity getEncodeId ()Ljava/lang/String;
+accessible field net/minecraft/server/network/ServerLoginPacketListenerImpl connection Lnet/minecraft/network/Connection;

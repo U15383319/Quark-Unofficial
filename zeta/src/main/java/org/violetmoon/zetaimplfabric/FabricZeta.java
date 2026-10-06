@@ -19,7 +19,6 @@ import org.violetmoon.zeta.event.load.ZConfigChanged;
 import org.violetmoon.zeta.event.load.ZEntityAttributeCreation;
 import org.violetmoon.zeta.event.load.ZLoadComplete;
 import org.violetmoon.zeta.event.load.ZRegister;
-import org.violetmoon.zeta.item.ext.IZetaItemExtensions;
 import org.violetmoon.zeta.item.ext.ItemExtensionFactory;
 import org.violetmoon.zeta.network.ZetaNetworkHandler;
 import org.violetmoon.zeta.registry.BrewingRegistry;
@@ -37,6 +36,7 @@ import org.violetmoon.zetaimplfabric.config.FabricBackedConfig;
 import org.violetmoon.zetaimplfabric.event.FabricZetaEventBus;
 import org.violetmoon.zetaimplfabric.event.FabricZetaEvents;
 import org.violetmoon.zetaimplfabric.event.play.FabricZPlayerEvents;
+import org.violetmoon.zetaimplfabric.item.FabricItemExtensions;
 import org.violetmoon.zetaimplfabric.network.FabricZetaNetworkHandler;
 import org.violetmoon.zetaimplfabric.registry.FabricBrewingRegistry;
 import org.violetmoon.zetaimplfabric.registry.FabricCraftingExtensionsRegistry;
@@ -141,7 +141,7 @@ public class FabricZeta extends Zeta {
 
 	@Override
 	public ItemExtensionFactory createItemExtensionFactory() {
-		return stack -> IZetaItemExtensions.DEFAULT;
+		return stack -> FabricItemExtensions.INSTANCE;
 	}
 
 	@Override

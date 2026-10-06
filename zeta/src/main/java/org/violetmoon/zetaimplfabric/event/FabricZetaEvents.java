@@ -40,6 +40,16 @@ public final class FabricZetaEvents {
 	}
 
 	/**
+	 * Same as {@link #firePlay}, for when the type is picked at runtime (Pre/Post variants sharing one event class).
+	 */
+	@SuppressWarnings("unchecked")
+	public static void firePlayAs(IZetaPlayEvent event, Class<? extends IZetaPlayEvent> firedAs) {
+		FabricZetaEventBus<IZetaPlayEvent> bus = playBus;
+		if(bus != null)
+			bus.fire(event, (Class<IZetaPlayEvent>) (Class<?>) firedAs);
+	}
+
+	/**
 	 * Fires a load event on every Zeta's own load bus.
 	 */
 	public static <T extends IZetaLoadEvent> T fireLoadAll(T event, Class<? super T> firedAs) {

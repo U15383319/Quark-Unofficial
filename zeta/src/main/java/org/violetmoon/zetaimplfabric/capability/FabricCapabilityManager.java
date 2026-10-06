@@ -107,7 +107,7 @@ public final class FabricCapabilityManager implements ZetaCapabilityManager {
 
 	private abstract static class Attach<O> implements ZAttachCapabilities<O> {
 		private final O object;
-		private final Map<ZetaCapability<?>, Object> caps = new IdentityHashMap<>();
+		final Map<ZetaCapability<?>, Object> caps = new IdentityHashMap<>();
 
 		Attach(O object) {
 			this.object = object;

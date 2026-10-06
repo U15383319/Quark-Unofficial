@@ -5,9 +5,6 @@ base {
 
 loom {
 	accessWidenerPath = file('src/main/resources/zeta.accesswidener')
-	mixin {
-		defaultRefmapName = 'zeta.mixins.refmap.json'
-	}
 }
 
 processResources {
@@ -23,4 +20,9 @@ jar {
 	from('LICENSE.md') {
 		rename { "${it}_zeta" }
 	}
+}
+
+// Third-party integrations are ported in a later phase (see PORTING.md)
+sourceSets.main.java {
+	exclude 'org/violetmoon/zeta/integration/**'
 }

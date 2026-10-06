@@ -4,15 +4,26 @@
 	"version": "${version}",
 	"name": "Zeta",
 	"description": "A fully featured Library designed around loading highly configurable, agile developed. modular mods. Unofficial Fabric port.",
-	"authors": ["Vazkii", "quat", "IThundxr", "siuol", "wiresegal", "MehVahdJukaar"],
+	"authors": [
+		"Vazkii",
+		"quat",
+		"IThundxr",
+		"siuol",
+		"wiresegal",
+		"MehVahdJukaar"
+	],
 	"contact": {
 		"sources": "https://github.com/VazkiiMods/Zeta"
 	},
 	"license": "CC-BY-NC-SA-3.0",
 	"environment": "*",
 	"entrypoints": {
-		"main": ["org.violetmoon.zetaimplfabric.mod.ZetaModFabric"],
-		"client": ["org.violetmoon.zetaimplfabric.mod.ZetaModFabricClient"]
+		"main": [
+			"org.violetmoon.zetaimplfabric.mod.ZetaModFabric"
+		],
+		"client": [
+			"org.violetmoon.zetaimplfabric.mod.ZetaModFabricClient"
+		]
 	},
 	"mixins": [
 		"zeta.mixins.json",
@@ -25,5 +36,12 @@
 		"java": ">=17",
 		"fabric-api": "*",
 		"forgeconfigapiport": ">=8.0.0"
+	},
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_1297": [
+				"org/violetmoon/zetaimplfabric/entity/IZetaEntityExtensions"
+			]
+		}
 	}
 }

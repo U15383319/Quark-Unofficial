@@ -4,7 +4,12 @@
 	"version": "${version}",
 	"name": "Quark",
 	"description": "Small things, improving Minecraft bit by bit. Unofficial Fabric port of the 1.20.1 Forge version.",
-	"authors": ["Vazkii", "WireSegal", "MCVinnyq", "Sully"],
+	"authors": [
+		"Vazkii",
+		"WireSegal",
+		"MCVinnyq",
+		"Sully"
+	],
 	"contact": {
 		"homepage": "https://quarkmod.net",
 		"sources": "https://github.com/VazkiiMods/Quark"
@@ -13,8 +18,12 @@
 	"icon": "proxypack.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": ["org.violetmoon.quark.base.QuarkFabric"],
-		"client": ["org.violetmoon.quark.base.QuarkFabricClient"]
+		"main": [
+			"org.violetmoon.quark.base.QuarkFabric"
+		],
+		"client": [
+			"org.violetmoon.quark.base.QuarkFabricClient"
+		]
 	},
 	"mixins": [
 		"quark.mixins.json"
@@ -26,5 +35,12 @@
 		"java": ">=17",
 		"fabric-api": "*",
 		"zeta": ">=1.0-29"
+	},
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_1297": [
+				"org/violetmoon/zetaimplfabric/entity/IZetaEntityExtensions"
+			]
+		}
 	}
 }
