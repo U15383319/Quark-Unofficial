@@ -28,15 +28,12 @@
 
 `zetaimplfabric/mixin/hook`（客户端为 `mixin/client/hook`）让原版在 Forge 调用 IForgeBlock/IForgeItem 的位置调用 Zeta 扩展。只有方块/物品类覆写了对应钩子时才生效（`ZetaHooks`），其余保持原版行为——Zeta 的部分默认实现（如 `canEquipZeta` 返回 false）与原版不同。
 
-- 已挂接：可燃性/火焰蔓延/能否着火、梯子、植物支撑（`BushBlock`）、信标颜色、附魔加成、碰撞高度（`Entity#getOnPos`）、流体覆盖贴图（Fabric `FluidRenderHandlerRegistry#setBlockTransparency`）、工具修改方块状态（斧/锹）、推拉反应、物品实体更新、潜行绕过、盔甲槽可装备、附魔书可附魔（铁砧）、最大耐久/可损耗/耐久损耗/耐久条、附魔值、默认隐藏提示、重新装备动画、鞘翅飞行（Fabric `EntityElytraEvents.ALLOW`）、附魔等级/全部附魔（`ForgeItemEnchantmentsMixin`）。
+- 已挂接：可燃性/火焰蔓延/能否着火、梯子、植物支撑（`BushBlock`）、信标颜色、附魔加成、碰撞高度（`Entity#getOnPos`）、流体覆盖贴图（Fabric `FluidRenderHandlerRegistry#setBlockTransparency`）、工具修改方块状态（斧/锹）、推拉反应、物品实体更新、潜行绕过、盔甲槽可装备、附魔书可附魔（铁砧）、最大耐久/可损耗/耐久损耗/耐久条、附魔值、默认隐藏提示、重新装备动画、鞘翅飞行（Fabric `EntityElytraEvents.ALLOW`）、附魔等级/全部附魔（`ForgeItemEnchantmentsMixin`）、含水方块的桶装取音效（`BucketItem`）、配方书按 `IZetaShapedRecipe` 的宽高放置（`PlaceRecipe`）。
 - 生物破坏（mobGriefing）事件：所有对该游戏规则的读取都会触发，归属于正在 tick 的实体；投射物/火球归属于发射者、凋灵玫瑰归属于凶手，与 Forge 一致。
-- 未挂接（Quark 中没有覆写或只在暂不启用的联动中使用）：位置相关光照、开启活板门可攀爬、潮涌核心框架、脚手架、`onItemUseFirst`（仅 Lootr 箱子）、`isRepairable`（仅回旋镐，且总返回 true，与原版对可损耗物品的判断一致）、熔岩点燃（`LavaFluid`）。
+- 未挂接（Quark 中没有覆写或只在暂不启用的联动中使用）：位置相关光照、开启活板门可攀爬、潮涌核心框架、脚手架、`onItemUseFirst`（仅 Lootr 箱子）、`isRepairable`（仅回旋镐，且总返回 true，与原版对可损耗物品的判断一致）、熔岩点燃（`LavaFluid`）、锄头耕地（`hoe_till`，没有 Quark 方块覆写）。
 
 ## 待办
 
-- `SimpleFluidloggedBlock#getPickupSound(BlockState)`：需在 `BucketItem` 中调用。
-- 配方书放置（`PlaceRecipe`）对 `IZetaShapedRecipe`（`ExclusionRecipe`、`MixedExclusionRecipe`）的宽高支持。
-- 锄头耕地（`hoe_till`）的 `getToolModifiedState` 挂接。
 - 在开发客户端中进入世界，逐模块对照 Forge 版验证（世界生成、GUI、网络、配置界面等）。
 - 第三方联动。
 
