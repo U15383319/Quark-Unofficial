@@ -154,7 +154,8 @@ public class WoodSetHandler {
 		set.wallSign = new ZetaWallSignBlock(name + "_wall_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD).lootFrom(() -> set.sign));
 
 		set.ceilingHangingSign = new ZetaCeilingHangingSignBlock(name + "_hanging_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD));
-		set.wallHangingSign = new ZetaWallHangingSignBlock(name + "_wall_hanging_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD).lootFrom(() -> set.sign));
+		// Quark Woven: upstream has lootFrom(() -> set.sign) here, which makes wall hanging signs drop regular signs
+		set.wallHangingSign = new ZetaWallHangingSignBlock(name + "_wall_hanging_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD).lootFrom(() -> set.ceilingHangingSign));
 
 		set.bookshelf = new VariantBookshelfBlock(name, module, true, sound).setCondition(() -> Quark.ZETA.modules.isEnabledOrOverlapping(VariantBookshelvesModule.class));
 		set.ladder = new VariantLadderBlock(name, module, Block.Properties.copy(Blocks.LADDER).sound(sound), true).setCondition(() -> Quark.ZETA.modules.isEnabledOrOverlapping(VariantLaddersModule.class));

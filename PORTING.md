@@ -15,12 +15,12 @@
 - `./gradlew build`：构建（含 AW 校验），产物在 `build/libs`，Zeta 以 jar-in-jar 打包。
 - `./gradlew runClient`：开发客户端。只有根项目有运行配置，`:zeta` 的运行任务已禁用。
 - `./gradlew runMixinAudit`：启动客户端，在客户端初始化时应用全部 Mixin（`MixinEnvironment.audit()`）后退出。想一次看到所有失败的 Mixin 时，先把各 `*.mixins.json` 的 `required` 临时改为 `false`。
-- `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 26 个测试，覆盖：
+- `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 27 个测试，覆盖：
   - 数据：配方/条件/标签/战利品表加载，熔炼配方的 Forge 式物品堆结果，碎玻璃掉落，两个半砖合成整块。
   - 自动化：漏斗向溜槽、板条箱、管道送物品（Fabric Transfer API），活塞推动装有物品的箱子，铁杆破坏方块，发射器放置方块，磁铁推动铁块。
   - 钩子：书架附魔加成、树苗种在树篱上、绳子可攀爬、刚玉染色信标光柱、纸墙可燃、磁石旁的混凝土粉末不凝固、简易收获（右键事件）。
   - 物品：背包掉在地上撒出物品、背包不能在附魔台附魔、铁砧不给背包上附魔书、泥刀耐久跟随配置。
-  - 冒烟：所有 Quark 方块都有战利品表；所有带方块实体的方块能放置并保存/读取；所有 Quark 实体能生成、tick 并保存/读取。
+  - 冒烟：所有 Quark 方块都有战利品表，各种告示牌掉落正确的物品；所有带方块实体的方块能放置并保存/读取；所有 Quark 实体能生成、tick 并保存/读取。
 
 ## 数据转换
 
@@ -44,6 +44,7 @@
 
 ## 已知差异
 
+- 有意修正的上游 bug：Forge 版的墙上悬挂告示牌掉落的是普通告示牌；本移植版改为掉落悬挂告示牌（`WoodSetHandler`，与原版的写法一致）。
 - `FlagIngredient` 改为 Fabric `CustomIngredient`，`getItems()` 结果由 Fabric 缓存，配置热重载后 JEI 显示可能不刷新（匹配逻辑本身是实时的）。
 - 可燃性钩子拿不到 Forge 传入的朝向（原版不记录），传 null；Quark 的实现都不使用它。
 - 生物破坏事件在实体 tick 之外（如玩家操作）读取规则时，事件中的实体为 null。

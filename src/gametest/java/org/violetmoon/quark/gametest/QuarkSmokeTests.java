@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -36,6 +37,25 @@ public class QuarkSmokeTests implements FabricGameTest {
 				missing.add(BuiltInRegistries.BLOCK.getKey(block) + " (" + table + ")");
 		}
 		helper.assertTrue(missing.isEmpty(), "missing loot tables: " + missing);
+		helper.succeed();
+	}
+
+	// wall signs take their drops from another block (Properties#lootFrom); wall hanging signs drop hanging signs
+	@GameTest(template = EMPTY_STRUCTURE)
+	public void signsDropTheirItem(GameTestHelper helper) {
+		BlockPos pos = helper.absolutePos(new BlockPos(2, 1, 2));
+		List<String> wrong = new ArrayList<>();
+		for(String wood : List.of("ancient", "azalea", "blossom")) {
+			for(String[] pair : new String[][] {
+				{ wood + "_sign", wood + "_sign" }, { wood + "_wall_sign", wood + "_sign" },
+				{ wood + "_hanging_sign", wood + "_hanging_sign" }, { wood + "_wall_hanging_sign", wood + "_hanging_sign" } }) {
+				Block block = QuarkTestUtil.block(pair[0]);
+				List<ItemStack> drops = Block.getDrops(block.defaultBlockState(), helper.getLevel(), pos, null);
+				if(drops.size() != 1 || !drops.get(0).is(QuarkTestUtil.item(pair[1])))
+					wrong.add(pair[0] + " drops " + drops);
+			}
+		}
+		helper.assertTrue(wrong.isEmpty(), "sign drops: " + wrong);
 		helper.succeed();
 	}
 
