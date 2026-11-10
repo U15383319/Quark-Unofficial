@@ -151,10 +151,10 @@ public class WoodSetHandler {
 		((IZetaBlock) set.log).setCreativeTab(CreativeModeTabs.NATURAL_BLOCKS, Blocks.WARPED_STEM, false);
 
 		set.sign = new ZetaStandingSignBlock(name + "_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD));
-		set.wallSign = new ZetaWallSignBlock(name + "_wall_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(set.sign));
+		set.wallSign = new ZetaWallSignBlock(name + "_wall_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD).lootFrom(() -> set.sign));
 
 		set.ceilingHangingSign = new ZetaCeilingHangingSignBlock(name + "_hanging_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD));
-		set.wallHangingSign = new ZetaWallHangingSignBlock(name + "_wall_hanging_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(set.sign));
+		set.wallHangingSign = new ZetaWallHangingSignBlock(name + "_wall_hanging_sign", module, type, OldMaterials.wood().forceSolidOn().mapColor(color).noCollission().strength(1.0F).sound(SoundType.WOOD).lootFrom(() -> set.sign));
 
 		set.bookshelf = new VariantBookshelfBlock(name, module, true, sound).setCondition(() -> Quark.ZETA.modules.isEnabledOrOverlapping(VariantBookshelvesModule.class));
 		set.ladder = new VariantLadderBlock(name, module, Block.Properties.copy(Blocks.LADDER).sound(sound), true).setCondition(() -> Quark.ZETA.modules.isEnabledOrOverlapping(VariantLaddersModule.class));
