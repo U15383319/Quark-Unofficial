@@ -152,6 +152,11 @@ jar {
 	from('LICENSE.md') {
 		rename { "${it}_quark" }
 	}
+	// the bundled Java Universal Tween Engine is Apache 2.0, which asks for its license text with every copy
+	from('src/main/java/aurelienribon') {
+		include 'LICENSE', 'NOTICE'
+		rename { "${it}_tweenengine" }
+	}
 }
 
 // Third-party integrations are ported in a later phase (see PORTING.md); their interfaces and dummy fallbacks stay

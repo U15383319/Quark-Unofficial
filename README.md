@@ -27,7 +27,7 @@ Quark 与 Zeta 以 [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-
 - 不得用于商业目的；
 - 再发布或改编本项目时，须保留上面的署名与许可证说明，标明所做的修改，并以相同协议发布。
 
-Java Universal Tween Engine 部分适用 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)。
+Java Universal Tween Engine 部分适用 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)，协议全文和版权声明见 [src/main/java/aurelienribon/LICENSE](src/main/java/aurelienribon/LICENSE) 与 [NOTICE](src/main/java/aurelienribon/NOTICE)，也随 jar 一起分发。
 
 ## 上游 README（原文）
 
