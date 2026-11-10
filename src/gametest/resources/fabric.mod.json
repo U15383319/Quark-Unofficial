@@ -7,7 +7,11 @@
 	"entrypoints": {
 		"fabric-gametest": [
 			"org.violetmoon.quark.gametest.QuarkDataTests",
-			"org.violetmoon.quark.gametest.QuarkHookTests"
+			"org.violetmoon.quark.gametest.QuarkHookTests",
+			"org.violetmoon.quark.gametest.QuarkAutomationTests",
+			"org.violetmoon.quark.gametest.QuarkTweakTests",
+			"org.violetmoon.quark.gametest.QuarkItemTests",
+			"org.violetmoon.quark.gametest.QuarkSmokeTests"
 		]
 	},
 	"depends": {

@@ -15,7 +15,12 @@
 - `./gradlew build`：构建（含 AW 校验），产物在 `build/libs`，Zeta 以 jar-in-jar 打包。
 - `./gradlew runClient`：开发客户端。只有根项目有运行配置，`:zeta` 的运行任务已禁用。
 - `./gradlew runMixinAudit`：启动客户端，在客户端初始化时应用全部 Mixin（`MixinEnvironment.audit()`）后退出。想一次看到所有失败的 Mixin 时，先把各 `*.mixins.json` 的 `required` 临时改为 `false`。
-- `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出。目前覆盖：配方/条件/标签/战利品表加载、熔炼配方的 Forge 式物品堆结果、书架附魔加成、树苗种在树篱上、绳子可攀爬。
+- `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 26 个测试，覆盖：
+  - 数据：配方/条件/标签/战利品表加载，熔炼配方的 Forge 式物品堆结果，碎玻璃掉落，两个半砖合成整块。
+  - 自动化：漏斗向溜槽、板条箱、管道送物品（Fabric Transfer API），活塞推动装有物品的箱子，铁杆破坏方块，发射器放置方块，磁铁推动铁块。
+  - 钩子：书架附魔加成、树苗种在树篱上、绳子可攀爬、刚玉染色信标光柱、纸墙可燃、磁石旁的混凝土粉末不凝固、简易收获（右键事件）。
+  - 物品：背包掉在地上撒出物品、背包不能在附魔台附魔、铁砧不给背包上附魔书、泥刀耐久跟随配置。
+  - 冒烟：所有 Quark 方块都有战利品表；所有带方块实体的方块能放置并保存/读取；所有 Quark 实体能生成、tick 并保存/读取。
 
 ## 数据转换
 
@@ -28,7 +33,7 @@
 
 `zetaimplfabric/mixin/hook`（客户端为 `mixin/client/hook`）让原版在 Forge 调用 IForgeBlock/IForgeItem 的位置调用 Zeta 扩展。只有方块/物品类覆写了对应钩子时才生效（`ZetaHooks`），其余保持原版行为——Zeta 的部分默认实现（如 `canEquipZeta` 返回 false）与原版不同。
 
-- 已挂接：可燃性/火焰蔓延/能否着火、梯子、植物支撑（`BushBlock`）、信标颜色、附魔加成、碰撞高度（`Entity#getOnPos`）、流体覆盖贴图（Fabric `FluidRenderHandlerRegistry#setBlockTransparency`）、工具修改方块状态（斧/锹）、推拉反应、物品实体更新、潜行绕过、盔甲槽可装备、附魔书可附魔（铁砧）、最大耐久/可损耗/耐久损耗/耐久条、附魔值、默认隐藏提示、重新装备动画、鞘翅飞行（Fabric `EntityElytraEvents.ALLOW`）、附魔等级/全部附魔（`ForgeItemEnchantmentsMixin`）、含水方块的桶装取音效（`BucketItem`）、配方书按 `IZetaShapedRecipe` 的宽高放置（`PlaceRecipe`）。
+- 已挂接：可燃性/火焰蔓延/能否着火、梯子、植物支撑（`BushBlock`）、信标颜色、附魔加成、碰撞高度（`Entity#getOnPos`）、流体覆盖贴图（Fabric `FluidRenderHandlerRegistry#setBlockTransparency`）、工具修改方块状态（斧/锹）、推拉反应、物品实体更新、潜行绕过、盔甲槽可装备、附魔书可附魔（铁砧）、最大耐久/可损耗/耐久损耗/耐久条、附魔值、默认隐藏提示、重新装备动画、鞘翅飞行（Fabric `EntityElytraEvents.ALLOW`）、方块属性 `lootFrom`（延迟读取另一方块的战利品表；原版 `dropsLike` 在方块注册前调用会读到并缓存 `blocks/air`）、附魔等级/全部附魔（`ForgeItemEnchantmentsMixin`）、含水方块的桶装取音效（`BucketItem`）、配方书按 `IZetaShapedRecipe` 的宽高放置（`PlaceRecipe`）。
 - 生物破坏（mobGriefing）事件：所有对该游戏规则的读取都会触发，归属于正在 tick 的实体；投射物/火球归属于发射者、凋灵玫瑰归属于凶手，与 Forge 一致。
 - 未挂接（Quark 中没有覆写或只在暂不启用的联动中使用）：位置相关光照、开启活板门可攀爬、潮涌核心框架、脚手架、`onItemUseFirst`（仅 Lootr 箱子）、`isRepairable`（仅回旋镐，且总返回 true，与原版对可损耗物品的判断一致）、熔岩点燃（`LavaFluid`）、锄头耕地（`hoe_till`，没有 Quark 方块覆写）。
 
