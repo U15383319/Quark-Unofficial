@@ -1,6 +1,8 @@
-# Quark Unofficial（Fabric 1.20.1）
+# Quark Woven（Fabric 1.20.1）
 
-[Quark](https://quarkmod.net) 的**非官方** Fabric 移植版，目标 Minecraft 1.20.1，内容与 Quark 1.20.1 Forge 版保持一致。
+[Quark](https://quarkmod.net) 的**非官方** Fabric 移植版，目标 Minecraft 1.20.1，内容与 Quark 1.20.1 Forge 版保持一致。内置的 Zeta 移植版名为 Zeta Woven。
+
+模组 ID 仍为 `quark` / `zeta`，与 Forge 版的存档、数据包和资源包兼容。
 
 > 本项目与 Quark 原作者及 Violet Moon 没有关联，也未经其认可或支持。使用本移植版遇到的问题请在本仓库反馈，不要报告给原版 Quark。
 

@@ -1,6 +1,6 @@
 version = project.zeta_version
 base {
-	archivesName = 'Zeta-Fabric-1.20.1'
+	archivesName = 'ZetaWoven-1.20.1'
 }
 
 loom {

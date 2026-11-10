@@ -1,6 +1,6 @@
 # 项目简介
 
-Quark-Unofficial 是 Quark 模组的 Fabric 非官方移植版，目标 Minecraft 版本为 `1.20.1`，内容与 1.20.1 Forge 版保持一致。模组 ID 与包名保持 `quark` / `org.violetmoon.quark` 不变，以保证方块物品 ID、数据包、资源包和存档兼容。
+Quark-Unofficial 仓库是 Quark 模组的 Fabric 非官方移植版，发布名为 **Quark Woven**（内置的 Zeta 为 **Zeta Woven**），目标 Minecraft 版本为 `1.20.1`，内容与 1.20.1 Forge 版保持一致。只有显示名称、描述和 jar 文件名用 Woven；模组 ID 与包名保持 `quark` / `zeta` / `org.violetmoon.quark` 不变，以保证方块物品 ID、数据包、资源包和存档兼容。
 
 # 移植来源
 

@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "quark",
 	"version": "${version}",
-	"name": "Quark",
-	"description": "Small things, improving Minecraft bit by bit. Unofficial Fabric port of the 1.20.1 Forge version.",
+	"name": "Quark Woven",
+	"description": "Small things, improving Minecraft bit by bit. Quark Woven is an unofficial Fabric port of Quark 1.20.1 by Vazkii and contributors; it is not affiliated with or endorsed by the Quark team.",
 	"authors": [
 		"Vazkii",
 		"WireSegal",
@@ -11,8 +11,9 @@
 		"Sully"
 	],
 	"contact": {
-		"homepage": "https://quarkmod.net",
-		"sources": "https://github.com/VazkiiMods/Quark"
+		"homepage": "https://github.com/U15383319/Quark-Unofficial",
+		"sources": "https://github.com/U15383319/Quark-Unofficial",
+		"issues": "https://github.com/U15383319/Quark-Unofficial/issues"
 	},
 	"license": "CC-BY-NC-SA-3.0",
 	"icon": "proxypack.png",
