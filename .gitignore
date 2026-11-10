@@ -24,3 +24,7 @@ bin/
 
 # macos
 *.DS_Store
+
+# local, machine-specific notes (paths to upstream clones etc.)
+CLAUDE.local.md
+*.local.md

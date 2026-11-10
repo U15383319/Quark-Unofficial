@@ -6,6 +6,7 @@ Quark-Unofficial 是 Quark 模组的 Fabric 非官方移植版，目标 Minecraf
 
 - Quark：原项目位于 `https://github.com/VazkiiMods/Quark`，使用 `1.20` 分支（Forge 1.20.1，提交 `c1bb06230edad49552296444a7b5706463e82252`）。
 - Zeta：Quark 依赖的模块化框架，原项目位于 `https://github.com/VazkiiMods/Zeta`。本项目内置的是 `org.violetmoon.zeta:Zeta:1.0-29.135` 的源码（来自 maven.blamejared.com 的 sources/pure jar，与 Quark 1.20 实际依赖版本一致）。
+- 本机上游克隆的位置等本地信息记在 `CLAUDE.local.md` 中（已被 `.gitignore` 忽略，不提交）。
 - 未修改的上游源码保存在本仓库第一个提交 `060cda2` 中，可用 `git show 060cda2:<路径>` 对照原始 Forge 代码（包括已删除的 `zetaimplforge`）。
 
 # 构建
