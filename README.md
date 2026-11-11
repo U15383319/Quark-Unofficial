@@ -11,6 +11,8 @@
 - **Quark Woven**（`QuarkWoven-1.20.1-*.jar`）
 - **Zeta Woven**（`ZetaWoven-1.20.1-*.jar`）：Zeta 的 Fabric 移植。版本号为上游 Zeta 版本加 `.woven.N`，每个 Quark Woven 版本只接受对应的 Zeta Woven 版本范围。Forge 版的 Zeta 不能用于 Fabric。
 
+可选安装 **Quark Woven Oddities**（`QuarkWovenOddities-1.20.1-*.jar`，模组 ID `quarkoddities`），它开启 Oddities 内容：背包、板条箱、管道、磁铁、矩阵附魔、不死图腾、小土豆。和 Forge 版的 Quark Oddities 一样，它本身不含内容，只是告诉 Quark Woven 启用这部分功能；没装时这些物品会显示“已禁用。安装 quarkoddities 以启用。”。
+
 另外需要 [Fabric API](https://modrinth.com/mod/fabric-api) 和 [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port)（让配置文件与 Forge 版保持相同格式）。配置界面和 Forge 版一样，可以通过标题界面和暂停菜单里的 “q” 按钮打开；另外可选安装 [Mod Menu](https://modrinth.com/mod/modmenu)，它提供模组列表，也能从列表里打开 Quark 的配置。
 
 > 本项目与 Quark 原作者及 Violet Moon 没有关联，也未经其认可或支持。使用本移植版遇到的问题请在本仓库反馈，不要报告给原版 Quark。

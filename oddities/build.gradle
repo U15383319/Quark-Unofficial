@@ -1,0 +1,27 @@
+// Quark Woven Oddities: no code. Quark only enables its "oddities" category (backpacks, crates, pipes, magnets, matrix
+// enchanting, totem of holding, tiny potato) when a mod with the id "quarkoddities" is loaded, like the Quark Oddities
+// add-on on Forge (Quark.ODDITIES_ID; in the dev environment the category is always on).
+version = project.oddities_version
+base {
+	archivesName = 'QuarkWovenOddities-1.20.1'
+}
+
+// launched as part of Quark, not on its own
+tasks.matching { it.name.startsWith('run') }.configureEach { enabled = false }
+
+processResources {
+	def version = project.version
+	inputs.property 'version', version
+	filesMatching('fabric.mod.json') {
+		filter { line -> line.replace('${version}', version.toString()) }
+	}
+}
+
+jar {
+	from(rootProject.file('LICENSE.md')) {
+		rename { "${it}_quarkoddities" }
+	}
+}
+
+// there is no source code to ship
+tasks.matching { it.name in ['sourcesJar', 'remapSourcesJar'] }.configureEach { enabled = false }

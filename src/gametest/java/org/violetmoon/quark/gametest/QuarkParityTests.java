@@ -70,6 +70,17 @@ public class QuarkParityTests implements FabricGameTest {
 		helper.succeed();
 	}
 
+	// Quark Woven Oddities (Forge: Quark Oddities) turns the oddities category on in production; in dev it is always on
+	@GameTest(template = EMPTY_STRUCTURE)
+	public void odditiesCategoryEnabled(GameTestHelper helper) {
+		java.util.List<String> off = new java.util.ArrayList<>();
+		for(var module : Quark.ZETA.modules.getModules())
+			if(module.category().name.equals("oddities") && !module.isEnabled() && !module.disabledByOverlap())
+				off.add(module.displayName());
+		helper.assertTrue(off.isEmpty(), "oddities modules off: " + off);
+		helper.succeed();
+	}
+
 	private static void use(GameTestHelper helper, BlockPos pos, ItemStack stack) {
 		FakePlayer player = FakePlayer.get(helper.getLevel());
 		player.setItemInHand(InteractionHand.MAIN_HAND, stack);

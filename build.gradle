@@ -162,7 +162,7 @@ dependencies {
 }
 
 def productionMods = { task ->
-	task.mods.from(tasks.named('remapJar'), project(':zeta').tasks.named('remapJar'), configurations.productionRuntimeMods)
+	task.mods.from(tasks.named('remapJar'), project(':zeta').tasks.named('remapJar'), project(':oddities').tasks.named('remapJar'), configurations.productionRuntimeMods)
 	task.runDir = file('build/production')
 }
 

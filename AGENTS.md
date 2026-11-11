@@ -11,7 +11,7 @@ Quark-Unofficial 仓库是 Quark 模组的 Fabric 非官方移植版，发布名
 
 # 构建
 
-- Gradle 多项目：根项目为 Quark（`src/`），子项目 `:zeta` 为内置的 Zeta（`zeta/`），作为独立模组 Zeta Woven 单独发布（不打包进 Quark）。Zeta Woven 的版本号是上游版本加 `.woven.N`（`gradle.properties` 中的 `zeta_version`），Quark 依赖的范围由 `zeta_version_range` 填入 `fabric.mod.json`；改动 Zeta 后发布时要递增 N，并按需调整范围。
+- Gradle 多项目：根项目为 Quark（`src/`），子项目 `:zeta` 为内置的 Zeta（`zeta/`），作为独立模组 Zeta Woven 单独发布（不打包进 Quark）。子项目 `:oddities`（`oddities/`）是 Quark Woven Oddities，模组 ID `quarkoddities`，没有代码：正式环境里 Quark 只有在这个 ID 的模组加载时才启用 oddities 类别（`Quark.ODDITIES_ID`，对应 Forge 的 Quark Oddities 附加模组；开发环境始终启用）。Zeta Woven 的版本号是上游版本加 `.woven.N`（`gradle.properties` 中的 `zeta_version`），Quark 依赖的范围由 `zeta_version_range` 填入 `fabric.mod.json`；改动 Zeta 后发布时要递增 N，并按需调整范围。
 - Fabric Loom（`net.fabricmc.fabric-loom-remap`），映射为 Mojang 官方映射 + Parchment `2023.09.03`（与上游 Forge 构建相同）。
 - 配置系统依赖 Forge Config API Port（从 Modrinth maven 获取），使 Zeta 基于 `ForgeConfigSpec` 的 TOML 配置与 Forge 版完全一致。
 - 访问转换器（AT）已转换为访问加宽器（`quark.accesswidener`、`zeta.accesswidener`）。Loom 只在子项目自己的编译中应用其 AW，所以 Zeta 的 AW 条目也复制到了 Quark 的 AW 中。

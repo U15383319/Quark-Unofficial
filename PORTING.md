@@ -12,11 +12,11 @@
 
 ## 开发命令
 
-- `./gradlew build`：构建（含 AW 校验），Quark Woven 的产物在 `build/libs`，Zeta Woven 的在 `zeta/build/libs`，两者分开发布。
+- `./gradlew build`：构建（含 AW 校验），Quark Woven 的产物在 `build/libs`，Zeta Woven 的在 `zeta/build/libs`，Quark Woven Oddities 的在 `oddities/build/libs`，三者分开发布。
 - `./gradlew runClient`：开发客户端。只有根项目有运行配置，`:zeta` 的运行任务已禁用。
 - `./gradlew runMixinAudit`：启动客户端，在客户端初始化时应用全部 Mixin（`MixinEnvironment.audit()`）后退出。想一次看到所有失败的 Mixin 时，先把各 `*.mixins.json` 的 `required` 临时改为 `false`。
 - `./gradlew runProductionClient` / `./gradlew runProductionMixinAudit`：用打包好的 Quark Woven 和 Zeta Woven 的 jar，加上从 Maven 下载的 Fabric API 和 Forge Config API Port，在与玩家相同的中间名（intermediary）环境中启动客户端；后者应用全部 Mixin 后退出。**发布前必须跑一遍**：开发环境用的是 Mojang 名，Mixin 目标写错时可能仍按方法名匹配成功，只有这里能发现。Mixin 的名字靠注解处理器生成的 refmap（`quark.refmap.json`、`zeta.refmap.json`）映射；`@At` 的 `args` 里的类名（如 `classValue=`）不会被映射，不要用。
-- `./gradlew runProductionGametest`：在生产服务端上用发布的 jar（加上改写成中间名的测试 jar 和 Fabric API 的 gametest 模块）运行同一套 GameTest，结果在 `build/production-junit.xml`。注意 oddities 类别在正式环境默认关闭（见下），所以磁铁测试在这里会失败。测试代码里不要按名字反射访问原版成员，正式环境里名字不同。
+- `./gradlew runProductionGametest`：在生产服务端上用发布的 jar（加上改写成中间名的测试 jar 和 Fabric API 的 gametest 模块）运行同一套 GameTest，结果在 `build/production-junit.xml`。这里也加载 Quark Woven Oddities，所以 oddities 类别是启用的。测试代码里不要按名字反射访问原版成员，正式环境里名字不同。
 - `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 27 个测试，覆盖：
   - 数据：配方/条件/标签/战利品表加载，熔炼配方的 Forge 式物品堆结果，碎玻璃掉落，两个半砖合成整块。
   - 自动化：漏斗向溜槽、板条箱、管道送物品（Fabric Transfer API），活塞推动装有物品的箱子，铁杆破坏方块，发射器放置方块，磁铁推动铁块。
@@ -57,7 +57,7 @@
 - 在开发客户端中进入世界，逐模块对照 Forge 版验证（世界生成、GUI、网络、配置界面等）。
 - 第三方联动。
 
-- oddities 类别（背包、板条箱、管道、磁铁、矩阵附魔、不死图腾、小土豆）：上游 `Quark.ODDITIES_ID` 在正式环境为 `quarkoddities`，即只有安装了 Quark Oddities 附加模组才启用，开发环境始终启用。Fabric 上还没有这个附加模组，需要决定怎么提供。
+- oddities 类别（背包、板条箱、管道、磁铁、矩阵附魔、不死图腾、小土豆）：上游 `Quark.ODDITIES_ID` 在正式环境为 `quarkoddities`，即只有安装了 Quark Oddities 附加模组才启用，开发环境始终启用。本仓库另外发布 Quark Woven Oddities（`oddities/`，模组 ID `quarkoddities`）与之对应；生产环境的运行任务会一并加载它。
 
 ## 已知差异
 

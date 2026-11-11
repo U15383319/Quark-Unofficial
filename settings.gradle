@@ -11,3 +11,4 @@ pluginManagement {
 
 rootProject.name = 'quark'
 include 'zeta'
+include 'oddities'
