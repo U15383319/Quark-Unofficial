@@ -33,13 +33,21 @@ public class DoEmoteMessage implements IZetaMessage {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public boolean receive(IZetaNetworkEventContext context) {
-		context.enqueueWork(() -> {
-			Level world = Minecraft.getInstance().level;
-			Player player = world.getPlayerByUUID(playerUUID);
-			EmoteHandler.putEmote(player, emote, tier);
-		});
+		context.enqueueWork(() -> Client.receive(this));
 
 		return true;
+	}
+
+	// Fabric strips @Environment(CLIENT) methods on a dedicated server, but not the lambdas inside them, and a lambda
+	// using client classes keeps the whole message class from loading there (it could never be sent). So the client
+	// code lives in a class of its own, only loaded when it runs.
+	@Environment(EnvType.CLIENT)
+	private static final class Client {
+		static void receive(DoEmoteMessage msg) {
+			Level world = Minecraft.getInstance().level;
+			Player player = world.getPlayerByUUID(msg.playerUUID);
+			EmoteHandler.putEmote(player, msg.emote, msg.tier);
+		}
 	}
 
 }

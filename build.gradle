@@ -218,6 +218,40 @@ tasks.register('runProductionSmoke', net.fabricmc.loom.task.prod.ClientProductio
 	jvmArgs.add('-Dsodium.checks.issue2561=false')
 }
 
+// Multiplayer smoke run: runProductionServer, then (once it says "Done") runProductionMultiplayer, which joins it
+// and runs -PsmokeCommands like runProductionSmoke; QuarkServerSmoke makes the player an operator and stops the
+// server when the player leaves. The EULA line below was agreed to by the project owner for these test runs.
+tasks.register('runProductionServer', net.fabricmc.loom.task.prod.ServerProductionRunTask) {
+	group = 'fabric'
+	productionMods(it)
+	mods.from(remapGametestJar, configurations.productionGametestMods)
+	loaderVersion = project.loader_version
+	minecraftVersion = project.minecraft_version
+	runDir = file('build/production-server')
+	jvmArgs.add('-Dquark.smoke.server=true')
+	programArgs.add('nogui')
+	def dir = file('build/production-server')
+	// written here, not in a separate task: the run directory is this task's output, so Gradle clears it first
+	doFirst {
+		dir.mkdirs()
+		new File(dir, 'eula.txt').text = 'eula=true\n'
+		new File(dir, 'server.properties').text = [
+			'online-mode=false', 'enforce-secure-profile=false', 'server-port=25570', 'level-type=minecraft\\:flat',
+			'spawn-protection=0', 'allow-flight=true', 'spawn-monsters=false', 'motd=Quark Woven test server'
+		].join('\n') + '\n'
+	}
+}
+
+tasks.register('runProductionMultiplayer', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	group = 'fabric'
+	productionMods(it)
+	mods.from(remapGametestJar, configurations.productionGametestMods)
+	runDir = file('build/production-multiplayer')
+	programArgs.addAll('--quickPlayMultiplayer', 'localhost:25570')
+	jvmArgs.add('-Dquark.smoke=true')
+	jvmArgs.add("-Dquark.smoke.commands=${project.findProperty('smokeCommands') ?: ''}")
+}
+
 // the gametests as an intermediary-named mod, to run them against the released jars (runProductionGametest)
 def gametestJar = tasks.register('gametestJar', Jar) {
 	from sourceSets.gametest.output

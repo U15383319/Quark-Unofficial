@@ -29,6 +29,7 @@
     "event.PlayerMixin",
     "event.ProjectileGriefingMixin",
     "event.ReloadableServerResourcesMixin",
+    "event.ServerEntityMixin",
     "event.ServerLevelMixin",
     "event.ServerPlayerMixin",
     "event.ShovelItemMixin",

@@ -13,10 +13,14 @@
 			"org.violetmoon.quark.gametest.QuarkItemTests",
 			"org.violetmoon.quark.gametest.QuarkSmokeTests",
 			"org.violetmoon.quark.gametest.QuarkWorldTests",
-			"org.violetmoon.quark.gametest.QuarkParityTests"
+			"org.violetmoon.quark.gametest.QuarkParityTests",
+			"org.violetmoon.quark.gametest.QuarkServerSideTests"
 		],
 		"client": [
 			"org.violetmoon.quark.gametest.QuarkClientSmoke"
+		],
+		"server": [
+			"org.violetmoon.quark.gametest.QuarkServerSmoke"
 		]
 	},
 	"depends": {

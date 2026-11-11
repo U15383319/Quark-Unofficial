@@ -31,17 +31,25 @@ public class UpdateTridentMessage implements IZetaMessage {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public boolean receive(IZetaNetworkEventContext context) {
-		context.enqueueWork(() -> {
-			Level level = Minecraft.getInstance().level;
-			if(level != null) {
-				Entity entity = level.getEntity(tridentID);
-				if(entity instanceof ThrownTrident trident) {
-					trident.tridentItem = stack;
-				}
-			}
-		});
+		context.enqueueWork(() -> Client.receive(this));
 
 		return true;
+	}
+
+	// Fabric strips @Environment(CLIENT) methods on a dedicated server, but not the lambdas inside them, and a lambda
+	// using client classes keeps the whole message class from loading there (it could never be sent). So the client
+	// code lives in a class of its own, only loaded when it runs.
+	@Environment(EnvType.CLIENT)
+	private static final class Client {
+		static void receive(UpdateTridentMessage msg) {
+			Level level = Minecraft.getInstance().level;
+			if(level != null) {
+				Entity entity = level.getEntity(msg.tridentID);
+				if(entity instanceof ThrownTrident trident) {
+					trident.tridentItem = msg.stack;
+				}
+			}
+		}
 	}
 
 }

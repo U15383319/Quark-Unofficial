@@ -18,12 +18,14 @@
 - `./gradlew runProductionClient` / `./gradlew runProductionMixinAudit`：用打包好的 Quark Woven 和 Zeta Woven 的 jar，加上从 Maven 下载的 Fabric API 和 Forge Config API Port，在与玩家相同的中间名（intermediary）环境中启动客户端；后者应用全部 Mixin 后退出。**发布前必须跑一遍**：开发环境用的是 Mojang 名，Mixin 目标写错时可能仍按方法名匹配成功，只有这里能发现。Mixin 的名字靠注解处理器生成的 refmap（`quark.refmap.json`、`zeta.refmap.json`）映射；`@At` 的 `args` 里的类名（如 `classValue=`）不会被映射，不要用。
 - `./gradlew runProductionGametest`：在生产服务端上用发布的 jar（加上改写成中间名的测试 jar 和 Fabric API 的 gametest 模块）运行同一套 GameTest，结果在 `build/production-junit.xml`。这里也加载 Quark Woven Oddities，所以 oddities 类别是启用的。测试代码里不要按名字反射访问原版成员，正式环境里名字不同。
 - `./gradlew runProductionCompatAudit`：同 `runProductionMixinAudit`，但另外加载 Sodium 和 Iris，用来发现与它们的 Mixin 冲突。
-- `./gradlew runProductionSmoke -PsmokeCommands="..."`：客户端冒烟（`src/gametest` 里的 `QuarkClientSmoke`，不进发布的 jar）：进入复制来的正式环境 GameTest 世界（先跑一次 `runProductionGametest`），依次执行用 `|` 分隔的命令（`wait N` 等待 N tick，`shot` 截图），截图在 `build/production-compat/screenshots`，然后退出。默认带 Sodium 和 Iris，加 `-PsmokeVanilla` 不带，用于对照截图。Loom 在 Java 21 上用 LWJGL 3.3.2 运行游戏，Sodium 会拒绝启动，所以这两个任务带了 `-Dsodium.checks.issue2561=false`（玩家的启动器用原版的 3.3.1，不受影响）。
-- `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 27 个测试，覆盖：
+- `./gradlew runProductionSmoke -PsmokeCommands="..."`：客户端冒烟（`src/gametest` 里的 `QuarkClientSmoke`，不进发布的 jar）：进入复制来的正式环境 GameTest 世界（先跑一次 `runProductionGametest`），依次执行用 `|` 分隔的步骤：命令、`wait N` 等待 N tick、`shot` 截图、`sort`/`emote 名字`（发送 Quark 的整理背包/表情网络包）、`use X Y Z`（像玩家一样右键方块），以及检查客户端看到的结果的 `expect-inv`、`expect-block`、`expect-entity`、`expect-emote`（结果打印为 `QUARK_SMOKE PASS/FAIL`，完整说明见类注释），截图在 `build/production-compat/screenshots`，然后退出。默认带 Sodium 和 Iris，加 `-PsmokeVanilla` 不带，用于对照截图。Loom 在 Java 21 上用 LWJGL 3.3.2 运行游戏，Sodium 会拒绝启动，所以这两个任务带了 `-Dsodium.checks.issue2561=false`（玩家的启动器用原版的 3.3.1，不受影响）。
+- `./gradlew runProductionServer`，然后（日志出现 “Done” 后）另开一个 `./gradlew runProductionMultiplayer -PsmokeCommands="..."`：联机测试。前者用发布的 jar 启动正式环境的专用服务器（离线模式，端口 25570，超平坦，目录 `build/production-server`，EULA 由项目所有者为测试运行同意，写在任务里），后者启动客户端直接连进去执行同样的冒烟步骤（命令以玩家身份发送；`QuarkServerSmoke` 把加入的玩家设为 OP，玩家退出或 5 分钟后服务器自动停止）。截图在 `build/production-multiplayer/screenshots`。在 Git Bash 里运行时，以 `/` 开头的参数会被改写成 Windows 路径，要先 `export MSYS_NO_PATHCONV=1`。
+- `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 36 个测试，覆盖：
   - 数据：配方/条件/标签/战利品表加载，熔炼配方的 Forge 式物品堆结果，碎玻璃掉落，两个半砖合成整块。
   - 自动化：漏斗向溜槽、板条箱、管道送物品（Fabric Transfer API），活塞推动装有物品的箱子，铁杆破坏方块，发射器放置方块，磁铁推动铁块。
   - 钩子：书架附魔加成、树苗种在树篱上、绳子可攀爬、刚玉染色信标光柱、纸墙可燃、磁石旁的混凝土粉末不凝固、简易收获（右键事件）。
   - 物品：背包掉在地上撒出物品、背包不能在附魔台附魔、铁砧不给背包上附魔书、泥刀耐久跟随配置。
+  - 专用服务器：Quark 和 Zeta 的所有非客户端类都能在服务器上加载（只在 `runProductionGametest` 中有意义，见下文“专用服务器”）。
   - 冒烟：所有 Quark 方块都有战利品表，各种告示牌掉落正确的物品；所有带方块实体的方块能放置并保存/读取；所有 Quark 实体能生成、tick 并保存/读取。
 
 ## 数据转换
@@ -43,6 +45,12 @@
 - 金工具附魔（`IZetaItemExtensionsMixin`）：上游用 Zeta 的 `@DelegateInterfaceMixin`，它按描述符字符串匹配目标，正式环境里不会被映射而静默失效，已改为普通接口 Mixin。
 - 生物破坏（mobGriefing）事件：所有对该游戏规则的读取都会触发，归属于正在 tick 的实体；投射物/火球归属于发射者、凋灵玫瑰归属于凶手，与 Forge 一致。
 - 未挂接（Quark 中没有覆写或只在暂不启用的联动中使用）：位置相关光照、开启活板门可攀爬、潮涌核心框架、脚手架、`onItemUseFirst`（仅 Lootr 箱子）、`isRepairable`（仅回旋镐，且总返回 true，与原版对可损耗物品的判断一致）、熔岩点燃（`LavaFluid`）、锄头耕地（`hoe_till`，没有 Quark 方块覆写）。
+
+## 专用服务器
+
+- `@Environment(EnvType.CLIENT)` 方法在服务器上会被 Fabric 删掉，但其中的 lambda 不会（Forge 的 `@OnlyIn` 会一起删）。lambda 里用到客户端类（例如把 `ClientLevel` 当 `Level` 用）时，整个类在服务器上无法通过字节码校验、根本加载不了。`DoEmoteMessage`、`UpdateTridentMessage` 因此在服务器上永远发不出去（表情在联机时不显示），已把客户端代码移到嵌套的 `Client` 类。`QuarkServerSideTests` 在正式环境服务器上加载并校验所有非客户端类，防止再出现；按名字识别客户端代码（`.client.` 包、`$Client` 嵌套类、`*ClientDefinition`、测试里的 `CLIENT_ONLY` 列表）。
+- 实体额外生成数据（Forge `IEntityAdditionalSpawnData`）：原版在玩家开始追踪实体时把生成包装进一个 bundle，bundle 不能嵌套，所以不能像 Forge 那样返回自己的 bundle（玩家会被踢出：“Can't serialize unregistered packet”）。`ServerEntityMixin` 把 `zeta:spawn_data` 包放在原版生成包后面的同一个 bundle 里，客户端在实体创建后读取。
+- 联机测试（2026-11-11，`runProductionMultiplayer`）：右键收获、整理背包、表情、实体同步（矿石龟、螃蟹、石头人、柴犬、图腾）通过。
 
 ## 与上游 Forge 实现的对照审计（2026-11-11）
 
