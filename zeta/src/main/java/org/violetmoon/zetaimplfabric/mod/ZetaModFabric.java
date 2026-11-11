@@ -14,6 +14,7 @@ import org.violetmoon.zetaimplfabric.entity.IZetaEntityExtensions;
 import org.violetmoon.zetaimplfabric.event.play.FabricZEntityEvents;
 import org.violetmoon.zetaimplfabric.event.play.FabricZPlayerEvents;
 import org.violetmoon.zetaimplfabric.event.play.FabricZWorldEvents;
+import org.violetmoon.zetaimplfabric.world.FabricZetaBiomeModifier;
 import org.violetmoon.zetaimplfabric.util.ServerTracker;
 
 import net.fabricmc.api.EnvType;
@@ -47,6 +48,7 @@ public class ZetaModFabric implements ModInitializer {
 		FabricZPlayerEvents.init();
 		FabricZEntityEvents.init();
 		FabricZWorldEvents.init();
+		FabricZetaBiomeModifier.init();
 
 		// Forge copies the PlayerPersisted sub-tag of the persistent data when a player respawns or leaves the end
 		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
