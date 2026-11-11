@@ -17,7 +17,7 @@
 		"issues": "https://github.com/U15383319/Quark-Unofficial/issues"
 	},
 	"license": "CC-BY-NC-SA-3.0",
-	"icon": "proxypack.png",
+	"icon": "assets/quark/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

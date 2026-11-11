@@ -19,6 +19,7 @@
 		"issues": "https://github.com/U15383319/Quark-Unofficial/issues"
 	},
 	"license": "CC-BY-NC-SA-3.0",
+	"icon": "assets/zeta/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

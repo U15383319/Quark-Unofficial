@@ -1,74 +1,63 @@
-# Quark Woven（Fabric 1.20.1）
+# Quark Woven (Fabric 1.20.1)
 
-[Quark](https://quarkmod.net) 的**非官方** Fabric 移植版，目标 Minecraft 1.20.1，内容与 Quark 1.20.1 Forge 版保持一致。
+An **unofficial** Fabric port of [Quark](https://quarkmod.net) for Minecraft 1.20.1. The content is the same as Quark 1.20.1 on Forge.
 
-模组 ID 仍为 `quark` / `zeta`，与 Forge 版的存档、数据包和资源包兼容。
+The mod ids are still `quark` and `zeta`, so worlds, data packs and resource packs made for the Forge version work with it.
 
-## 安装
+> This project is not affiliated with, endorsed by or supported by the Quark team or Violet Moon. Please report problems with this port here, not to Quark.
 
-和 Forge 版一样，Quark 需要 Zeta 库。本仓库发布两个模组，都要放进 `mods` 文件夹：
+## Installation
 
-- **Quark Woven**（`QuarkWoven-1.20.1-*.jar`）
-- **Zeta Woven**（`ZetaWoven-1.20.1-*.jar`）：Zeta 的 Fabric 移植。版本号为上游 Zeta 版本加 `.woven.N`，每个 Quark Woven 版本只接受对应的 Zeta Woven 版本范围。Forge 版的 Zeta 不能用于 Fabric。
+Like Quark on Forge, Quark Woven needs the Zeta library. Put these in your `mods` folder:
 
-可选安装 **Quark Woven Oddities**（`QuarkWovenOddities-1.20.1-*.jar`，模组 ID `quarkoddities`），它开启 Oddities 内容：背包、板条箱、管道、磁铁、矩阵附魔、不死图腾、小土豆。和 Forge 版的 Quark Oddities 一样，它本身不含内容，只是告诉 Quark Woven 启用这部分功能；没装时这些物品会显示“已禁用。安装 quarkoddities 以启用。”。
+- **Quark Woven** (`QuarkWoven-1.20.1-*.jar`)
+- **Zeta Woven** (`ZetaWoven-1.20.1-*.jar`): the Fabric port of Zeta. Its version is the upstream Zeta version plus `.woven.N`; each Quark Woven release accepts a matching range of Zeta Woven versions. The Forge version of Zeta does not work on Fabric.
+- [Fabric API](https://modrinth.com/mod/fabric-api)
+- [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port), which keeps the config files in the same format as on Forge
 
-另外需要 [Fabric API](https://modrinth.com/mod/fabric-api) 和 [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port)（让配置文件与 Forge 版保持相同格式）。配置界面和 Forge 版一样，可以通过标题界面和暂停菜单里的 “q” 按钮打开；另外可选安装 [Mod Menu](https://modrinth.com/mod/modmenu)，它提供模组列表，也能从列表里打开 Quark 的配置。
+Optional:
 
-> 本项目与 Quark 原作者及 Violet Moon 没有关联，也未经其认可或支持。使用本移植版遇到的问题请在本仓库反馈，不要报告给原版 Quark。
+- **Quark Woven Oddities** (`QuarkWovenOddities-1.20.1-*.jar`, mod id `quarkoddities`) turns on the Oddities content: backpacks, crates, pipes, magnets, matrix enchanting, the totem of holding and the tiny potato. Like Quark Oddities on Forge, it contains no content itself; it only tells Quark Woven to enable it. Without it the Oddities content is disabled, as on Forge without Quark Oddities.
+- [Mod Menu](https://modrinth.com/mod/modmenu) adds a mod list from which Quark's config can also be opened. Without it, the config is opened with the "q" button on the title screen and the pause menu, as on Forge.
 
-## 署名
+## Differences from Quark on Forge
 
-- **Quark**：Vazkii、WireSegal、MCVinnyq、Sully 及其他贡献者。官网 <https://quarkmod.net>，源码 <https://github.com/VazkiiMods/Quark>。本项目基于其 `1.20` 分支（提交 `c1bb062`）。
-- **Zeta**：Vazkii、quat、IThundxr、siuol、wiresegal、MehVahdJukaar 及其他贡献者。源码 <https://github.com/VazkiiMods/Zeta>。本项目内置其 `1.0-29.135` 版的源码，移植后以 Zeta Woven 的名义单独发布。
-- **Java Universal Tween Engine**：Aurelien Ribon。源码 <https://github.com/AurelienRibon/universal-tween-engine>，以 Apache License 2.0 发布，随 Quark 内置于 `src/main/java/aurelienribon`。
+- No integrations with other mods yet: Quark's JEI, Lootr, TerraBlender and land-claim support are not ported.
+- Wall hanging signs made from Quark wood drop hanging signs. On Forge they drop regular signs, which is an upstream bug.
+- After a config reload, recipe viewers may keep showing the old ingredients for config-dependent recipes; the recipes themselves follow the new config.
+- At startup the log says "No data fixer registered for ..." for each Quark entity. Vanilla prints this for every modded entity and it is harmless.
 
-## 修改说明
+## Credits
 
-本项目是上述作品的改编作品，主要改动：
+- **Quark** by Vazkii, WireSegal, MCVinnyq, Sully and other contributors. Website <https://quarkmod.net>, source <https://github.com/VazkiiMods/Quark>. This port is based on its `1.20` branch (commit `c1bb062`).
+- **Zeta** by Vazkii, quat, IThundxr, siuol, wiresegal, MehVahdJukaar and other contributors. Source <https://github.com/VazkiiMods/Zeta>. This repository contains the source of its `1.0-29.135` release, ported and released as Zeta Woven.
+- **Java Universal Tween Engine** by Aurelien Ribon. Source <https://github.com/AurelienRibon/universal-tween-engine>, Apache License 2.0; included with Quark in `src/main/java/aurelienribon`.
 
-- 用 Fabric 实现（新增 `org.violetmoon.zetaimplfabric`）替换 Zeta 的 Forge 实现，并修改 Quark 与 Zeta 中依赖 Forge API 的代码；
-- 把数据包中的 Forge 条件和 `forge:` 标签转换为 Fabric 格式（`fabric:load_conditions`、`c:` 标签）；
-- 暂不包含第三方模组联动。
+## Changes
 
-未修改的上游源码保存在本仓库的第一个提交中，可用 git 与之对照。具体改动见提交历史和 [PORTING.md](PORTING.md)。
+This project is an adaptation of the works above. The main changes:
 
-## 许可证
+- Zeta's Forge implementation is replaced by a Fabric one (`org.violetmoon.zetaimplfabric`), and the code in Quark and Zeta that used Forge APIs is adapted.
+- Forge conditions and `forge:` tags in the data packs are converted to their Fabric equivalents (`fabric:load_conditions`, `c:` tags).
+- Third-party integrations are not included yet.
 
-Quark 与 Zeta 以 [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/)（署名-非商业性使用-相同方式共享 3.0）发布。本移植版作为改编作品，同样以 CC BY-NC-SA 3.0 发布，协议全文见 [LICENSE.md](LICENSE.md)（Zeta 部分见 [zeta/LICENSE.md](zeta/LICENSE.md)）：
+The unmodified upstream source is the first commit of this repository; diff against it with git to see every change. Notes on the port (in Chinese) are in [PORTING.md](PORTING.md).
 
-- 不得用于商业目的；
-- 再发布或改编本项目时，须保留上面的署名与许可证说明，标明所做的修改，并以相同协议发布。
+## Building
 
-Java Universal Tween Engine 部分适用 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)，协议全文和版权声明见 [src/main/java/aurelienribon/LICENSE](src/main/java/aurelienribon/LICENSE) 与 [NOTICE](src/main/java/aurelienribon/NOTICE)，也随 jar 一起分发。
+```
+./gradlew build
+```
 
-## 上游 README（原文）
+Gradle needs Java 21; the mods themselves run on Java 17 or newer. Quark Woven is built to `build/libs`, Zeta Woven to `zeta/build/libs` and Quark Woven Oddities to `oddities/build/libs`. `./gradlew runGametest` runs the game tests; PORTING.md lists the other tasks, including the checks against the released jars.
 
-以下是 Quark 原版的 README。其中的发布流程和签名说明只适用于原版 Quark：本项目的发布物不带 Violet Moon 的签名。
+## License
 
----
+Quark and Zeta are released under [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) (Attribution-NonCommercial-ShareAlike 3.0). As an adaptation, this port is released under the same license; the full text is in [LICENSE.md](LICENSE.md) (for Zeta, [zeta/LICENSE.md](zeta/LICENSE.md)):
 
-Small things. Learn more at [the Mod's website](https://quarkmod.net).
+- no commercial use;
+- if you redistribute or adapt this project, keep the credits and license notice above, say what you changed, and release it under the same license.
 
-This mod makes use of the [Java Universal Tween Engine](https://github.com/AurelienRibon/universal-tween-engine) by Aurelien Ribon, licensed under the Apache 2.0 License.  
+The Java Universal Tween Engine is under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0); its license and notice are in [src/main/java/aurelienribon/LICENSE](src/main/java/aurelienribon/LICENSE) and [NOTICE](src/main/java/aurelienribon/NOTICE), and are also included in the jar.
 
-### Zeta?
-
-*Project Zeta* is a planned rearchitecture of Quark to make it less tightly-integrated with Forge. Read the roadmap [in Vazkii's post on the Violet Moon forums](https://forum.violetmoon.org/d/78-project-zeta-aka-quark-on-fabric-real).
-
-There is still lots to do! If you'd like to contribute, see `zeta-todo/README.md`
-
-### Release Process
-Quark's release process is mostly automated. Here's the steps:
-
-1. Pull master so you're up to date, make sure everything is committed
-2. Run `git tag -a release-<mc_version>-<build_number>`. If you don't know or remember what those are, look at `build.properties`
-3. In the editor that pops up, write the changelog
-4. In `build.properties`, increment the build_number by one for the next version. Commit this.
-5. Push master and the release tag: `git push origin master release-<mc_version>-<build_number>`
-6. Shortly after, the mod should be automatically uploaded to GitHub's release tab, Modrinth, and CurseForge.
-
-### Signing
-Releases are signed with the Violet Moon signing key, see [this
-page](https://github.com/VazkiiMods/.github/blob/main/security/README.md) for information
-about how to verify the artifacts.
+The icons of Quark Woven, Zeta Woven and Quark Woven Oddities were made for this port and are not Quark's logo.
