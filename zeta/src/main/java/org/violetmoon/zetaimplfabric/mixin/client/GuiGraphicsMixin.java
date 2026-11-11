@@ -2,6 +2,7 @@ package org.violetmoon.zetaimplfabric.mixin.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.violetmoon.zetaimplfabric.client.event.FabricZClientEvents;
+import org.violetmoon.zetaimplfabric.ext.client.IZetaGuiGraphicsExtensions;
 
 import com.mojang.datafixers.util.Either;
 
@@ -28,7 +30,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 
 @Mixin(GuiGraphics.class)
-public abstract class GuiGraphicsMixin {
+public abstract class GuiGraphicsMixin implements IZetaGuiGraphicsExtensions {
 
 	@Shadow
 	public abstract int guiWidth();
@@ -45,10 +47,16 @@ public abstract class GuiGraphicsMixin {
 	 */
 	@Inject(method = "renderTooltip(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;II)V", at = @At("HEAD"), cancellable = true)
 	private void zeta$gatherTooltip(Font font, ItemStack stack, int mouseX, int mouseY, CallbackInfo ci) {
+		renderTooltip(font, Screen.getTooltipFromItem(Minecraft.getInstance(), stack), stack.getTooltipImage(), stack, mouseX, mouseY);
+		ci.cancel();
+	}
+
+	@Override
+	public void renderTooltip(Font font, List<Component> lines, Optional<TooltipComponent> image, ItemStack stack, int mouseX, int mouseY) {
 		List<Either<FormattedText, TooltipComponent>> elements = new ArrayList<>();
-		for(Component line : Screen.getTooltipFromItem(Minecraft.getInstance(), stack))
+		for(Component line : lines)
 			elements.add(Either.left(line));
-		stack.getTooltipImage().ifPresent(image -> elements.add(1, Either.right(image)));
+		image.ifPresent(i -> elements.add(Math.min(1, elements.size()), Either.right(i)));
 
 		int maxWidth = FabricZClientEvents.fireGatherTooltip(stack, guiWidth(), guiHeight(), elements, -1);
 
@@ -77,7 +85,6 @@ public abstract class GuiGraphicsMixin {
 			.toList();
 
 		renderTooltipInternal(font, components, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE);
-		ci.cancel();
 	}
 
 	private static FormattedCharSequence zeta$visual(FormattedText text) {
