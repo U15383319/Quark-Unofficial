@@ -5,6 +5,12 @@ base {
 
 loom {
 	accessWidenerPath = file('src/main/resources/zeta.accesswidener')
+	// Mixin targets are written with Mojang names; the annotation processor writes a refmap so that they resolve
+	// against intermediary names in the released jar (check with runProductionClient)
+	mixin {
+		useLegacyMixinAp = true
+		defaultRefmapName = 'zeta.refmap.json'
+	}
 }
 
 // Zeta is launched as part of Quark (the root project's runs), not on its own

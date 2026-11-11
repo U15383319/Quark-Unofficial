@@ -18,6 +18,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.TransientCraftingContainer;
@@ -55,6 +59,31 @@ public class QuarkTweakTests implements FabricGameTest {
 			helper.assertBlockPresent(Blocks.WHITE_CONCRETE, onStone);
 			helper.assertBlockPresent(Blocks.WHITE_CONCRETE_POWDER, onMagma);
 		});
+	}
+
+	// Zombie Villagers On Normal (LivingConversionEvent.Pre in Zombie#killedEntity, before vanilla's 50% roll on Normal)
+	@GameTest(template = EMPTY_STRUCTURE)
+	public void zombieVillagersOnNormal(GameTestHelper helper) {
+		var server = helper.getLevel().getServer();
+		Difficulty before = server.getWorldData().getDifficulty();
+		server.setDifficulty(Difficulty.NORMAL, true);
+		try {
+			Zombie zombie = helper.spawn(EntityType.ZOMBIE, new BlockPos(1, 2, 1));
+			zombie.setNoAi(true);
+			int converted = 0;
+			for(int i = 0; i < 8; i++) {
+				Villager villager = helper.spawn(EntityType.VILLAGER, new BlockPos(3, 2, 3));
+				villager.setNoAi(true);
+				zombie.killedEntity(helper.getLevel(), villager);
+				if(villager.isRemoved())
+					converted++;
+			}
+			helper.assertTrue(converted == 8, converted + " of 8 villagers turned into zombie villagers");
+			helper.assertTrue(helper.getEntities(EntityType.ZOMBIE_VILLAGER, new BlockPos(3, 2, 3), 3).size() == 8, "zombie villagers missing");
+		} finally {
+			server.setDifficulty(before, true);
+		}
+		helper.succeed();
 	}
 
 	// Glass Shards: the converted glass loot table (quark:flag condition) drops shards without silk touch

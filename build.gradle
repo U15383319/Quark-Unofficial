@@ -67,6 +67,12 @@ sourceSets {
 
 loom {
 	accessWidenerPath = file('src/main/resources/quark.accesswidener')
+	// Mixin targets are written with Mojang names; the annotation processor writes a refmap so that they resolve
+	// against intermediary names in the released jar (check with runProductionClient)
+	mixin {
+		useLegacyMixinAp = true
+		defaultRefmapName = 'quark.refmap.json'
+	}
 	mods {
 		quark {
 			sourceSet sourceSets.main
@@ -135,6 +141,36 @@ dependencies {
 	// optional: config screen button in Mod Menu (Forge's ConfigScreenFactory)
 	modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
 	modLocalRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
+}
+
+// Production check: the released jars with intermediary names, like a player's game (dev runs use Mojang names,
+// where a wrong mixin target can still match by name). The other mods come unremapped from Maven.
+configurations {
+	productionRuntimeMods {
+		transitive = false
+	}
+}
+
+dependencies {
+	productionRuntimeMods "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	productionRuntimeMods "maven.modrinth:forge-config-api-port:${project.forge_config_api_port_version}"
+}
+
+def productionMods = { task ->
+	task.mods.from(tasks.named('remapJar'), project(':zeta').tasks.named('remapJar'), configurations.productionRuntimeMods)
+	task.runDir = file('build/production')
+}
+
+tasks.register('runProductionClient', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	group = 'fabric'
+	productionMods(it)
+}
+
+// applies every mixin at client init in the production environment, then exits (see ZetaModFabricClient)
+tasks.register('runProductionMixinAudit', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	group = 'fabric'
+	productionMods(it)
+	jvmArgs.add('-Dzeta.debug.mixinAudit=true')
 }
 
 processResources {

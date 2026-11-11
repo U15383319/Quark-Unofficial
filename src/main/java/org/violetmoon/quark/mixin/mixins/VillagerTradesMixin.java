@@ -17,7 +17,7 @@ public class VillagerTradesMixin {
             require = 1,
             at = @At(value = "INVOKE",
                     ordinal = 0,
-                    target = "Lcom/google/common/collect/ImmutableMap;builder()Lcom/google/common/collect/ImmutableMap$Builder;"))
+                    target = "Lcom/google/common/collect/ImmutableMap;builder()Lcom/google/common/collect/ImmutableMap$Builder;", remap = false))
     private static ImmutableMap.Builder<VillagerType, Item> addBeachType(ImmutableMap.Builder<VillagerType, Item> original) {
         MoreVillagersModule.addExtraTrades(original);
         return original;
