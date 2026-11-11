@@ -188,6 +188,7 @@ def gametestJar = tasks.register('gametestJar', Jar) {
 def remapGametestJar = tasks.register('remapGametestJar', net.fabricmc.loom.task.RemapJarTask) {
 	inputFile = gametestJar.flatMap { it.archiveFile }
 	archiveClassifier = 'gametest'
+	destinationDirectory = layout.buildDirectory.dir('devlibs') // not a release artifact
 	addNestedDependencies = false
 	classpath.from(sourceSets.gametest.compileClasspath)
 }
