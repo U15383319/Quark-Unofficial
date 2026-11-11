@@ -1,15 +1,24 @@
 # Quark Woven（Fabric 1.20.1）
 
-[Quark](https://quarkmod.net) 的**非官方** Fabric 移植版，目标 Minecraft 1.20.1，内容与 Quark 1.20.1 Forge 版保持一致。内置的 Zeta 移植版名为 Zeta Woven。
+[Quark](https://quarkmod.net) 的**非官方** Fabric 移植版，目标 Minecraft 1.20.1，内容与 Quark 1.20.1 Forge 版保持一致。
 
 模组 ID 仍为 `quark` / `zeta`，与 Forge 版的存档、数据包和资源包兼容。
+
+## 安装
+
+和 Forge 版一样，Quark 需要 Zeta 库。本仓库发布两个模组，都要放进 `mods` 文件夹：
+
+- **Quark Woven**（`QuarkWoven-1.20.1-*.jar`）
+- **Zeta Woven**（`ZetaWoven-1.20.1-*.jar`）：Zeta 的 Fabric 移植。版本号为上游 Zeta 版本加 `.woven.N`，每个 Quark Woven 版本只接受对应的 Zeta Woven 版本范围。Forge 版的 Zeta 不能用于 Fabric。
+
+另外需要 [Fabric API](https://modrinth.com/mod/fabric-api) 和 [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port)（让配置文件与 Forge 版保持相同格式）。可选安装 [Mod Menu](https://modrinth.com/mod/modmenu)，用来在游戏内打开配置界面。
 
 > 本项目与 Quark 原作者及 Violet Moon 没有关联，也未经其认可或支持。使用本移植版遇到的问题请在本仓库反馈，不要报告给原版 Quark。
 
 ## 署名
 
 - **Quark**：Vazkii、WireSegal、MCVinnyq、Sully 及其他贡献者。官网 <https://quarkmod.net>，源码 <https://github.com/VazkiiMods/Quark>。本项目基于其 `1.20` 分支（提交 `c1bb062`）。
-- **Zeta**：Vazkii、quat、IThundxr、siuol、wiresegal、MehVahdJukaar 及其他贡献者。源码 <https://github.com/VazkiiMods/Zeta>。本项目内置其 `1.0-29.135` 版的源码。
+- **Zeta**：Vazkii、quat、IThundxr、siuol、wiresegal、MehVahdJukaar 及其他贡献者。源码 <https://github.com/VazkiiMods/Zeta>。本项目内置其 `1.0-29.135` 版的源码，移植后以 Zeta Woven 的名义单独发布。
 - **Java Universal Tween Engine**：Aurelien Ribon。源码 <https://github.com/AurelienRibon/universal-tween-engine>，以 Apache License 2.0 发布，随 Quark 内置于 `src/main/java/aurelienribon`。
 
 ## 修改说明

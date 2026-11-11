@@ -12,7 +12,7 @@
 
 ## 开发命令
 
-- `./gradlew build`：构建（含 AW 校验），产物在 `build/libs`，Zeta 以 jar-in-jar 打包。
+- `./gradlew build`：构建（含 AW 校验），Quark Woven 的产物在 `build/libs`，Zeta Woven 的在 `zeta/build/libs`，两者分开发布。
 - `./gradlew runClient`：开发客户端。只有根项目有运行配置，`:zeta` 的运行任务已禁用。
 - `./gradlew runMixinAudit`：启动客户端，在客户端初始化时应用全部 Mixin（`MixinEnvironment.audit()`）后退出。想一次看到所有失败的 Mixin 时，先把各 `*.mixins.json` 的 `required` 临时改为 `false`。
 - `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 27 个测试，覆盖：
