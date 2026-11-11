@@ -1,7 +1,5 @@
 package org.violetmoon.quark.base.client.config;
 
-import com.google.common.collect.ImmutableSet;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -17,8 +15,6 @@ import org.violetmoon.zeta.client.event.play.ZScreen;
 import org.violetmoon.zeta.event.bus.PlayEvent;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class QButtonHandler {
 
@@ -27,18 +23,15 @@ public class QButtonHandler {
 		if(!QuarkGeneralConfig.enableQButton)
 			return;
 
-		Set<String> targetButtonTranslationKeys = getTargetButtons(event.getScreen());
-		if(targetButtonTranslationKeys == null || targetButtonTranslationKeys.isEmpty())
+		List<String> targetButtonTranslationKeys = getTargetButtons(event.getScreen());
+		if(targetButtonTranslationKeys == null)
 			return;
 
-		Set<String> targetButtonNames = targetButtonTranslationKeys.stream()
-			.map(I18n::get)
-			.collect(Collectors.toSet());
-
-		List<GuiEventListener> listeners = event.getListenersList();
-		for(GuiEventListener listener : listeners)
-			if(listener instanceof AbstractWidget widget) {
-				if(targetButtonNames.contains(widget.getMessage().getString())) {
+		// the first target button (in priority order) that the screen has
+		for(String key : targetButtonTranslationKeys) {
+			String name = I18n.get(key);
+			for(GuiEventListener listener : event.getListenersList())
+				if(listener instanceof AbstractWidget widget && name.equals(widget.getMessage().getString())) {
 					int x = widget.getX();
 
 					if(QuarkGeneralConfig.qButtonOnRight)
@@ -50,21 +43,22 @@ public class QButtonHandler {
 					event.addListener(qButton);
 					return;
 				}
-			}
+		}
 	}
 
-	private static @Nullable Set<String> getTargetButtons(Screen gui) {
+	private static @Nullable List<String> getTargetButtons(Screen gui) {
 		if(gui instanceof TitleScreen)
 			if(QuarkGeneralConfig.qButtonOnRight)
-				return Set.of("menu.online"); // Minecraft Realms
+				return List.of("menu.online"); // Minecraft Realms
 			else
-				return Set.of("fml.menu.mods.title", "fml.menu.mods"); // Mods (idk which one is used)
+				// Forge has its own Mods button; on Fabric it comes from Mod Menu, and without Mod Menu the Q button goes next to Realms
+				return List.of("modmenu.title", "menu.online");
 
 		if(gui instanceof PauseScreen)
 			if(QuarkGeneralConfig.qButtonOnRight)
-				return Set.of("menu.shareToLan", "menu.playerReporting"); // Open to LAN, Player Reporting
+				return List.of("menu.shareToLan", "menu.playerReporting"); // Open to LAN, Player Reporting
 			else
-				return Set.of("menu.options"); // Options...
+				return List.of("menu.options"); // Options...
 
 		return null;
 	}
