@@ -272,7 +272,8 @@ tasks.register('runProductionGametest', net.fabricmc.loom.task.prod.ServerProduc
 	group = 'fabric'
 	productionMods(it)
 	mods.from(remapGametestJar, configurations.productionGametestMods)
-	loaderVersion = project.loader_version
+	// -PprodLoader=<version> runs them on another Fabric Loader, e.g. the oldest one fabric.mod.json accepts
+	loaderVersion = project.findProperty('prodLoader') ?: project.loader_version
 	minecraftVersion = project.minecraft_version
 	runDir = file('build/production-gametest')
 	jvmArgs.add('-Dfabric-api.gametest')

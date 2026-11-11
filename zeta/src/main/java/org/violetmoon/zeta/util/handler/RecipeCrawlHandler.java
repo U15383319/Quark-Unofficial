@@ -156,11 +156,18 @@ public class RecipeCrawlHandler {
 		for (Ingredient ingredient : ingredients) {
 			for (ItemStack inStack : ingredient.getItems()) {
 				//don't include catalyst items. This includes partial ones like buckets and such
-				ItemStack remaining = inStack.getItem().getRecipeRemainder(inStack); // Fabric: FabricItem#getRecipeRemainder (Forge: ItemStack#getCraftingRemainingItem)
+				ItemStack remaining;
+
+				try {
+					remaining = inStack.getItem().getRecipeRemainder(inStack); // Fabric: FabricItem#getRecipeRemainder (Forge: ItemStack#getCraftingRemainingItem)
+				} catch(Exception e) {
+					ZetaMod.LOGGER.error("Item {} threw an exception from FabricItem#getRecipeRemainder!! This is very broken, report to the author of that mod", inStack.getItem(), e);
+					continue;
+				}
 
 				if(remaining == null) {
 					//sigh. let's at least not make this into our problem
-					ZetaMod.LOGGER.error("Item {} returned NULL from getCraftingRemainingItem. This is wrong and will cause problems down the line", inStack.getItem());
+					ZetaMod.LOGGER.error("Item {} returned NULL from FabricItem#getRecipeRemainder. This is wrong and will cause problems down the line", inStack.getItem());
 					continue;
 				}
 

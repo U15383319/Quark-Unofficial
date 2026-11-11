@@ -12,7 +12,7 @@ Like Quark on Forge, Quark Woven needs the Zeta library. Put these in your `mods
 
 - **Quark Woven** (`QuarkWoven-1.20.1-*.jar`)
 - **Zeta Woven** (`ZetaWoven-1.20.1-*.jar`): the Fabric port of Zeta. Its version is the upstream Zeta version plus `.woven.N`; each Quark Woven release accepts a matching range of Zeta Woven versions. The Forge version of Zeta does not work on Fabric.
-- [Fabric API](https://modrinth.com/mod/fabric-api)
+- [Fabric API](https://modrinth.com/mod/fabric-api) 0.92.9 or newer, which needs Fabric Loader 0.16.10 or newer
 - [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port), which keeps the config files in the same format as on Forge
 
 Optional:
@@ -30,7 +30,7 @@ Optional:
 ## Credits
 
 - **Quark** by Vazkii, WireSegal, MCVinnyq, Sully and other contributors. Website <https://quarkmod.net>, source <https://github.com/VazkiiMods/Quark>. This port is based on its `1.20` branch (commit `c1bb062`).
-- **Zeta** by Vazkii, quat, IThundxr, siuol, wiresegal, MehVahdJukaar and other contributors. Source <https://github.com/VazkiiMods/Zeta>. This repository contains the source of its `1.0-29.135` release, ported and released as Zeta Woven.
+- **Zeta** by Vazkii, quat, IThundxr, siuol, wiresegal, MehVahdJukaar and other contributors. Source <https://github.com/VazkiiMods/Zeta>. This repository contains the source of its `1.0-29.135` release plus the fix from `1.0-30`, ported and released as Zeta Woven.
 - **Java Universal Tween Engine** by Aurelien Ribon. Source <https://github.com/AurelienRibon/universal-tween-engine>, Apache License 2.0; included with Quark in `src/main/java/aurelienribon`.
 
 ## Changes

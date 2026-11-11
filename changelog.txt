@@ -1,1 +1,16 @@
-nothing yet!
+Quark Woven 4.0-463.woven.1, Zeta Woven 1.0-30.woven.1, Quark Woven Oddities 1.0.0
+
+First release: an unofficial Fabric port of Quark 4.0-463 for Minecraft 1.20.1 (upstream commit c1bb062), with the
+same content as the Forge version.
+
+* Needs Zeta Woven, Fabric API (0.92.9 or newer, so Fabric Loader 0.16.10 or newer) and Forge Config API Port.
+  Quark Woven Oddities is optional and turns on the Oddities content (backpacks, crates, pipes, magnets, matrix
+  enchanting, totem of holding, tiny potato), like Quark Oddities on Forge. Mod Menu is optional.
+* Zeta Woven is Zeta 1.0-29.135 (the version Quark 4.0-463 is built against) plus the fix from Zeta 1.0-30: an item
+  from another mod that throws an exception when asked for its crafting remainder no longer breaks Zeta's recipe
+  handling.
+* Differences from Quark on Forge:
+  * no integrations with other mods yet (JEI, Lootr, TerraBlender, land-claim mods);
+  * wall hanging signs made of Quark wood drop hanging signs (they drop regular signs on Forge, an upstream bug);
+  * recipe viewers may show stale ingredients for config-dependent recipes until the game restarts.
+* Tested on a dedicated server and over LAN, and with Sodium and Iris (including a shader pack).
