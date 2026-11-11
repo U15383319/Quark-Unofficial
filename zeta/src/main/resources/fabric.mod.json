@@ -3,7 +3,7 @@
 	"id": "zeta",
 	"version": "${version}",
 	"name": "Zeta Woven",
-	"description": "A fully featured Library designed around loading highly configurable, agile developed. modular mods. Zeta Woven is an unofficial Fabric port of Zeta by Vazkii and contributors, bundled with Quark Woven; it is not affiliated with or endorsed by the Zeta team.",
+	"description": "A fully featured Library designed around loading highly configurable, agile developed. modular mods. Zeta Woven is an unofficial Fabric port of Zeta by Vazkii and contributors, made for Quark Woven; it is not affiliated with or endorsed by the Zeta team.",
 	"authors": [
 		"Gvxwsur",
 		"Vazkii",

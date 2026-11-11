@@ -135,16 +135,17 @@ dependencies {
 	// optional: config screen button in Mod Menu (Forge's ConfigScreenFactory)
 	modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
 	modLocalRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
-	include project(':zeta')
 }
 
 processResources {
 	def version = project.version
+	def zetaRange = project.zeta_version_range
 	inputs.property 'version', version
+	inputs.property 'zetaRange', zetaRange
 
 	// plain replace: fabric.mod.json contains '$' (inner class names in injected interfaces)
 	filesMatching('fabric.mod.json') {
-		filter { line -> line.replace('${version}', version.toString()) }
+		filter { line -> line.replace('${version}', version.toString()).replace('${zeta_version_range}', zetaRange.toString()) }
 	}
 }
 
