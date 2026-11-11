@@ -12,7 +12,8 @@
 			"org.violetmoon.quark.gametest.QuarkTweakTests",
 			"org.violetmoon.quark.gametest.QuarkItemTests",
 			"org.violetmoon.quark.gametest.QuarkSmokeTests",
-			"org.violetmoon.quark.gametest.QuarkWorldTests"
+			"org.violetmoon.quark.gametest.QuarkWorldTests",
+			"org.violetmoon.quark.gametest.QuarkParityTests"
 		]
 	},
 	"depends": {

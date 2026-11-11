@@ -16,6 +16,7 @@
 - `./gradlew runClient`：开发客户端。只有根项目有运行配置，`:zeta` 的运行任务已禁用。
 - `./gradlew runMixinAudit`：启动客户端，在客户端初始化时应用全部 Mixin（`MixinEnvironment.audit()`）后退出。想一次看到所有失败的 Mixin 时，先把各 `*.mixins.json` 的 `required` 临时改为 `false`。
 - `./gradlew runProductionClient` / `./gradlew runProductionMixinAudit`：用打包好的 Quark Woven 和 Zeta Woven 的 jar，加上从 Maven 下载的 Fabric API 和 Forge Config API Port，在与玩家相同的中间名（intermediary）环境中启动客户端；后者应用全部 Mixin 后退出。**发布前必须跑一遍**：开发环境用的是 Mojang 名，Mixin 目标写错时可能仍按方法名匹配成功，只有这里能发现。Mixin 的名字靠注解处理器生成的 refmap（`quark.refmap.json`、`zeta.refmap.json`）映射；`@At` 的 `args` 里的类名（如 `classValue=`）不会被映射，不要用。
+- `./gradlew runProductionGametest`：在生产服务端上用发布的 jar（加上改写成中间名的测试 jar 和 Fabric API 的 gametest 模块）运行同一套 GameTest，结果在 `build/production-junit.xml`。注意 oddities 类别在正式环境默认关闭（见下），所以磁铁测试在这里会失败。测试代码里不要按名字反射访问原版成员，正式环境里名字不同。
 - `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 27 个测试，覆盖：
   - 数据：配方/条件/标签/战利品表加载，熔炼配方的 Forge 式物品堆结果，碎玻璃掉落，两个半砖合成整块。
   - 自动化：漏斗向溜槽、板条箱、管道送物品（Fabric Transfer API），活塞推动装有物品的箱子，铁杆破坏方块，发射器放置方块，磁铁推动铁块。
@@ -36,13 +37,27 @@
 
 - 已挂接：可燃性/火焰蔓延/能否着火、梯子、植物支撑（`BushBlock`）、信标颜色、附魔加成、碰撞高度（`Entity#getOnPos`）、流体覆盖贴图（Fabric `FluidRenderHandlerRegistry#setBlockTransparency`）、工具修改方块状态（斧/锹）、推拉反应、物品实体更新、潜行绕过、盔甲槽可装备、附魔书可附魔（铁砧）、最大耐久/可损耗/耐久损耗/耐久条、附魔值、默认隐藏提示、重新装备动画、鞘翅飞行（Fabric `EntityElytraEvents.ALLOW`）、方块属性 `lootFrom`（延迟读取另一方块的战利品表；原版 `dropsLike` 在方块注册前调用会读到并缓存 `blocks/air`）、附魔等级/全部附魔（`ForgeItemEnchantmentsMixin`）、含水方块的桶装取音效（`BucketItem`）、配方书按 `IZetaShapedRecipe` 的宽高放置（`PlaceRecipe`）。
 - 生物群系修改（Forge 的 `zeta:biome_modifier`，`FabricZetaBiomeModifier`）：用 Fabric `BiomeModifications` 给所有生物群系加上 Zeta 的 11 个延迟世界生成特征（Quark 的全部世界生成都挂在上面；对应的 configured/placed feature 文件在 Zeta 的 `data/zeta/worldgen`），以及各 Zeta 模组登记的生物生成和生成成本。
+- 自定义氧化铜（Forge 的 `WeatheringCopperMixin`，`WeatheringCopperExtMixin`）：原版 `WeatheringCopper#getPrevious/getFirst` 对 Quark 的铜竖半砖也返回正确结果（斧头刮锈；闪电除锈由 Quark 自己的 `LightningBoltMixin` 处理）。
+- 金工具附魔（`IZetaItemExtensionsMixin`）：上游用 Zeta 的 `@DelegateInterfaceMixin`，它按描述符字符串匹配目标，正式环境里不会被映射而静默失效，已改为普通接口 Mixin。
 - 生物破坏（mobGriefing）事件：所有对该游戏规则的读取都会触发，归属于正在 tick 的实体；投射物/火球归属于发射者、凋灵玫瑰归属于凶手，与 Forge 一致。
 - 未挂接（Quark 中没有覆写或只在暂不启用的联动中使用）：位置相关光照、开启活板门可攀爬、潮涌核心框架、脚手架、`onItemUseFirst`（仅 Lootr 箱子）、`isRepairable`（仅回旋镐，且总返回 true，与原版对可损耗物品的判断一致）、熔岩点燃（`LavaFluid`）、锄头耕地（`hoe_till`，没有 Quark 方块覆写）。
+
+## 与上游 Forge 实现的对照审计（2026-11-11）
+
+逐项核对了上游 `zetaimplforge` 的全部类、移植中删除的文件、Forge 专用数据文件：
+
+- 事件：Quark 和 Zeta 监听的 114 种 Zeta 事件都有触发点（`ZGatherHints` 只在 JEI 联动中触发）。
+- 入口类（`ZetaModCommonProxy`/`ClientProxy`/`ForgeZeta`/`ForgeZetaClient`）注册的处理器、配置事件、首次客户端 tick、颜色查询、盆栽注册：都有对应实现。
+- 漏掉并已补上：生物群系修改器（生物生成 + 全部世界生成）、`WeatheringCopperMixin`。
+- 原版方块/物品的默认扩展行为与 Forge 的 `IForgeBlock`/`IForgeItem` 默认值逐个对比：附魔加成改为按 `enchantment_power_provider` 标签判断，其余一致。
+- 模块：正式环境加载 164 个模块，与源码声明一致（排除暂不启用的联动）。
 
 ## 待办
 
 - 在开发客户端中进入世界，逐模块对照 Forge 版验证（世界生成、GUI、网络、配置界面等）。
 - 第三方联动。
+
+- oddities 类别（背包、板条箱、管道、磁铁、矩阵附魔、不死图腾、小土豆）：上游 `Quark.ODDITIES_ID` 在正式环境为 `quarkoddities`，即只有安装了 Quark Oddities 附加模组才启用，开发环境始终启用。Fabric 上还没有这个附加模组，需要决定怎么提供。
 
 ## 已知差异
 
@@ -51,3 +66,4 @@
 - 可燃性钩子拿不到 Forge 传入的朝向（原版不记录），传 null；Quark 的实现都不使用它。
 - 生物破坏事件在实体 tick 之外（如玩家操作）读取规则时，事件中的实体为 null。
 - 原版没有为模组实体注册数据修复器，启动时会打印 “No data fixer registered for …”（不影响功能）。
+- 上游 `QuarkRemapHandler`（Forge 的缺失映射事件）把 1.19 时代 Quark 的方块 ID（竹子系列、合成器、磨制凝灰岩等，后被原版收录）映射到原版 ID；Fabric 1.20.1 没有对应接口，未移植。只影响从 1.19 Forge 版升级来的存档。

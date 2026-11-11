@@ -46,6 +46,7 @@
     "ext.EntityTypeExtMixin",
     "ext.ItemStackExtMixin",
     "ext.SimpleCookingSerializerExtMixin",
+    "ext.WeatheringCopperExtMixin",
     "hook.AnvilMenuHookMixin",
     "hook.BeaconBlockEntityHookMixin",
     "hook.BucketItemHookMixin",

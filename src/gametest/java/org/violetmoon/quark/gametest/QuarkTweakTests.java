@@ -3,8 +3,6 @@ package org.violetmoon.quark.gametest;
 import static org.violetmoon.quark.gametest.QuarkTestUtil.block;
 import static org.violetmoon.quark.gametest.QuarkTestUtil.item;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -29,11 +27,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -138,53 +134,42 @@ public class QuarkTweakTests implements FabricGameTest {
 	}
 
 	// getBeaconColorMultiplier: corundum tints the beacon beam (vanilla only tints with stained glass)
-	@GameTest(template = EMPTY_STRUCTURE)
+	@GameTest(template = EMPTY_STRUCTURE, timeoutTicks = 200)
 	public void corundumTintsBeacon(GameTestHelper helper) {
-		BlockPos beacon = new BlockPos(1, 1, 2);
-		BlockPos control = new BlockPos(4, 1, 2); // vanilla: stained glass
+		BlockPos beacon = new BlockPos(1, 2, 1);
+		BlockPos control = new BlockPos(5, 2, 1); // vanilla: stained glass
 		CorundumBlock corundum = (CorundumBlock) block("red_corundum");
-		helper.setBlock(beacon, Blocks.BEACON);
+		for(BlockPos center : List.of(beacon, control)) {
+			// a one-level pyramid, so that the beacon activates and reports its beam
+			for(int x = -1; x <= 1; x++)
+				for(int z = -1; z <= 1; z++)
+					helper.setBlock(center.offset(x, -1, z), Blocks.IRON_BLOCK);
+			helper.setBlock(center, Blocks.BEACON);
+		}
 		helper.setBlock(beacon.above(), corundum);
-		helper.setBlock(control, Blocks.BEACON);
 		helper.setBlock(control.above(), Blocks.RED_STAINED_GLASS);
 
 		helper.succeedWhen(() -> {
-			List<BeaconBlockEntity.BeaconBeamSection> controlSections = beamSections(helper, control);
+			List<BeaconBlockEntity.BeaconBeamSection> controlSections = ((BeaconBlockEntity) helper.getBlockEntity(control)).getBeamSections();
 			helper.assertTrue(controlSections.size() >= 2, "vanilla beam has " + controlSections.size() + " sections");
-			List<BeaconBlockEntity.BeaconBeamSection> sections = beamSections(helper, beacon);
+			List<BeaconBlockEntity.BeaconBeamSection> sections = ((BeaconBlockEntity) helper.getBlockEntity(beacon)).getBeamSections();
 			helper.assertTrue(sections.size() >= 2, "beam has " + sections.size() + " sections");
 			helper.assertTrue(Arrays.equals(sections.get(1).getColor(), corundum.colorComponents),
 				"beam colour " + Arrays.toString(sections.get(1).getColor()) + ", corundum is " + Arrays.toString(corundum.colorComponents));
 		});
 	}
 
-	// isFlammable / getFireSpreadSpeed: paper walls catch fire like Forge says they do
+	// isFlammable: fire can hang in the air next to a paper wall (FireBlock#canSurvive asks canBurn of the neighbours)
 	@GameTest(template = EMPTY_STRUCTURE)
-	public void paperWallIsFlammable(GameTestHelper helper) throws ReflectiveOperationException {
-		FireBlock fire = (FireBlock) Blocks.FIRE;
-		BlockPos wall = new BlockPos(2, 1, 2);
+	public void paperWallIsFlammable(GameTestHelper helper) {
+		BlockPos wall = new BlockPos(1, 2, 2);
+		BlockPos stone = new BlockPos(4, 2, 2);
 		helper.setBlock(wall, block("paper_wall"));
+		helper.setBlock(stone, Blocks.STONE);
 
-		Method canBurn = FireBlock.class.getDeclaredMethod("canBurn", BlockState.class);
-		canBurn.setAccessible(true);
-		helper.assertTrue((boolean) canBurn.invoke(fire, helper.getBlockState(wall)), "paper wall can't burn");
-
-		Method igniteOdds = FireBlock.class.getDeclaredMethod("getIgniteOdds", LevelReader.class, BlockPos.class);
-		igniteOdds.setAccessible(true);
-		int odds = (int) igniteOdds.invoke(fire, helper.getLevel(), helper.absolutePos(wall.east()));
-		helper.assertTrue(odds == 60, "fire next to a paper wall has ignite odds " + odds);
+		BlockState fire = Blocks.FIRE.defaultBlockState();
+		helper.assertTrue(fire.canSurvive(helper.getLevel(), helper.absolutePos(wall.east())), "fire can't burn next to a paper wall");
+		helper.assertFalse(fire.canSurvive(helper.getLevel(), helper.absolutePos(stone.east())), "fire can burn next to stone");
 		helper.succeed();
-	}
-
-	// getBeamSections() is empty while the beacon has no pyramid; the computed sections are what the hook changes
-	@SuppressWarnings("unchecked")
-	private static List<BeaconBlockEntity.BeaconBeamSection> beamSections(GameTestHelper helper, BlockPos pos) {
-		try {
-			Field field = BeaconBlockEntity.class.getDeclaredField("beamSections");
-			field.setAccessible(true);
-			return (List<BeaconBlockEntity.BeaconBeamSection>) field.get(helper.getBlockEntity(pos));
-		} catch(ReflectiveOperationException e) {
-			throw new IllegalStateException(e);
-		}
 	}
 }

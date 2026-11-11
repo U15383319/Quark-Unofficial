@@ -71,7 +71,8 @@ public interface IZetaBlockExtensions {
 	}
 
 	default float getEnchantPowerBonusZeta(BlockState state, LevelReader level, BlockPos pos) {
-		return state.is(Blocks.BOOKSHELF) ? 1 : 0;
+		// Fabric: like Forge's IForgeBlock default (this is what blocks without their own extensions answer on Fabric)
+		return state.is(BlockTags.ENCHANTMENT_POWER_PROVIDER) ? 1 : 0;
 	}
 
 	default SoundType getSoundTypeZeta(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {

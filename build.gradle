@@ -149,11 +149,16 @@ configurations {
 	productionRuntimeMods {
 		transitive = false
 	}
+	// the released Fabric API leaves out its gametest module
+	productionGametestMods {
+		transitive = false
+	}
 }
 
 dependencies {
 	productionRuntimeMods "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	productionRuntimeMods "maven.modrinth:forge-config-api-port:${project.forge_config_api_port_version}"
+	productionGametestMods "net.fabricmc.fabric-api:fabric-gametest-api-v1:1.2.15+1802ada577"
 }
 
 def productionMods = { task ->
@@ -171,6 +176,32 @@ tasks.register('runProductionMixinAudit', net.fabricmc.loom.task.prod.ClientProd
 	group = 'fabric'
 	productionMods(it)
 	jvmArgs.add('-Dzeta.debug.mixinAudit=true')
+}
+
+// the gametests as an intermediary-named mod, to run them against the released jars (runProductionGametest)
+def gametestJar = tasks.register('gametestJar', Jar) {
+	from sourceSets.gametest.output
+	archiveClassifier = 'gametest-dev'
+	destinationDirectory = layout.buildDirectory.dir('devlibs')
+}
+
+def remapGametestJar = tasks.register('remapGametestJar', net.fabricmc.loom.task.RemapJarTask) {
+	inputFile = gametestJar.flatMap { it.archiveFile }
+	archiveClassifier = 'gametest'
+	addNestedDependencies = false
+	classpath.from(sourceSets.gametest.compileClasspath)
+}
+
+// the gametests on a production server with the released jars; no EULA involved (Fabric's gametest server skips it)
+tasks.register('runProductionGametest', net.fabricmc.loom.task.prod.ServerProductionRunTask) {
+	group = 'fabric'
+	productionMods(it)
+	mods.from(remapGametestJar, configurations.productionGametestMods)
+	loaderVersion = project.loader_version
+	minecraftVersion = project.minecraft_version
+	runDir = file('build/production-gametest')
+	jvmArgs.add('-Dfabric-api.gametest')
+	jvmArgs.add("-Dfabric-api.gametest.report-file=${project.buildDir}/production-junit.xml")
 }
 
 processResources {
