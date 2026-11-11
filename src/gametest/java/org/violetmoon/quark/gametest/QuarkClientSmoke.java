@@ -11,6 +11,7 @@ import org.violetmoon.quark.content.tweaks.client.emote.EmoteHandler;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
@@ -34,7 +35,7 @@ import net.minecraft.world.phys.Vec3;
  * <ul>
  * <li>a command ("/..."; in singleplayer run by the integrated server with operator rights, on a server sent as the
  * player, whom QuarkServerSmoke makes an operator)</li>
- * <li>"wait N" ticks; "shot" saves screenshots/quark-smoke-N.png</li>
+ * <li>"wait N" ticks; "shot" saves screenshots/quark-smoke-N.png; "camera first|back|front" switches the view; "sneak on|off"</li>
  * <li>"sort": Quark's sort-inventory packet; "emote NAME": Quark's emote request packet;
  * "use X Y Z": right-clicks the block with the main hand, as a player would</li>
  * <li>checks of what this client sees, retried for up to 3 seconds: "expect-inv SLOT ITEM|empty|nonempty",
@@ -134,6 +135,12 @@ public class QuarkClientSmoke implements ClientModInitializer {
 					wait = 5;
 				}
 				case "wait" -> wait = Integer.parseInt(a[1]);
+				case "sneak" -> mc.options.keyShift.setDown(a[1].equals("on"));
+				case "camera" -> mc.options.setCameraType(switch(a[1]) {
+					case "back" -> CameraType.THIRD_PERSON_BACK;
+					case "front" -> CameraType.THIRD_PERSON_FRONT;
+					default -> CameraType.FIRST_PERSON;
+				});
 				case "sort" -> {
 					QuarkClient.ZETA_CLIENT.sendToServer(new SortInventoryMessage(true));
 					System.out.println("QUARK_SMOKE sent sort");

@@ -53,7 +53,26 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, A extends 
 	private A zeta$armorModel(A model, PoseStack pose, MultiBufferSource buffer, T entity, EquipmentSlot slot) {
 		ItemStack stack = entity.getItemBySlot(slot);
 		HumanoidArmorModelGetter getter = FabricZetaClient.ARMOR_MODELS.get(stack.getItem());
-		return getter == null ? model : (A) getter.getHumanoidArmorModel(entity, stack, slot, model);
+		if(getter == null)
+			return model;
+		HumanoidModel<?> replacement = getter.getHumanoidArmorModel(entity, stack, slot, model);
+		if(replacement != model)
+			copyModelProperties(model, (HumanoidModel<T>) replacement);
+		return (A) replacement;
+	}
+
+	// Forge's IClientItemExtensions#getGenericArmorModel does this with every replacement model (ForgeHooksClient#copyModelProperties):
+	// without it the model keeps the pose it was baked with, so a backpack hangs at the legs and a hat floats away
+	@Unique
+	private static <T extends LivingEntity> void copyModelProperties(HumanoidModel<T> original, HumanoidModel<T> replacement) {
+		original.copyPropertiesTo(replacement);
+		replacement.head.visible = original.head.visible;
+		replacement.hat.visible = original.hat.visible;
+		replacement.body.visible = original.body.visible;
+		replacement.rightArm.visible = original.rightArm.visible;
+		replacement.leftArm.visible = original.leftArm.visible;
+		replacement.rightLeg.visible = original.rightLeg.visible;
+		replacement.leftLeg.visible = original.leftLeg.visible;
 	}
 
 	@Inject(method = "getArmorLocation", at = @At("HEAD"), cancellable = true)
