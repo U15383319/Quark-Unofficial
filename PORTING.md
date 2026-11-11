@@ -17,6 +17,8 @@
 - `./gradlew runMixinAudit`：启动客户端，在客户端初始化时应用全部 Mixin（`MixinEnvironment.audit()`）后退出。想一次看到所有失败的 Mixin 时，先把各 `*.mixins.json` 的 `required` 临时改为 `false`。
 - `./gradlew runProductionClient` / `./gradlew runProductionMixinAudit`：用打包好的 Quark Woven 和 Zeta Woven 的 jar，加上从 Maven 下载的 Fabric API 和 Forge Config API Port，在与玩家相同的中间名（intermediary）环境中启动客户端；后者应用全部 Mixin 后退出。**发布前必须跑一遍**：开发环境用的是 Mojang 名，Mixin 目标写错时可能仍按方法名匹配成功，只有这里能发现。Mixin 的名字靠注解处理器生成的 refmap（`quark.refmap.json`、`zeta.refmap.json`）映射；`@At` 的 `args` 里的类名（如 `classValue=`）不会被映射，不要用。
 - `./gradlew runProductionGametest`：在生产服务端上用发布的 jar（加上改写成中间名的测试 jar 和 Fabric API 的 gametest 模块）运行同一套 GameTest，结果在 `build/production-junit.xml`。这里也加载 Quark Woven Oddities，所以 oddities 类别是启用的。测试代码里不要按名字反射访问原版成员，正式环境里名字不同。
+- `./gradlew runProductionCompatAudit`：同 `runProductionMixinAudit`，但另外加载 Sodium 和 Iris，用来发现与它们的 Mixin 冲突。
+- `./gradlew runProductionSmoke -PsmokeCommands="..."`：客户端冒烟（`src/gametest` 里的 `QuarkClientSmoke`，不进发布的 jar）：进入复制来的正式环境 GameTest 世界（先跑一次 `runProductionGametest`），依次执行用 `|` 分隔的命令（`wait N` 等待 N tick，`shot` 截图），截图在 `build/production-compat/screenshots`，然后退出。默认带 Sodium 和 Iris，加 `-PsmokeVanilla` 不带，用于对照截图。Loom 在 Java 21 上用 LWJGL 3.3.2 运行游戏，Sodium 会拒绝启动，所以这两个任务带了 `-Dsodium.checks.issue2561=false`（玩家的启动器用原版的 3.3.1，不受影响）。
 - `./gradlew runGametest`：无头游戏测试服务端（不需要 EULA），运行 `src/gametest` 中的测试后退出，每个测试的结果写在 `build/junit.xml`。目前 27 个测试，覆盖：
   - 数据：配方/条件/标签/战利品表加载，熔炼配方的 Forge 式物品堆结果，碎玻璃掉落，两个半砖合成整块。
   - 自动化：漏斗向溜槽、板条箱、管道送物品（Fabric Transfer API），活塞推动装有物品的箱子，铁杆破坏方块，发射器放置方块，磁铁推动铁块。

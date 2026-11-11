@@ -153,12 +153,18 @@ configurations {
 	productionGametestMods {
 		transitive = false
 	}
+	// popular client mods that touch the same rendering code as Quark (runProductionCompatAudit)
+	productionCompatMods {
+		transitive = false
+	}
 }
 
 dependencies {
 	productionRuntimeMods "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	productionRuntimeMods "maven.modrinth:forge-config-api-port:${project.forge_config_api_port_version}"
 	productionGametestMods "net.fabricmc.fabric-api:fabric-gametest-api-v1:1.2.15+1802ada577"
+	productionCompatMods "maven.modrinth:sodium:mc1.20.1-0.5.13-fabric"
+	productionCompatMods "maven.modrinth:iris:1.7.6+1.20.1"
 }
 
 def productionMods = { task ->
@@ -176,6 +182,40 @@ tasks.register('runProductionMixinAudit', net.fabricmc.loom.task.prod.ClientProd
 	group = 'fabric'
 	productionMods(it)
 	jvmArgs.add('-Dzeta.debug.mixinAudit=true')
+}
+
+// the mixin audit with Sodium and Iris installed: mixin conflicts with them show up here
+tasks.register('runProductionCompatAudit', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	group = 'fabric'
+	productionMods(it)
+	mods.from(configurations.productionCompatMods)
+	runDir = file('build/production-compat')
+	jvmArgs.add('-Dzeta.debug.mixinAudit=true')
+	// Loom runs Java 21+ games on LWJGL 3.3.2, which Sodium refuses (players' launchers use 3.3.1); test runs only
+	jvmArgs.add('-Dsodium.checks.issue2561=false')
+}
+
+// Client smoke run (see QuarkClientSmoke): joins a copy of the production gametest world, runs -PsmokeCommands
+// ("|"-separated commands, "wait N" ticks, "shot" for a screenshot) and saves build/production-compat/screenshots.
+// With Sodium and Iris unless -PsmokeVanilla is given. Run runProductionGametest once first, for the world.
+def smokeWorld = tasks.register('prepareSmokeWorld', Copy) {
+	from('build/production-gametest/world')
+	into('build/production-compat/saves/smoke')
+	exclude('session.lock')
+}
+
+tasks.register('runProductionSmoke', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	group = 'fabric'
+	dependsOn(smokeWorld)
+	productionMods(it)
+	mods.from(remapGametestJar, configurations.productionGametestMods)
+	if(!project.hasProperty('smokeVanilla'))
+		mods.from(configurations.productionCompatMods)
+	runDir = file('build/production-compat')
+	programArgs.addAll('--quickPlaySingleplayer', 'smoke')
+	jvmArgs.add('-Dquark.smoke=true')
+	jvmArgs.add("-Dquark.smoke.commands=${project.findProperty('smokeCommands') ?: ''}")
+	jvmArgs.add('-Dsodium.checks.issue2561=false')
 }
 
 // the gametests as an intermediary-named mod, to run them against the released jars (runProductionGametest)
